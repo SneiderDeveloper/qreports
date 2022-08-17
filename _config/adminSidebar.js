@@ -1,4 +1,4 @@
 const pages = config('pages') // Get Pages from config
 export default [
-  pages.qpage.reports,
+  pages.qreports.reports,
 ]

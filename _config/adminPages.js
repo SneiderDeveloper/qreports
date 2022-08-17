@@ -1,5 +1,5 @@
 export default {
-    report: {
+    reports: {
         //permission: 'page.pages.manage',
         activated: true,
         authenticated: true,
