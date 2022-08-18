@@ -1,14 +1,17 @@
 <template>
     <div>
+        <mainComponent />
          <steppers />
     </div>
 </template>
 
 <script>
 import steppers from './steppers';
+import mainComponent from './main';
 export default {
     components: {
-       steppers
+       steppers,
+       mainComponent,
     },
     data() {
         return {
