@@ -1,10 +1,12 @@
 <template>
-<div>
-  Hola
-</div>
+  <sectionReports />
 </template>
 <script>
+import sectionReports from '@imagina/qreports/_components/reports/index.vue';
   export default {
+    components: {
+      sectionReports
+    },
     data() {
       return {
         crudId: this.$uid()
