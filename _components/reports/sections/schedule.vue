@@ -1,34 +1,13 @@
 <template>
     <div>
-        <div class="tw-relative tw-mb-4 tw-overflow-x-hidden">
-            <h3 class="
-                tw-text-lg 
-                tw-font-extrabold 
-                text-primary 
-                tw-bg-white
-                tw-pr-4
-                tw-inline-block
-                tw-z-[2]
-                tw-relative
-                ">
-                Schedule your new report
-            </h3>
-            <div class="
-                tw-block
-                tw-w-full
-                tw-h-px
-                tw-bg-gray-200
-                tw-top-2/4
-                tw-absolute
-                tw-z-[1]
-                ">
-            </div>
+        <div class="q-stepper-title">
+            <h3 class="text-primary">Schedule your new report</h3>
+            <div></div>
         </div>
-
         <div class="tw-flex tw-items-center tw-mb-6">
             <div class="tw-border-r-2 tw-pr-4">
                 <h4 class="text-primary tw-text-base tw-font-extrabold">Do you want to schedule this report?</h4>
-                <p class="tw-text-sm tw-text-[#000000] tw-mb-0">Please adjust the parameters below</p>
+                <p class="tw-text-sm tw-text-black tw-mb-0">Please adjust the parameters below</p>
             </div>
             <div class="tw-pl-4">
                 <dynamic-field  :field="formFields.reportsForms.toggle"/>
@@ -56,15 +35,15 @@
             tw-overflow-hidden 
             ">
             <div class="tw-flex tw-items-center">
-                <label class="text-sm tw-text-[#000000] font-medium tw-mr-4 tw-pt-1.5">Every</label>
+                <label class="text-sm tw-text-black font-medium tw-mr-4 tw-pt-1.5">Every</label>
                 <dynamic-field class="input-report tw-w-full" :field="formFields.reportsForms.every"/>
             </div>
             <div class="tw-flex tw-items-center">
-                <label class="text-sm tw-text-[#000000] font-medium tw-mr-4 tw-pt-1.5">Month(s) at</label>
+                <label class="text-sm tw-text-black font-medium tw-mr-4 tw-pt-1.5">Month(s) at</label>
                 <dynamic-field class="input-report tw-w-[73%]" :field="formFields.reportsForms.monthAt"/>
             </div>
             <div class="tw-flex tw-items-center">
-                <label class="text-sm tw-text-[#000000] font-medium tw-mr-4 tw-pt-1.5">On</label>
+                <label class="text-sm tw-text-black font-medium tw-mr-4 tw-pt-1.5">On</label>
                 <dynamic-field class="input-report tw-w-full" :field="formFields.reportsForms.on"/>
             </div>
 
@@ -81,7 +60,7 @@
               <dynamic-field class="input-report" :field="formFields.reportsForms.endingOn"/>
         </div>
 
-        <p class="tw-text-sm tw-text-[#000000]">
+        <p class="tw-text-sm tw-text-black">
             <q-icon name="emergency" class="tw-text-red-600"/>
             Remember to add all the emails you need to send this report on “Step 1”
         </p>

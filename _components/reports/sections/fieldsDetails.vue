@@ -1,31 +1,11 @@
 <template>
     <div>
-        <div class="tw-relative tw-mb-4 tw-overflow-x-hidden">
-            <h3 class="
-                tw-text-lg 
-                tw-font-extrabold 
-                text-primary 
-                tw-bg-white
-                tw-pr-4
-                tw-inline-block
-                tw-z-[2]
-                tw-relative
-                ">
-                Detail the options inside the fields
-            </h3>
-            <div class="
-                tw-block
-                tw-w-full
-                tw-h-px
-                tw-bg-gray-200
-                tw-top-2/4
-                tw-absolute
-                tw-z-[1]
-                ">
-            </div>
+        <div class="q-stepper-title">
+            <h3 class="text-primary">Detail the options inside the fields</h3>
+            <div></div>
         </div>
         <h4 class="text-primary tw-text-base tw-font-extrabold">How would you want to view the data?</h4>
-        <p class="tw-text-sm tw-text-[#000000] tw-mb-6">Tick the info you want to view in each field</p>
+        <p class="tw-text-sm tw-text-black tw-mb-6">Tick the info you want to view in each field</p>
         <div class="
             tw-grid 
             tw-gap-x-8 

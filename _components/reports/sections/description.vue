@@ -1,27 +1,8 @@
 <template>
   <div>
-    <div class="tw-relative tw-mb-6 tw-overflow-x-hidden">
-      <h3 class="
-        tw-text-lg 
-        tw-font-bold 
-        text-primary 
-        tw-bg-white
-        tw-pr-4
-        tw-inline-block
-        tw-z-[2]
-        tw-relative
-        ">
-          Identify your report
-        </h3>
-        <div class="
-          tw-block
-          tw-w-full
-          tw-h-px
-          tw-bg-gray-200
-          tw-top-2/4
-          tw-absolute
-          tw-z-[1]
-        "></div>
+    <div class="q-stepper-title">
+      <h3 class="text-primary">Identify your report</h3>
+      <div></div>
     </div>
     <div class="
         tw-grid 
