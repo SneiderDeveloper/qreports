@@ -107,7 +107,7 @@ export default {
   top: 25px;
 }
 .input-report .q-field .q-field__control:after  {
-  @apply tw-mt-1.5;
+  @apply tw-mt-6;
   border-radius: 5px !important;
 }
 .input-report .q-field:not(.q-textarea)  .q-field__control:after {
