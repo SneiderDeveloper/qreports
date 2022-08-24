@@ -35,15 +35,15 @@
             tw-overflow-hidden 
             ">
             <div class="tw-flex tw-items-center">
-                <label class="text-sm tw-text-black font-medium tw-mr-4 tw-pt-1.5">Every</label>
+                <label class="tw-text-sm tw-text-black tw-font-medium tw-mr-4 tw-pt-1.5">Every</label>
                 <dynamic-field class="input-report tw-w-full" :field="formFields.reportsForms.every"/>
             </div>
             <div class="tw-flex tw-items-center">
-                <label class="text-sm tw-text-black font-medium tw-mr-4 tw-pt-1.5">Month(s) at</label>
+                <label class="tw-text-sm tw-text-black tw-font-medium tw-mr-4 tw-pt-1.5">Month(s) at</label>
                 <dynamic-field class="input-report tw-w-[73%]" :field="formFields.reportsForms.monthAt"/>
             </div>
             <div class="tw-flex tw-items-center">
-                <label class="text-sm tw-text-black font-medium tw-mr-4 tw-pt-1.5">On</label>
+                <label class="tw-text-sm tw-text-black tw-font-medium tw-mr-4 tw-pt-1.5">On</label>
                 <dynamic-field class="input-report tw-w-full" :field="formFields.reportsForms.on"/>
             </div>
 
