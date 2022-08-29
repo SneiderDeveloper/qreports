@@ -56,6 +56,7 @@
         <dynamic-field
             v-model="filter.ckeck" 
             class="check-report-2" 
+            :class="{ 'check-active': filter.ckeck }"
             :field="formFields.reportsFilters[filter.field]" 
         />
       </div>
@@ -166,5 +167,8 @@ export default {
   .q-checkbox__inner--indet
   .q-checkbox__bg {
   @apply tw-hidden;
+}
+.check-report-2.check-active .q-item__label {
+    @apply tw-text-white;
 }
 </style>
