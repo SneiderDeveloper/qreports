@@ -6,8 +6,7 @@
         </div>
         <div class="tw-flex tw-items-center tw-mb-6">
             <div class="tw-border-r-2 tw-pr-4">
-                <h4 class="text-primary tw-text-base tw-font-extrabold">Do you want to schedule this report?</h4>
-                <p class="tw-text-sm tw-text-black tw-mb-0">Please adjust the parameters below</p>
+                <h4 class="text-primary tw-text-base tw-font-extrabold">Do you want to schedule it? Adjust the following parameters:</h4>
             </div>
             <div class="tw-pl-4">
                 <dynamic-field  :field="formFields.reportsForms.toggle"/>
@@ -34,16 +33,31 @@
             md:tw-grid-cols-3
             tw-overflow-hidden 
             ">
-            <div class="tw-flex tw-items-center">
-                <label class="tw-text-sm tw-text-black tw-font-medium tw-mr-4 tw-pt-1.5">Every</label>
-                <dynamic-field class="input-report tw-w-full" :field="formFields.reportsForms.every"/>
+            <div class="
+                tw-flex tw-flex-col tw-items-center tw-mt-3 
+                lg:tw-flex-row lg:tw-items-start ">
+                <label class="
+                    text-sm text-primary font-medium tw-mr-4 tw-pt-1.5 tw-my-1 tw-hidden
+                    lg:tw-block
+                    ">Every</label>
+                <dynamic-field class="input-report-nolabel tw-w-full" :field="formFields.reportsForms.every"/>
             </div>
-            <div class="tw-flex tw-items-center">
-                <label class="tw-text-sm tw-text-black tw-font-medium tw-mr-4 tw-pt-1.5">Month(s) at</label>
-                <dynamic-field class="input-report tw-w-[73%]" :field="formFields.reportsForms.monthAt"/>
+            <div class="
+                tw-flex tw-flex-col tw-items-center  
+                lg:tw-flex-row lg:tw-items-start md:tw-mt-3">
+                <label class="
+                    tw-text-sm text-primary tw-font-medium tw-mr-4 tw-pt-1.5 tw-my-1 tw-hidden tw-w-1/3
+                    lg:tw-block
+                    ">Month(s) at</label>
+                <dynamic-field class="input-report-nolabel tw-w-full" :field="formFields.reportsForms.monthAt"/>
             </div>
-            <div class="tw-flex tw-items-center">
-                <label class="tw-text-sm tw-text-black tw-font-medium tw-mr-4 tw-pt-1.5">On</label>
+            <div class="
+                tw-flex tw-flex-col tw-items-center  
+                lg:tw-flex-row lg:tw-items-start md:tw-mt-3">
+                <label class="
+                    text-sm text-primary font-medium tw-mr-4 tw-pt-1.5 tw-my-1 tw-hidden
+                    lg:tw-block
+                    ">On</label>
                 <dynamic-field class="input-report tw-w-full" :field="formFields.reportsForms.on"/>
             </div>
 
@@ -56,8 +70,8 @@
             md:tw-grid-cols-2
             tw-my-4 tw-overflow-hidden
             ">
-              <dynamic-field class="input-report" :field="formFields.reportsForms.startingOn"/>
-              <dynamic-field class="input-report" :field="formFields.reportsForms.endingOn"/>
+              <dynamic-field class="input-report tw-mb-4" :field="formFields.reportsForms.startingOn"/>
+              <dynamic-field class="input-report tw-mb-4" :field="formFields.reportsForms.endingOn"/>
         </div>
 
         <p class="tw-text-sm tw-text-black">
@@ -96,6 +110,7 @@ export default {
                         props: {
                             label: 'Time Interval',
                             icon: 'more_time',
+                            color: 'primary',
                             options: [
                                 {label: this.$tr('isite.cms.label.enabled'), value: '1'},
                                 {label: this.$tr('isite.cms.label.disabled'), value: '0'}
@@ -108,7 +123,8 @@ export default {
                         isTranslatable: false,
                         props: {
                             label: 'Time Zone',
-                            icon: 'language',
+                            icon: 'public',
+                            color: 'primary',
                             options: [
                                 {label: this.$tr('isite.cms.label.enabled'), value: '1'},
                                 {label: this.$tr('isite.cms.label.disabled'), value: '0'}
@@ -120,7 +136,9 @@ export default {
                         type: 'select',
                         isTranslatable: false,
                         props: {
+                            label: 'every',
                             icon: 'numbers',
+                            color: 'primary',
                             options: [
                                 {label: '1', value: '1'},
                                 {label: '2', value: '0'}
@@ -132,7 +150,9 @@ export default {
                         type: 'select',
                         isTranslatable: false,
                         props: {
-                            icon: 'schedule',
+                            label: 'Month(s) at',
+                            icon: 'watch_later',
+                            color: 'primary',
                             options: [
                                 {label: '1', value: '1'},
                                 {label: '2', value: '0'}
@@ -144,7 +164,9 @@ export default {
                         type: 'select',
                         isTranslatable: false,
                         props: {
+                            label: 'On',
                             icon: 'event_available',
+                            color: 'primary',
                             options: [
                                 {label: '1', value: '1'},
                                 {label: '2', value: '0'}
@@ -152,29 +174,27 @@ export default {
                         },
                     },
                     startingOn: {
-                        value: '0',
-                        type: 'select',
+                        type: 'date',
                         isTranslatable: false,
                         props: {
                             label: 'Starting On',
                             icon: 'calendar_month',
-                            options: [
-                                {label: this.$tr('isite.cms.label.enabled'), value: '1'},
-                                {label: this.$tr('isite.cms.label.disabled'), value: '0'}
-                            ],
+                            color: 'primary',
+                            hint: 'Format: MM/DD/YYYY HH:mm',
+                            mask: 'MM/DD/YYYY HH:mm',
+                            iconRight: 'watch_later',
                         },
                     },
                     endingOn: {
-                        value: '0',
-                        type: 'select',
+                        type: 'date',
                         isTranslatable: false,
                         props: {
                             label: 'Ending On',
                             icon: 'calendar_month',
-                            options: [
-                                {label: this.$tr('isite.cms.label.enabled'), value: '1'},
-                                {label: this.$tr('isite.cms.label.disabled'), value: '0'}
-                            ],
+                            color: 'primary',
+                            hint: 'Format: MM/DD/YYYY HH:mm',
+                            mask: 'MM/DD/YYYY HH:mm',
+                            iconRight: 'watch_later',
                         },
                     },
 

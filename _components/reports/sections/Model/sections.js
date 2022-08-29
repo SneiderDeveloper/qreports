@@ -1,6 +1,7 @@
 import description from '../description.vue';
 import feature from '../feature';
 import fieldsDetails from '../fieldsDetails';
+import sort from '../sort';
 import schedule from '../schedule';
 
 export default [
@@ -27,8 +28,15 @@ export default [
     },
     {
         id: 4,
-        title: 'schedule',
+        title: 'Sort',
         prefix: 4,
+        component: sort,
+        done: false,
+    },
+    {
+        id: 5,
+        title: 'Schedule',
+        prefix: 5,
         component: schedule,
         done: false,
     },

@@ -6,42 +6,45 @@
     </div>
     <div class="
         tw-grid 
-        tw-gap-4 
+        tw-gap-6 
         tw-grid-cols-1 
         md:tw-grid-cols-2 
-        lg:tw-grid-cols-3 
+        xl:tw-grid-cols-3 
         tw-my-4 tw-overflow-hidden
         ">
         <div>
 
-          <dynamic-field class="input-report tw-mb-2" :field="formFields.reportsForms.reportType"/>
-          <dynamic-field class="input-report tw-mb-2" :field="formFields.reportsForms.folder"/>
-          <dynamic-field class="input-report tw-mb-2" :field="formFields.reportsForms.reportTitle"/>
+          <dynamic-field class="input-report tw-mb-4" :field="formFields.reportsForms.reportType"/>
+          <dynamic-field class="input-report tw-mb-4" :field="formFields.reportsForms.folder"/>
+          <dynamic-field class="input-report tw-mb-4" :field="formFields.reportsForms.reportTitle"/>
 
         </div>
         <div>
 
-          <dynamic-field class="input-report tw-mb-2" :field="formFields.reportsForms.description"/>
-          <dynamic-field class="input-report tw-mb-2" :field="formFields.reportsForms.shortDescription"/>
+          <dynamic-field class="input-report tw-mb-4" :field="formFields.reportsForms.description"/>
+          <dynamic-field class="input-report tw-mb-4" :field="formFields.reportsForms.shortDescription"/>
           
         </div>
         <div>
 
-          <div class="tw-w-full tw-flex tw-items-end tw-space-x-4 tw-mb-8 ">
-            <div class="tw-w-4/5 lg:tw-w-3/4">
+          <div class="
+            tw-w-full tw-flex tw-flex-col tw-items-start tw-space-x-4 tw-mb-6 
+            lg:tw-flex-row lg:tw-mb-8
+            ">
+            <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
               <dynamic-field class="input-report" :field="formFields.reportsForms.email"/>
             </div> 
-            <div class="tw-w-1/5 lg:tw-w-1/4 tw-overflow-hidden">
+            <div class="tw-w-full lg:tw-w-1/4 tw-overflow-hidden">
               <dynamic-field :field="formFields.reportsForms.toggle"/>
             </div> 
           </div>
           
-          <q-btn outline color="primary" class="tw-mb-6" no-caps>
+          <q-btn outline color="primary" class="tw-mb-8" no-caps>
             <q-icon left size="1em" name="fa fa-plus" />
             <div>Add another email</div>
           </q-btn>
 
-          <dynamic-field class="q-mb-md radio-report" :field="formFields.reportsForms.AttachReport"  />
+          <dynamic-field class="q-mb-md radio-report" :field="formFields.reportsForms.attachReport"  />
 
         </div>
     </div>
@@ -49,6 +52,7 @@
 </template>
 
 <script>
+import { controllers } from 'chart.js'
 export default {
   data() {
     return {};
@@ -64,6 +68,7 @@ export default {
             props: {
               label: 'Report Type',
               icon: 'description',
+              color: 'primary',
               options: [
                 {label: this.$tr('isite.cms.label.enabled'), value: '1'},
                 {label: this.$tr('isite.cms.label.disabled'), value: '0'}
@@ -77,6 +82,7 @@ export default {
             props: {
               label: 'Folder',
               icon: 'folder_open',
+              color: 'primary',
               options: [
                 {label: this.$tr('isite.cms.label.enabled'), value: '1'},
                 {label: this.$tr('isite.cms.label.disabled'), value: '0'}
@@ -87,7 +93,8 @@ export default {
             type: 'input',
             props: {
               icon: 'text_fields', 
-              label: 'Report Title'
+              label: 'Report Title',
+              color: 'primary',
             }
           },
           description: {
@@ -97,7 +104,7 @@ export default {
               type: 'textarea',
               counter: true,
               maxlength: 300,
-              rows: '6'
+              rows: '6',
             }
           },
           shortDescription: {
@@ -116,20 +123,23 @@ export default {
             props: {
               label: 'Email Notification',
               icon: 'mail',
+              color: 'primary',
+              counter: true,
+              maxlength: 40,
             }
           },
           toggle: {
             type: 'toggle',
             value: '1',
             props: {
-                size: 'lg',
+                size: 'md',
                 options: [
                     {label: 'YES', value: '1'},
                     {label: 'NO', value: '0'},
                 ],
             },
           },
-          AttachReport: {
+          attachReport: {
             value: 'pdf',
             type: 'optionGroup',
             props: {
