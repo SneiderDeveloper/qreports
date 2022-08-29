@@ -44,9 +44,9 @@
     <div class="tw-flex tw-space-x-4">
       <div
         v-for="(filter) in filterList"
-        :key="keyField"
+        :key="filter.id"
       >
-        <dynamic-field 
+        <dynamic-field
             v-model="filter.ckeck" 
             class="check-report-2" 
             :field="formFields.reportsFilters[filter.field]" 
