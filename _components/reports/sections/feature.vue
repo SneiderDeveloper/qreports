@@ -34,7 +34,14 @@
             v-model="list.check"
             :field="formFields.reportsColumns[list.field]"
           />
-          <div class="check-report-icon"></div>
+          <q-btn
+              flat
+              round
+              size="6px"
+              class="check-report-icon"
+            >
+              <q-tooltip> Move column </q-tooltip>
+            </q-btn>
         </div>
       </draggable>
     </div>
