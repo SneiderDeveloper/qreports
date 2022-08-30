@@ -32,9 +32,11 @@ export default {
   data() {
     return {};
   },
+  created() {
+    fieldsDetailsStore().removeObjectIdentifiers();
+  },
   computed: {
     form() {
-      fieldsDetailsStore().removeObjectIdentifiers();
       return fieldsDetailsStore().getForm();
     },
     formFields() {
