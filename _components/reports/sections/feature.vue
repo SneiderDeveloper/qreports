@@ -82,7 +82,7 @@ export default {
       return featureStore().getFilterList();
     },
     totalSelectedFilters() {
-      return this.filterList.filter(item => Boolean(item.check)).length;
+      return featureStore().getSelectedFilters().length;
     },
     formFields() {
       return {
