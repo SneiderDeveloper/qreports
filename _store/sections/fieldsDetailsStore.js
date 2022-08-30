@@ -8,7 +8,7 @@ const state = reactive({
 
 export default function fieldsDetailsStore() {
     function factoryOfDynamicSelect() {
-        const data = {}
+        const data = {};
         featureStore().getSelectedFilters().forEach(item => {
             data[item.field] = {
                 value: [],
@@ -17,8 +17,8 @@ export default function fieldsDetailsStore() {
                     label: item.title,
                     multiple: true,
                     options: [
-                        {label: 'enable', value: '1'},
-                        {label: 'disabled', value: '2'}
+                        { label: 'enable', value: '1' },
+                        { label: 'disabled', value: '2' }
                     ]
                 }
             };
@@ -28,8 +28,17 @@ export default function fieldsDetailsStore() {
     function getForm() {
         return state.form;
     }
+    function removeObjectIdentifiers() {
+        Object.entries(state.form).forEach(([key, value]) => {
+            const filter = featureStore().getSelectedFilters().some(item => item.field === key);
+            if (!filter) {
+                delete state.form[key];
+            }
+        })
+    }
     return {
         factoryOfDynamicSelect,
+        removeObjectIdentifiers,
         getForm,
     }
 }

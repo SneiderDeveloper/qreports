@@ -34,6 +34,7 @@ export default {
   },
   computed: {
     form() {
+      fieldsDetailsStore().removeObjectIdentifiers();
       return fieldsDetailsStore().getForm();
     },
     formFields() {
