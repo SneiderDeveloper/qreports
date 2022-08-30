@@ -74,10 +74,14 @@ export default function featureStore() {
     function getSelectedFilters() {
         return state.filterList.filter(item => Boolean(item.check));
     }
+    function getSelectedColumns() {
+        return state.columnList.filter(item => Boolean(item.check));
+    }
     return {
         getColumnList,
         getFilterList,
         factoryOfDynamicCheck,
         getSelectedFilters,
+        getSelectedColumns,
     }
 }

@@ -6,20 +6,21 @@ const state = reactive({
     form: {},
 });
 
-export default function fieldsDetailsStore() {
-    function factoryOfDynamicSelect(multiple) {
+export default function sortStore() {
+    function factoryOfDynamicSelect() {
         const data = {};
-        featureStore().getSelectedFilters().forEach(item => {
+        featureStore().getSelectedColumns().forEach(item => {
             data[item.field] = {
-                value: [],
+                value: '1',
                 type: 'select',
                 props: {
                     label: item.title,
-                    multiple: true,
+                    icon: 'fas fa-sort-amount-up',
+                    color: 'primary',
                     options: [
-                        { label: 'enable', value: '1' },
-                        { label: 'disabled', value: '2' }
-                    ]
+                        { label: 'Ascending', value: '1' },
+                        { label: 'Descending', value: '0' }
+                    ],
                 }
             };
         });
@@ -30,7 +31,7 @@ export default function fieldsDetailsStore() {
     }
     function removeObjectIdentifiers() {
         Object.entries(state.form).forEach(([key, value]) => {
-            const filter = featureStore().getSelectedFilters().some(item => item.field === key);
+            const filter = featureStore().getSelectedColumns().some(item => item.field === key);
             if (!filter) {
                 delete state.form[key];
             }

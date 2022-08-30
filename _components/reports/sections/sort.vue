@@ -12,7 +12,7 @@
                 <div class="tw-w-1/2 text-primary tw-text-base tw-font-extrabold">Attribute</div>
                 <div class="tw-w-1/2 text-primary tw-text-base tw-font-extrabold">Sort</div>
             </div>
-            <div v-for="(field, name, keyField) in formFields.reportsForms" :key="keyField" 
+            <div v-for="(field, name ,keyField) in formFields.reportsForms" :key="keyField" 
                 class="tw-flex tw-items-center tw-space-x-2 tw-w-full tw-mb-4">
                 <div class="tw-w-auto sm:tw-w-1/2 
                             tw-text-center sm:tw-text-left 
@@ -36,7 +36,7 @@
                     </div>  
                 </div>
                 <div class="tw-w-full sm:tw-w-1/2">
-                    <dynamic-field class="select-report" :field="field"/>
+                    <dynamic-field v-model="form[name]" class="select-report" :field="field"/>
                 </div>
             </div>
 
@@ -49,88 +49,22 @@
 
 
 <script>
+import sortStore from "../../../_store/sections/sortStore.js";
 export default {
     data() {
         return {
-            prueba: 'two',
         };
     },
+    created() {
+        sortStore().removeObjectIdentifiers();
+    },
     computed: {
+        form() {
+            return sortStore().getForm();
+        },
         formFields() {
             return {
-                reportsForms: {
-                    id: {
-                        value: '1',
-                        type: 'select',
-                        isTranslatable: false,
-                        label: 'ID',
-                        props: {
-                            label: 'ID',
-                            icon: 'fas fa-sort-amount-up',
-                            color: 'primary',
-                            options: [
-                                {label: 'Ascending', value: '1'},
-                                {label: 'Descending', value: '0'}
-                            ],
-                        },
-                    },
-                    referenceId: {
-                        value: '1',
-                        type: 'select',
-                        isTranslatable: false,
-                        props: {
-                            label: 'Reference ID',
-                            icon: 'fas fa-sort-amount-up',
-                            color: 'primary',
-                            options: [
-                                {label: 'Ascending', value: '1'},
-                                {label: 'Descending', value: '0'}
-                            ],
-                        },
-                    },
-                    customers: {
-                        value: '1',
-                        type: 'select',
-                        isTranslatable: false,
-                        props: {
-                            label: 'Customers',
-                            icon: 'fas fa-sort-amount-up',
-                            color: 'primary',
-                            options: [
-                                {label: 'Ascending', value: '1'},
-                                {label: 'Descending', value: '0'}
-                            ],
-                        },
-                    },
-                    status: {
-                        value: '1',
-                        type: 'select',
-                        isTranslatable: false,
-                        props: {
-                            label: 'Status',
-                            icon: 'fas fa-sort-amount-up',
-                            color: 'primary',
-                            options: [
-                                {label: 'Ascending', value: '1'},
-                                {label: 'Descending', value: '0'}
-                            ],
-                        },
-                    },
-                    operationType: {
-                        value: '1',
-                        type: 'select',
-                        isTranslatable: false,
-                        props: {
-                            label: 'Operation Type',
-                            icon: 'fas fa-sort-amount-up',
-                            color: 'primary',
-                            options: [
-                                {label: 'Ascending', value: '1'},
-                                {label: 'Descending', value: '0'}
-                            ],
-                        },
-                    }
-                },
+                reportsForms: sortStore().factoryOfDynamicSelect(),
             };
         },
     }
