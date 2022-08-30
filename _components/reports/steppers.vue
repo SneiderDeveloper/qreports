@@ -92,7 +92,11 @@ export default {
 .stepper-report  .q-stepper__nav {
   background-color: #F1F4FA;
 }
-.input-report  .q-field .q-field__label {
+.stepper-report .q-stepper__step-inner {
+  @apply tw-p-4 lg:tw-p-5;
+}
+
+.input-report  .q-field.q-field--float .q-field__label {
   @apply tw-font-medium;
   color: var(--q-color-primary);
 }

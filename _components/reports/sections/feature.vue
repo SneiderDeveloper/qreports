@@ -48,10 +48,10 @@
     <h4 class="text-primary tw-text-base tw-font-extrabold tw-mt-8 tw-mb-6">
       Select the first 4 filters
     </h4>
-    <div class="tw-flex tw-space-x-4">
+    <div class="tw-flex tw-flex-wrap">
       <div
         v-for="(filter) in filterList"
-        :key="filter.id"
+        :key="filter.id" class="tw-mr-2 tw-mb-2"
       >
         <dynamic-field
             v-model="filter.ckeck" 

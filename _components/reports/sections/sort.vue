@@ -6,214 +6,47 @@
         </div>
         <h4 class="text-primary tw-text-base tw-font-extrabold tw-mb-6">Do you want to schedule it? Adjust the following parameters:</h4>
 
-        <table class="q-stepper-table tw-table-auto">
-            <thead>
-                <tr>
-                    <th class="text-left tw-w-2/5 text-primary tw-text-base tw-font-extrabold">Attribute</th>
-                    <th class="text-left text-primary tw-text-base tw-font-extrabold">Sort</th>
-                </tr>
-            </thead>
-            <tbody> 
-                <tr>
-                    <td> 
-                        <div class="text-primary tw-mr-4 tw-w-9 tw-h-9  tw-inline-flex tw-items-center tw-justify-center tw-font-extrabold tw-rounded-full tw-border-2 tw-border-slate-50">1</div> 
-                        <span class="tw-text-base tw-font-extrabold">ID</span>  
-                    </td>
-                    <td>
-                        <q-btn-toggle
-                            v-model="prueba"
-                            class="my-custom-toggle"
-                            no-caps
-                            rounded
-                            spread
-                            size="sm"
-                            toggle-color="primary"
-                            color="white"
-                            unelevated
-                            text-color="primary"
-                            :options="[
-                            { value: 'one', slot: 'one'},
-                            { value: 'two', slot: 'two'}
-                            ]"
-                        >
-                            <template v-slot:one>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-down" />
-                                    <div class="tw-text-sm"> Ascending </div>
-                                </div>
-                            </template>
+        <div class="md:tw-w-9/12 lg:tw-w-7/12">
+    
+            <div class="sm:tw-flex tw-items-center tw-space-x-4 tw-mb-4 tw-hidden">
+                <div class="tw-w-1/2 text-primary tw-text-base tw-font-extrabold">Attribute</div>
+                <div class="tw-w-1/2 text-primary tw-text-base tw-font-extrabold">Sort</div>
+            </div>
+            <div v-for="(field, name, keyField) in formFields.reportsForms" :key="keyField" 
+                class="tw-flex tw-items-center tw-space-x-2 tw-w-full tw-mb-4">
+                <div class="tw-w-auto sm:tw-w-1/2 
+                            tw-text-center sm:tw-text-left 
+                            tw-items-center 
+                            tw-flex">
+                    <div class="tw-mr-2 sm:tw-mr-4 ">
+                        <div class="text-primary 
+                                    tw-w-7 sm:tw-w-9 
+                                    tw-h-7 sm:tw-h-9 
+                                    tw-inline-flex 
+                                    tw-items-center 
+                                    tw-justify-center 
+                                    tw-font-extrabold 
+                                    tw-rounded-full 
+                                    tw-border-2 
+                                    tw-border-slate-50">{{keyField + 1 }}
+                        </div>
+                    </div>
+                    <div class="tw-text-sm md:tw-text-base tw-hidden sm:tw-block
+                                tw-font-extrabold"> {{field.props.label }}
+                    </div>  
+                </div>
+                <div class="tw-w-full sm:tw-w-1/2">
+                    <dynamic-field class="select-report" :field="field"/>
+                </div>
+            </div>
 
-                            <template v-slot:two>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-up" />
-                                    <div class="tw-text-sm"> Descending</div>
-                                </div>
-                            </template>
+        </div>
 
-                        </q-btn-toggle>
-                    </td>
-                </tr>
-                <tr>
-                    <td> 
-                        <div class="text-primary tw-mr-4 tw-w-9 tw-h-9  tw-inline-flex tw-items-center tw-justify-center tw-font-extrabold tw-rounded-full tw-border-2 tw-border-slate-50">2</div> 
-                        <span class="tw-text-base tw-font-extrabold">Reference ID</span>  
-                    </td>
-                    <td>
-                        <q-btn-toggle
-                            v-model="prueba"
-                            class="my-custom-toggle"
-                            no-caps
-                            rounded
-                            spread
-                            size="sm"
-                            toggle-color="primary"
-                            color="white"
-                            unelevated
-                            text-color="primary"
-                            :options="[
-                            { value: 'one', slot: 'one'},
-                            { value: 'two', slot: 'two'}
-                            ]"
-                        >
-                            <template v-slot:one>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-down" />
-                                    <div class="tw-text-sm"> Ascending </div>
-                                </div>
-                            </template>
-
-                            <template v-slot:two>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-up" />
-                                    <div class="tw-text-sm"> Descending</div>
-                                </div>
-                            </template>
-
-                        </q-btn-toggle>
-                    </td>
-                </tr>
-                <tr>
-                    <td> 
-                        <div class="text-primary tw-mr-4 tw-w-9 tw-h-9 tw-inline-flex tw-items-center tw-justify-center tw-font-extrabold tw-rounded-full tw-border-2 tw-border-slate-50">3</div> 
-                        <span class="tw-text-base tw-font-extrabold">Customers</span>  
-                    </td>
-                    <td>
-                        <q-btn-toggle
-                            v-model="prueba"
-                            class="my-custom-toggle"
-                            no-caps
-                            rounded
-                            spread
-                            size="sm"
-                            toggle-color="primary"
-                            color="white"
-                            unelevated
-                            text-color="primary"
-                            :options="[
-                            { value: 'one', slot: 'one'},
-                            { value: 'two', slot: 'two'}
-                            ]"
-                        >
-                            <template v-slot:one>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-down" />
-                                    <div class="tw-text-sm"> Ascending </div>
-                                </div>
-                            </template>
-
-                            <template v-slot:two>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-up" />
-                                    <div class="tw-text-sm"> Descending</div>
-                                </div>
-                            </template>
-
-                        </q-btn-toggle>
-                    </td>
-                </tr>
-                <tr>
-                    <td> 
-                        <div class="text-primary tw-mr-4 tw-w-9 tw-h-9  tw-inline-flex tw-items-center tw-justify-center tw-font-extrabold tw-rounded-full tw-border-2 tw-border-slate-50">4</div> 
-                        <span class="tw-text-base tw-font-extrabold">Status</span>  
-                    </td>
-                    <td>
-                        <q-btn-toggle
-                            v-model="prueba"
-                            class="my-custom-toggle"
-                            no-caps
-                            rounded
-                            spread
-                            size="sm"
-                            toggle-color="primary"
-                            color="white"
-                            unelevated
-                            text-color="primary"
-                            :options="[
-                            { value: 'one', slot: 'one'},
-                            { value: 'two', slot: 'two'}
-                            ]"
-                        >
-                            <template v-slot:one>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-down" />
-                                    <div class="tw-text-sm"> Ascending </div>
-                                </div>
-                            </template>
-
-                            <template v-slot:two>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-up" />
-                                    <div class="tw-text-sm"> Descending</div>
-                                </div>
-                            </template>
-
-                        </q-btn-toggle>
-                    </td>
-                </tr>
-                <tr>
-                    <td> 
-                        <div class="text-primary tw-mr-4 tw-w-9 tw-h-9 tw-inline-flex tw-items-center tw-justify-center tw-font-extrabold tw-rounded-full tw-border-2 tw-border-slate-50">5</div> 
-                        <span class="tw-text-base tw-font-extrabold">Operation Type</span>  
-                    </td>
-                    <td>
-                        <q-btn-toggle
-                            v-model="prueba"
-                            class="my-custom-toggle"
-                            no-caps
-                            rounded
-                            spread
-                            size="sm"
-                            toggle-color="primary"
-                            color="white"
-                            unelevated
-                            text-color="primary"
-                            :options="[
-                            { value: 'one', slot: 'one'},
-                            { value: 'two', slot: 'two'}
-                            ]"
-                        >
-                            <template v-slot:one>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-down" />
-                                    <div class="tw-text-sm"> Ascending </div>
-                                </div>
-                            </template>
-
-                            <template v-slot:two>
-                                <div class="row items-center no-wrap tw-px-4">
-                                    <q-icon left name="fas fa-sort-amount-up" />
-                                    <div class="tw-text-sm"> Descending</div>
-                                </div>
-                            </template>
-
-                        </q-btn-toggle>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         
     </div>
 </template>
+
+
 
 <script>
 export default {
@@ -226,33 +59,77 @@ export default {
         formFields() {
             return {
                 reportsForms: {
-                    idColumns: {
-                        type: 'toggle',
+                    id: {
+                        value: '1',
+                        type: 'select',
                         isTranslatable: false,
+                        label: 'ID',
                         props: {
                             label: 'ID',
-                            noCaps: true,
-                            rounded: true,
-                            unelevated: true,
-                            toggleColor: 'primary',
-                            color: 'white',
-                            textColor: 'primary',
+                            icon: 'fas fa-sort-amount-up',
+                            color: 'primary',
                             options: [
                                 {label: 'Ascending', value: '1'},
-                                {label: 'Descending', value: '2'}
+                                {label: 'Descending', value: '0'}
                             ],
                         },
                     },
-                    sort: {
+                    referenceId: {
+                        value: '1',
                         type: 'select',
                         isTranslatable: false,
                         props: {
+                            label: 'Reference ID',
+                            icon: 'fas fa-sort-amount-up',
+                            color: 'primary',
                             options: [
                                 {label: 'Ascending', value: '1'},
-                                {label: 'Descending', value: '2'}
+                                {label: 'Descending', value: '0'}
                             ],
                         },
                     },
+                    customers: {
+                        value: '1',
+                        type: 'select',
+                        isTranslatable: false,
+                        props: {
+                            label: 'Customers',
+                            icon: 'fas fa-sort-amount-up',
+                            color: 'primary',
+                            options: [
+                                {label: 'Ascending', value: '1'},
+                                {label: 'Descending', value: '0'}
+                            ],
+                        },
+                    },
+                    status: {
+                        value: '1',
+                        type: 'select',
+                        isTranslatable: false,
+                        props: {
+                            label: 'Status',
+                            icon: 'fas fa-sort-amount-up',
+                            color: 'primary',
+                            options: [
+                                {label: 'Ascending', value: '1'},
+                                {label: 'Descending', value: '0'}
+                            ],
+                        },
+                    },
+                    operationType: {
+                        value: '1',
+                        type: 'select',
+                        isTranslatable: false,
+                        props: {
+                            label: 'Operation Type',
+                            icon: 'fas fa-sort-amount-up',
+                            color: 'primary',
+                            options: [
+                                {label: 'Ascending', value: '1'},
+                                {label: 'Descending', value: '0'}
+                            ],
+                        },
+                    }
                 },
             };
         },
@@ -261,19 +138,14 @@ export default {
 </script>
 
 <style>
-.my-custom-toggle {
-    border: 2px solid var(--q-color-primary);
+.select-report .q-field {
+    padding-bottom: 0 !important;
 }
-.my-custom-toggle .q-btn.q-btn--rounded {
-    border-radius: none; 
+.select-report  .q-field .q-field__label {
+  @apply tw-font-medium sm:tw-hidden;
+  color: var(--q-color-primary);
 }
-.my-custom-toggle .q-btn-item {
-    border-radius: 20px 0 0 20px;
-}
-.my-custom-toggle .q-btn-item + .q-btn-item {
-    border-radius: 0 20px 20px 0;
-}
-.q-stepper-table td, .q-stepper-table th {
-    padding: 0.75rem;
+.select-report .q-field--labeled .q-field__control-container {
+  @apply sm:tw-pt-px !important;
 }
 </style>
