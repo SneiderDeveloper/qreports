@@ -1,11 +1,11 @@
 
 <template>
     <div class="stepper-report">
-      <div class="tw-flex tw-flex-col md:tw-flex-row tw-items-end tw-justify-between">
+      <div class="tw-flex tw-flex-col sm:tw-flex-row sm:tw-items-end tw-justify-between">
         <h2 class="text-primary tw-text-2xl tw-font-semibold tw-mb-4">Create a Report</h2>
         <div class="text-right">
-          <q-btn rounded outline color="secondary" label="Discard" class="q-mr-sm tw-mb-4" no-caps />    
-          <q-btn rounded color="secondary" label="Save" class="tw-mb-4" no-caps/>
+          <q-btn rounded outline color="primary" label="Discard" class="q-mr-sm tw-mb-4" no-caps />    
+          <q-btn rounded color="primary" label="Save" class="tw-mb-4" no-caps/>
         </div>
       </div>
         <q-stepper v-model="step" ref="stepper" color="primary" alternative-labels active-color="primary"  animated class="tw-bg-white">
@@ -58,7 +58,6 @@ export default {
 .stepper-report  .q-stepper__header {
   @apply tw-border-b-0;
 }
-
 .stepper-report .q-stepper__tab  .q-stepper__dot {
   @apply tw-w-10 tw-h-10 tw-font-bold tw-text-base tw-border-0;
 }
@@ -93,8 +92,11 @@ export default {
 .stepper-report  .q-stepper__nav {
   background-color: #F1F4FA;
 }
+.stepper-report .q-stepper__step-inner {
+  @apply tw-p-4 lg:tw-p-5;
+}
 
-.input-report  .q-field .q-field__label {
+.input-report  .q-field.q-field--float .q-field__label {
   @apply tw-font-medium;
   color: var(--q-color-primary);
 }
@@ -126,7 +128,7 @@ export default {
 .input-report-nolabel .q-field--labeled .q-field__control-container {
   @apply lg:tw-pt-px !important;
 }
-.input-report .q-select__dropdown-icon, .input-report-nolabel .q-select__dropdown-icon {
+.input-report .q-icon, .input-report-nolabel .q-select__dropdown-icon {
   color: var(--q-color-primary);
 }
 </style>

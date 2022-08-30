@@ -15,16 +15,10 @@
         handle=".check-report-icon"
         class="
           tw-grid
-          tw-grid
-          tw-grid
-          tw-gap-6
-          tw-gap-6
           tw-gap-6
           tw-grid-cols-1
-          tw-grid-cols-1
-          tw-grid-cols-1
-          md:tw-grid-cols-2 md:tw-grid-cols-2 md:tw-grid-cols-2
-          xl:tw-grid-cols-3 xl:tw-grid-cols-3 xl:tw-grid-cols-3
+          md:tw-grid-cols-2
+          xl:tw-grid-cols-3
           tw-my-4 tw-overflow-hidden
         "
       >
@@ -48,10 +42,10 @@
     <h4 class="text-primary tw-text-base tw-font-extrabold tw-mt-8 tw-mb-6">
       Select the first {{ totalSelectedFilters }} filters
     </h4>
-    <div class="tw-flex tw-space-x-4">
+    <div class="tw-flex tw-flex-wrap">
       <div
         v-for="(filter) in filterList"
-        :key="filter.id"
+        :key="filter.id" class="tw-mr-2 tw-mb-2"
       >
         <dynamic-field
             v-model="filter.check" 
@@ -178,5 +172,8 @@ export default {
   .q-checkbox__inner--indet
   .q-checkbox__bg {
   @apply tw-hidden;
+}
+.check-report-2.check-active .q-item__label {
+    @apply tw-text-white;
 }
 </style>
