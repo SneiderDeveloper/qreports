@@ -15,16 +15,10 @@
         handle=".check-report-icon"
         class="
           tw-grid
-          tw-grid
-          tw-grid
-          tw-gap-6
-          tw-gap-6
           tw-gap-6
           tw-grid-cols-1
-          tw-grid-cols-1
-          tw-grid-cols-1
-          md:tw-grid-cols-2 md:tw-grid-cols-2 md:tw-grid-cols-2
-          xl:tw-grid-cols-3 xl:tw-grid-cols-3 xl:tw-grid-cols-3
+          md:tw-grid-cols-2
+          xl:tw-grid-cols-3
           tw-my-4 tw-overflow-hidden
         "
       >
@@ -46,7 +40,7 @@
       </draggable>
     </div>
     <h4 class="text-primary tw-text-base tw-font-extrabold tw-mt-8 tw-mb-6">
-      Select the first 4 filters
+      Select the first {{ totalSelectedFilters }} filters
     </h4>
     <div class="tw-flex tw-flex-wrap">
       <div
@@ -54,9 +48,9 @@
         :key="filter.id" class="tw-mr-2 tw-mb-2"
       >
         <dynamic-field
-            v-model="filter.ckeck" 
-            class="check-report-2" 
-            :class="{ 'check-active': filter.ckeck }"
+            v-model="filter.check" 
+            class="check-report-2"
+            :class="{'check-report-text-white check-report-btn': Boolean(filter.check)}"
             :field="formFields.reportsFilters[filter.field]" 
         />
       </div>
@@ -80,6 +74,9 @@ export default {
     },
     filterList() {
       return featureStore().getFilterList();
+    },
+    totalSelectedFilters() {
+      return featureStore().getSelectedFilters().length;
     },
     formFields() {
       return {
@@ -121,6 +118,10 @@ export default {
   border-color: rgba(0, 0, 0, 0.24);
 }
 
+.check-report-btn .q-field__control-container {
+  @apply tw-border-none;
+}
+
 .check-report-2 .q-hoverable:hover > .q-focus-helper {
   @apply tw-rounded-3xl;
 }
@@ -131,6 +132,10 @@ export default {
 
 .check-report-2 .q-item__label {
   @apply tw-font-medium tw-text-gray-400 tw-text-sm;
+}
+
+.check-report-text-white .q-item__label {
+  @apply tw-text-white !important;
 }
 
 .check-report-2 .q-field--focused {
