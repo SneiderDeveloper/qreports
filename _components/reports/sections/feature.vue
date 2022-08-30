@@ -55,7 +55,8 @@
       >
         <dynamic-field
             v-model="filter.check" 
-            class="check-report-2" 
+            class="check-report-2"
+            :class="{'check-report-text-white check-report-btn': Boolean(filter.check)}"
             :field="formFields.reportsFilters[filter.field]" 
         />
       </div>
@@ -123,6 +124,10 @@ export default {
   border-color: rgba(0, 0, 0, 0.24);
 }
 
+.check-report-btn .q-field__control-container {
+  @apply tw-border-none;
+}
+
 .check-report-2 .q-hoverable:hover > .q-focus-helper {
   @apply tw-rounded-3xl;
 }
@@ -133,6 +138,10 @@ export default {
 
 .check-report-2 .q-item__label {
   @apply tw-font-medium tw-text-gray-400 tw-text-sm;
+}
+
+.check-report-text-white .q-item__label {
+  @apply tw-text-white !important;
 }
 
 .check-report-2 .q-field--focused {
