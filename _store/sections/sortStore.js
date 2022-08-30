@@ -9,13 +9,16 @@ const state = reactive({
 export default function sortStore() {
     function factoryOfDynamicSelect() {
         const data = {};
+        
         featureStore().getSelectedColumns().forEach(item => {
+            const icon = state.form[item.field] === '1' ? 'fas fa-sort-amount-up'
+            :'fas fa-sort-amount-down';
             data[item.field] = {
                 value: '1',
                 type: 'select',
                 props: {
                     label: item.title,
-                    icon: 'fas fa-sort-amount-up',
+                    icon,
                     color: 'primary',
                     options: [
                         { label: 'Ascending', value: '1' },
