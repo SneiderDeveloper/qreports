@@ -46,7 +46,7 @@
       </draggable>
     </div>
     <h4 class="text-primary tw-text-base tw-font-extrabold tw-mt-8 tw-mb-6">
-      Select the first 4 filters
+      Select the first {{ totalSelectedFilters }} filters
     </h4>
     <div class="tw-flex tw-space-x-4">
       <div
@@ -54,7 +54,7 @@
         :key="filter.id"
       >
         <dynamic-field
-            v-model="filter.ckeck" 
+            v-model="filter.check" 
             class="check-report-2" 
             :field="formFields.reportsFilters[filter.field]" 
         />
@@ -79,6 +79,9 @@ export default {
     },
     filterList() {
       return featureStore().getFilterList();
+    },
+    totalSelectedFilters() {
+      return this.filterList.filter(item => Boolean(item.check)).length;
     },
     formFields() {
       return {
