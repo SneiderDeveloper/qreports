@@ -69,8 +69,8 @@
             </div>
           </div>
         </div>
-
         <q-btn
+          v-if="form.emailNotification.length <= 4"
           outline
           color="primary"
           class="tw-mb-8"
