@@ -1,17 +1,17 @@
 <template>
     <div>
-        <mainComponent />
-         <steppers />
+        <folder />
+        <steppers />
     </div>
 </template>
 
 <script>
 import steppers from './steppers';
-import mainComponent from './main';
+import folder from './folder/index.vue';
 export default {
     components: {
        steppers,
-       mainComponent,
+       folder,
     },
     data() {
         return {

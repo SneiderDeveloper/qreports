@@ -90,7 +90,7 @@ export default {
 
 <style>
 .ghost {
-  @apply tw-bg-gray-100 tw-opacity-50;
+  @apply tw-bg-gray-100 tw-opacity-50 !important;
 }
 .check-report-div {
   @apply tw-relative tw-border tw-rounded-xl;
