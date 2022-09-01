@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tw-overflow-y-auto">
     <draggable
       :id="folder.id"
       :list="folder.reportList"
@@ -11,6 +11,7 @@
       :force-fallback="true"
       @start="dragReports = true"
       @end="dragReports = false"
+      :style="{ height: folder.reportList.length <= 5 ? 'auto' : '300px' }"
     >
       <q-item
         clickable
