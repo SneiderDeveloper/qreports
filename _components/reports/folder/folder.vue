@@ -9,18 +9,15 @@
             class="tw-shadow-lg tw-bg-white tw-rounded-xl"
           >
             <template v-slot:header>
-              <q-item-section>
-                <div class="row items-center "  
-                    @mouseover="showCollapse"
-                >
-                  <q-icon name="folder" color="primary" size="2rem" />
-                  <h5 class="tw-text-xl tw-ml-3 tw-font-bold">{{ folder.title }}</h5>
-                </div>
+              <q-item-section avatar>
+                <q-icon name="folder" color="primary" size="2rem"/>
               </q-item-section>
-
+              <q-item-section>
+                <q-item-label class="tw-text-xl tw-font-bold" lines="1">{{ folder.title }}</q-item-label>
+              </q-item-section>
               <q-item-section side>
                 <div class="row items-center">
-                  <q-btn
+                <q-btn
                     flat
                     round
                     color="tw-gray-300"
@@ -42,20 +39,28 @@
                         <q-separator />
                         <q-item clickable v-ripple>
                           <q-item-section avatar>
-                            <q-icon name="delete" color="primary" />
+                            <q-icon name="fa-regular fa-trash-can" color="primary" />
                           </q-item-section>
 
                           <q-item-section>Delete</q-item-section>
                         </q-item>
                       </q-list>
                     </q-menu>
-                  </q-btn>
+                </q-btn>
                 </div>
               </q-item-section>
             </template>
-
             <q-list separator class="tw-pt-2 tw-rounded-b-xl">
-               <reportList :folder="folder" />
+              <q-item clickable v-ripple>
+                <q-item-section class="input-report">
+                  <q-input outlined dense type="search">
+                    <template v-slot:append>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>  
+                </q-item-section>
+              </q-item>
+              <reportList :folder="folder" />
             </q-list>
           </q-expansion-item>
         </q-card-section>
@@ -68,6 +73,9 @@ import draggable from "vuedraggable"
 import reportList from './reportList';
 import foldersStore from "./store/foldersStore.js";
 export default {
+  data() {
+    return {};
+  },
   components: {
     reportList,
   },
