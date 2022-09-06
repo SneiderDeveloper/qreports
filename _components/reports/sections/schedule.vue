@@ -33,33 +33,25 @@
             md:tw-grid-cols-3
             tw-overflow-hidden 
             ">
-            <div class="
-                tw-flex tw-flex-col tw-items-center tw-mt-3 
-                lg:tw-flex-row lg:tw-items-start ">
-                <label class="
-                    text-sm text-primary font-medium tw-mr-4 tw-pt-1.5 tw-my-1 tw-hidden
-                    lg:tw-block
-                    ">Every</label>
-                <dynamic-field class="input-report-nolabel tw-w-full" :field="formFields.reportsForms.every"/>
+            <div class="schedule-grid-3">
+                <label class="col-auto text-primary">Every</label>
+                <div class="col">
+                    <dynamic-field class="input-report-nolabel tw-w-full" :field="formFields.reportsForms.every"/>
+                </div>
             </div>
-            <div class="
-                tw-flex tw-flex-col tw-items-center  
-                lg:tw-flex-row lg:tw-items-start md:tw-mt-3">
-                <label class="
-                    tw-text-sm text-primary tw-font-medium tw-mr-4 tw-pt-1.5 tw-my-1 tw-hidden tw-w-1/3
-                    lg:tw-block
-                    ">Month(s) at</label>
-                <dynamic-field class="input-report-nolabel tw-w-full" :field="formFields.reportsForms.monthAt"/>
+            <div class="schedule-grid-3">
+                <label class="col-auto text-primary">Month(s) at</label>
+                <div class="col">
+                    <dynamic-field class="input-report-nolabel tw-w-full" :field="formFields.reportsForms.monthAt"/>
+                </div>
             </div>
-            <div class="
-                tw-flex tw-flex-col tw-items-center  
-                lg:tw-flex-row lg:tw-items-start md:tw-mt-3">
-                <label class="
-                    text-sm text-primary font-medium tw-mr-4 tw-pt-1.5 tw-my-1 tw-hidden
-                    lg:tw-block
-                    ">On</label>
-                <dynamic-field class="input-report tw-w-full" :field="formFields.reportsForms.on"/>
+            <div class="schedule-grid-3">
+                <label class="col-auto text-primary">On</label>
+                <div class="col">
+                    <dynamic-field class="input-report-nolabel tw-w-full" :field="formFields.reportsForms.on"/>
+                </div>
             </div>
+
 
         </div>
         <div class="
@@ -206,5 +198,16 @@ export default {
 </script>
 
 <style>
-
+.schedule-grid-3 {
+    @apply tw-flex tw-flex-col tw-items-center tw-flex-wrap lg:tw-flex-row lg:tw-items-start md:tw-mt-3;
+}
+.schedule-grid-3 .col-auto {
+    @apply  tw-text-sm tw-font-medium tw-mr-4 tw-pt-1.5 tw-my-1 tw-hidden tw-max-w-full tw-w-auto lg:tw-block;
+    flex: 0 0 auto;
+}
+.schedule-grid-3 .col {
+    @apply tw-max-w-full tw-w-full lg:tw-w-2.5;
+    flex-basis: 0; 
+    flex-grow: 1;
+}
 </style>
