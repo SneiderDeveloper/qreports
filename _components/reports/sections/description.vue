@@ -14,6 +14,11 @@
     >
       <div>
         <dynamic-field
+          v-model="form.object"
+          class="input-report tw-mb-4"
+          :field="formFields.reportsForms.object"
+        />
+        <dynamic-field
           v-model="form.reportType"
           class="input-report tw-mb-4"
           :field="formFields.reportsForms.reportType"
@@ -51,7 +56,7 @@
               :field="formFields.reportsForms.email"
             />
           </div>
-          <div class="tw-flex tw-w-full lg:tw-w-1/4 tw-overflow-hidden">
+          <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
             <div>
               <dynamic-field
               v-model="item.status"
@@ -62,6 +67,7 @@
               <q-btn
                 flat
                 round
+                color="primary"
                 icon="fa-regular fa-trash-can"
                 size="12px"
                 @click="deleteEmailNotification(index)"
@@ -104,6 +110,20 @@ export default {
     formFields() {
       return {
         reportsForms: {
+          object: {
+            value: "1",
+            type: "select",
+            isTranslatable: false,
+            props: {
+              label: "Object",
+              icon: "fa-solid fa-list-ul",
+              color: "primary",
+              options: [
+                { label: this.$tr("isite.cms.label.enabled"), value: "1" },
+                { label: this.$tr("isite.cms.label.disabled"), value: "0" },
+              ],
+            },
+          },
           reportType: {
             value: "1",
             type: "select",
