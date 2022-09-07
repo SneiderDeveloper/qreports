@@ -1,7 +1,8 @@
-const moduleName = 'reports';
+const moduleName = 'ireport';
 const moduleVersion = 'v1';
 const urlBase = `/${moduleName}/${moduleVersion}`
 
 
 export default {
+    folders: `${urlBase}/folders`,
 }
