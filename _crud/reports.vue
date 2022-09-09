@@ -1,22 +1,23 @@
 <template>
+  <sectionReports />
 </template>
 <script>
 import sectionReports from '@imagina/qreports/_components/reports/index.vue';
-  export default {
-    components: {
-      sectionReports
+export default {
+  components: {
+    sectionReports
+  },
+  data() {
+    return {
+      crudId: this.$uid()
+    }
+  },
+  computed: {
+    //Crud info
+    crudInfo() {
+      return this.$store.state.qcrudComponent.component[this.crudId] || {}
     },
-    data() {
-      return {
-        crudId: this.$uid()
-      }
-    },
-    computed: {
-      //Crud info
-      crudInfo() {
-        return this.$store.state.qcrudComponent.component[this.crudId] || {}
-      },
-      crudData() {
+    crudData() {
       return {
         crudId: this.crudId,
         entityName: config("main.qfly.entityNames.workOrder"),
@@ -55,13 +56,49 @@ import sectionReports from '@imagina/qreports/_components/reports/index.vue';
           filters: {},
           requestParams: {},
           actions: [],
-          relation: {},
+          relation: {
+            //permission: "",
+            apiRoute: 'apiRoutes.qreports.reports',
+            requestParams: (row) => {
+              return {
+                filter: { folderId: row.id },
+              }
+            },
+            columns: [
+              {
+                name: 'id',
+                label: this.$tr('isite.cms.form.id'),
+                field: 'id',
+                style: 'width: 50px'
+              },
+              {
+                name: 'name',
+                label: this.$tr('isite.cms.form.name'),
+                field: 'name',
+              },
+              {
+                name: "created_at",
+                label: this.$tr("isite.cms.form.createdAt"),
+                field: "createdAt",
+                align: "left",
+                format: (val) => (val ? this.$trd(val) : "-"),
+              },
+              {
+                name: "updated_at",
+                label: this.$tr("isite.cms.form.updatedAt"),
+                field: "updatedAt",
+                align: "left",
+                format: (val) => (val ? this.$trd(val) : "-"),
+              },
+              { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' },
+            ]
+          },
         },
         update: false,
         delete: true,
         formLeft: {}
       }
     },
-    },
-  }
+  },
+}
 </script>
