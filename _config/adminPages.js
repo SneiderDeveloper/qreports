@@ -9,7 +9,7 @@ export default {
         page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
         layout: () => import('@imagina/qsite/_layouts/master.vue'),
         title: 'ireports.cms.sidebar.reportsInfo',
-        icon: 'fas fa-file-alt',
+        icon: 'fal fa-file-alt',
         subHeader: {
           refresh: true,
         }
