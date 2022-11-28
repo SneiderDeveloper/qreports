@@ -6,16 +6,17 @@ const modelEmailNotification = {
     status: false,
 }
 const descriptionModel = {
-    reportType: null,
-    folder: null,
-    reportTitle: null,
+    entity: null,
+    reportTypeId: null,
+    folderId: null,
+    title: null,
     description: null,
-    emailNotification: [
+    /*emails: [ // tenerlo encuenta para schedule
         {
             email: null,
             status: false,
         }
-    ],
+    ],*/
     attachReport: 'pdf'
 }
 

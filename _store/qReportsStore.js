@@ -6,10 +6,10 @@ const state = reactive({
 });
 
 export default function qReportsStore() {
-    function saveReport() {
+    async function saveReport() {
         const descriptionForm = descriptionStore().getDescriptionForm();
         const data = {
-            description: {...descriptionForm},
+            attributes: {...descriptionForm},
         }
     }
     return {

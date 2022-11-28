@@ -14,24 +14,24 @@
     >
       <div>
         <dynamic-field
-          v-model="form.object"
+          v-model="form.entity"
           class="input-report tw-mb-4"
-          :field="formFields.reportsForms.object"
+          :field="formFields.reportsForms.entity"
         />
         <dynamic-field
-          v-model="form.reportType"
+          v-model="form.reportTypeId"
           class="input-report tw-mb-4"
-          :field="formFields.reportsForms.reportType"
+          :field="formFields.reportsForms.reportTypeId"
         />
         <dynamic-field
-          v-model="form.folder"
+          v-model="form.folderId"
           class="input-report tw-mb-4"
-          :field="formFields.reportsForms.folder"
+          :field="formFields.reportsForms.folderId"
         />
         <dynamic-field
-          v-model="form.reportTitle"
+          v-model="form.title"
           class="input-report tw-mb-4"
-          :field="formFields.reportsForms.reportTitle"
+          :field="formFields.reportsForms.title"
         />
       </div>
       <div>
@@ -42,51 +42,52 @@
         />
       </div>
       <div>
-        <div
-          class="
-            tw-w-full tw-flex tw-flex-col tw-items-start tw-space-x-4 tw-mb-6
-            lg:tw-flex-row lg:tw-mb-8
-          "
-          v-for="(item, index) in form.emailNotification"
-        >
-          <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
-            <dynamic-field
-              v-model="item.email"
-              class="input-report"
-              :field="formFields.reportsForms.email"
-            />
-          </div>
-          <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
-            <div>
+        <div v-if="false">
+          <div
+            class="
+              tw-w-full tw-flex tw-flex-col tw-items-start tw-space-x-4 tw-mb-6
+              lg:tw-flex-row lg:tw-mb-8
+            "
+            v-for="(item, index) in form.emails"
+          >
+            <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
               <dynamic-field
-              v-model="item.status"
-              :field="formFields.reportsForms.status"
-            />
+                v-model="item.email"
+                class="input-report"
+                :field="formFields.reportsForms.email"
+              />
             </div>
-            <div>
-              <q-btn
-                flat
-                round
-                color="primary"
-                icon="fa-regular fa-trash-can"
-                size="12px"
-                @click="deleteEmailNotification(index)"
-                />
+            <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
+              <div>
+                <dynamic-field
+                v-model="item.status"
+                :field="formFields.reportsForms.status"
+              />
+              </div>
+              <div>
+                <q-btn
+                  flat
+                  round
+                  color="primary"
+                  icon="fa-regular fa-trash-can"
+                  size="12px"
+                  @click="deleteEmailNotification(index)"
+                  />
+              </div>
             </div>
           </div>
-        </div>
-        <q-btn
-          v-if="form.emailNotification.length <= 4"
-          outline
-          color="primary"
-          class="tw-mb-8"
-          no-caps
-          @click="addEmailNotification"
-        >
-          <q-icon left size="1em" name="fa fa-plus" />
-          <div>Add another email</div>
-        </q-btn>
-
+          <q-btn
+            v-if="form.emails.length <= 4"
+            outline
+            color="primary"
+            class="tw-mb-8"
+            no-caps
+            @click="addEmailNotification"
+          >
+            <q-icon left size="1em" name="fa fa-plus" />
+            <div>Add another email</div>
+          </q-btn>
+        </div>  
         <dynamic-field
           v-model="form.attachReport"
           class="q-mb-md radio-report"
@@ -110,7 +111,7 @@ export default {
     formFields() {
       return {
         reportsForms: {
-          object: {
+          entity: {
             value: "1",
             type: "select",
             isTranslatable: false,
@@ -124,7 +125,7 @@ export default {
               ],
             },
           },
-          reportType: {
+          reportTypeId: {
             value: "1",
             type: "select",
             isTranslatable: false,
@@ -138,7 +139,7 @@ export default {
               ],
             },
           },
-          folder: {
+          folderId: {
             value: "1",
             type: "select",
             isTranslatable: false,
@@ -152,7 +153,7 @@ export default {
               ],
             },
           },
-          reportTitle: {
+          title: {
             type: "input",
             props: {
               icon: "text_fields",
