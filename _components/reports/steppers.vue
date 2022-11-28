@@ -8,7 +8,13 @@
           <q-btn rounded color="primary" label="Save" class="tw-mb-4" no-caps/>
         </div>
       </div>
-        <q-stepper v-model="step" ref="stepper" color="primary" alternative-labels active-color="primary"  animated class="tw-bg-white">
+        <q-stepper v-model="step" 
+                  :contracted="$q.screen.lt.sm"
+                  ref="stepper" 
+                  color="primary" 
+                  alternative-labels 
+                  active-color="primary"  
+                  animated class="tw-bg-white">
             <q-step
                 v-for="section in sections"
                 :key="section.id"
@@ -53,41 +59,41 @@ export default {
 }
 .stepper-report .q-stepper {
   @apply tw-rounded-xl tw-border tw-shadow-none;
-  border-color: #D3DAEC;
+  border-color: #F1F4FA;
 }
 .stepper-report  .q-stepper__header {
   @apply tw-border-b-0;
 }
 .stepper-report .q-stepper__tab  .q-stepper__dot {
-  @apply tw-w-10 tw-h-10 tw-font-bold tw-text-base tw-border-0;
+  @apply sm:tw-w-10 sm:tw-h-10 tw-font-bold sm:tw-text-base tw-border-0;
 }
 .stepper-report .q-stepper__tab:not(.q-stepper__tab--active) .q-stepper__dot {
   @apply tw-border-2;
   background-color: #F1F4FA;
-  border-color: #D3DAEC;
+  border-color: #F1F4FA;
 }
 .stepper-report .q-stepper__tab:not(.q-stepper__tab--active) .q-stepper__dot span {
-   @apply tw-text-gray-400;
+  color: #8A98C3;
 }
 .stepper-report .q-stepper__tab--active .q-stepper__dot {
   @apply tw-border-current tw-border-2;
-  border-color: var(--q-color-primary);
 }
 .stepper-report .q-stepper__tab--active .q-stepper__dot span {
   @apply tw-text-white;
 }
 .stepper-report .q-stepper .q-stepper__dot:before {
-  @apply tw-mr-8;
+  @apply sm:tw-mr-4 md:tw-mr-8;
 }
 .stepper-report .q-stepper .q-stepper__dot:after {
-  @apply tw-ml-8;
+  @apply sm:tw-ml-4 md:tw-ml-8;
 }
 .stepper-report .q-stepper .q-stepper__line:after, 
 .stepper-report .q-stepper .q-stepper__line:before {
   @apply tw-h-0.5;
 }
 .stepper-report .q-stepper__title {
-  @apply tw-text-base tw-font-normal tw-text-black;
+  font-size: .5rem;
+  @apply tw-font-bold sm:tw-text-xs md:tw-text-base md:tw-font-normal tw-text-black;
 }
 .stepper-report  .q-stepper__nav {
   background-color: #F1F4FA;
@@ -95,7 +101,6 @@ export default {
 .stepper-report .q-stepper__step-inner {
   @apply tw-p-4 lg:tw-p-5;
 }
-
 .input-report  .q-field.q-field--float .q-field__label {
   @apply tw-font-medium;
   color: var(--q-color-primary);
@@ -121,9 +126,6 @@ export default {
 }
 .input-report  .q-field .q-field__native input {
   @apply lg:tw--mt-3;
-}
-.input-report .q-field__native .q-field__input[aria-expanded="false"] ~ .q-field__label {
-  color: red;
 }
 .input-report-nolabel .q-field--labeled .q-field__control-container {
   @apply lg:tw-pt-px !important;
