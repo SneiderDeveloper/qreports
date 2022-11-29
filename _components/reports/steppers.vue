@@ -41,7 +41,9 @@
         :title="section.title"
         :done="section.done"
       >
-        <component :is="section.component" />
+        <q-form :ref="section.refs">
+          <component :is="section.component" />
+        </q-form>  
       </q-step>
 
       <template v-slot:navigation>
@@ -73,23 +75,44 @@
 </template>
 
 <script>
+                      import { computed } from '@vue/composition-api'
 import modelSections from "./sections/Model/sections.js";
 import qReportsStore from "../../_store/qReportsStore.js";
+import { 
+    STEP_DESCRIPTION, 
+    STEP_FEATURE, 
+    STEP_FIELDS_DETAILDS,
+    STEP_SORT,
+    STEP_SCHEDULE 
+} from './sections/Model/constants.js';
 export default {
   data() {
     return {
       step: 1,
-      sections: modelSections,
     };
+  },
+  beforeDestroy() {
+    qReportsStore().reset();
+  },
+  computed:{
+    sections() {
+      return modelSections;
+    },
   },
   methods: {
     async saveFormReports() {
-      if (this.step === 5) {
-        await qReportsStore().saveReport();
-        return;
-      }
-      this.$refs.stepper.next();
-    },
+      const form = this.sections.find(item => item.id === this.step);
+      this.$refs[form.refs][0].validate().then(async (success) => {
+        if (success) {
+          if (this.step === STEP_SCHEDULE) {
+             await qReportsStore().saveReport();
+             return;
+          }
+          this.$refs.stepper.next();
+          return;
+        }
+      });
+    }
   },
 };
 </script>

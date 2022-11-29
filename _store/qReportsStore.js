@@ -12,7 +12,11 @@ export default function qReportsStore() {
             attributes: {...descriptionForm},
         }
     }
+    function reset() {
+        descriptionStore().reset();
+    }
     return {
-        saveReport
+        saveReport,
+        reset,
     }
 }

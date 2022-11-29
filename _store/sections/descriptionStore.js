@@ -34,9 +34,13 @@ export default function descriptionStore() {
     function deleteEmailNotification(index) {
         state.form.emailNotification.splice(index, 1)
     }
+    function reset() {
+        state.form = {...descriptionModel};
+    }
     return {
         getDescriptionForm,
         addEmailNotification,
         deleteEmailNotification,
+        reset,
     }
 }

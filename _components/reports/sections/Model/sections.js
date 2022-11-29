@@ -3,41 +3,54 @@ import feature from '../feature';
 import fieldsDetails from '../fieldsDetails';
 import sort from '../sort';
 import schedule from '../schedule';
+import { 
+    STEP_DESCRIPTION, 
+    STEP_FEATURE, 
+    STEP_FIELDS_DETAILDS,
+    STEP_SORT,
+    STEP_SCHEDULE 
+} from './constants.js';
+import { reactive } from '@vue/composition-api';
 
-export default [
+export default reactive([
     {
-        id: 1,
+        id: STEP_DESCRIPTION,
         title: 'Description',
         prefix: 1,
         component: description,
         done: false,
+        refs: 'descriptionForm'
     },
     {
-        id: 2,
+        id: STEP_FEATURE,
         title: 'Feature',
         prefix: 2,
         component: feature,
         done: false,
+        refs: 'featureForm'
     },
     {
-        id: 3,
+        id: STEP_FIELDS_DETAILDS,
         title: 'Fields Details',
         prefix: 3,
         component: fieldsDetails,
         done: false,
+        refs: 'fieldsDetailsForm'
     },
     {
-        id: 4,
+        id: STEP_SORT,
         title: 'Sort',
         prefix: 4,
         component: sort,
         done: false,
+        refs: 'sortForm'
     },
     {
-        id: 5,
+        id: STEP_SCHEDULE,
         title: 'Schedule',
         prefix: 5,
         component: schedule,
         done: false,
+        refs: 'schedule'
     },
-];
+]);

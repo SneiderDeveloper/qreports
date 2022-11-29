@@ -4,97 +4,102 @@
       <h3 class="text-primary">Identify your report</h3>
       <div></div>
     </div>
-    <div
-      class="
-        tw-grid tw-gap-6 tw-grid-cols-1
-        md:tw-grid-cols-2
-        xl:tw-grid-cols-3
-        tw-my-4 tw-overflow-hidden
-      "
-    >
-      <div>
-        <dynamic-field
-          v-model="form.entity"
-          class="input-report tw-mb-4"
-          :field="formFields.reportsForms.entity"
-        />
-        <dynamic-field
-          v-model="form.reportTypeId"
-          class="input-report tw-mb-4"
-          :field="formFields.reportsForms.reportTypeId"
-        />
-        <dynamic-field
-          v-model="form.folderId"
-          class="input-report tw-mb-4"
-          :field="formFields.reportsForms.folderId"
-        />
-        <dynamic-field
-          v-model="form.title"
-          class="input-report tw-mb-4"
-          :field="formFields.reportsForms.title"
-        />
-      </div>
-      <div>
-        <dynamic-field
-          v-model="form.description"
-          class="input-report tw-mb-4"
-          :field="formFields.reportsForms.description"
-        />
-      </div>
-      <div>
-        <div v-if="false">
-          <div
-            class="
-              tw-w-full tw-flex tw-flex-col tw-items-start tw-space-x-4 tw-mb-6
-              lg:tw-flex-row lg:tw-mb-8
-            "
-            v-for="(item, index) in form.emails"
-          >
-            <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
-              <dynamic-field
-                v-model="item.email"
-                class="input-report"
-                :field="formFields.reportsForms.email"
-              />
-            </div>
-            <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
-              <div>
+      <div
+        class="
+          tw-grid tw-gap-6 tw-grid-cols-1
+          md:tw-grid-cols-2
+          xl:tw-grid-cols-3
+          tw-my-4 tw-overflow-hidden
+        "
+      >
+        <div>
+          <dynamic-field
+            v-model="form.entity"
+            class="input-report tw-mb-4"
+            :field="formFields.reportsForms.entity"
+          />
+          <dynamic-field
+            v-model="form.reportTypeId"
+            class="input-report tw-mb-4"
+            :field="formFields.reportsForms.reportTypeId"
+          />
+          <dynamic-field
+            v-model="form.folderId"
+            class="input-report tw-mb-4"
+            :field="formFields.reportsForms.folderId"
+          />
+          <dynamic-field
+            v-model="form.title"
+            class="input-report tw-mb-4"
+            :field="formFields.reportsForms.title"
+          />
+        </div>
+        <div>
+          <dynamic-field
+            v-model="form.description"
+            class="input-report tw-mb-4"
+            :field="formFields.reportsForms.description"
+          />
+        </div>
+        <div>
+          <div v-if="false">
+            <div
+              class="
+                tw-w-full
+                tw-flex
+                tw-flex-col
+                tw-items-start
+                tw-space-x-4
+                tw-mb-6
+                lg:tw-flex-row lg:tw-mb-8
+              "
+              v-for="(item, index) in form.emails"
+            >
+              <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
                 <dynamic-field
-                v-model="item.status"
-                :field="formFields.reportsForms.status"
-              />
+                  v-model="item.email"
+                  class="input-report"
+                  :field="formFields.reportsForms.email"
+                />
               </div>
-              <div>
-                <q-btn
-                  flat
-                  round
-                  color="primary"
-                  icon="fa-regular fa-trash-can"
-                  size="12px"
-                  @click="deleteEmailNotification(index)"
+              <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
+                <div>
+                  <dynamic-field
+                    v-model="item.status"
+                    :field="formFields.reportsForms.status"
                   />
+                </div>
+                <div>
+                  <q-btn
+                    flat
+                    round
+                    color="primary"
+                    icon="fa-regular fa-trash-can"
+                    size="12px"
+                    @click="deleteEmailNotification(index)"
+                  />
+                </div>
               </div>
             </div>
+            <q-btn
+              v-if="form.emails.length <= 4"
+              outline
+              color="primary"
+              class="tw-mb-8"
+              no-caps
+              @click="addEmailNotification"
+            >
+              <q-icon left size="1em" name="fa fa-plus" />
+              <div>Add another email</div>
+            </q-btn>
           </div>
-          <q-btn
-            v-if="form.emails.length <= 4"
-            outline
-            color="primary"
-            class="tw-mb-8"
-            no-caps
-            @click="addEmailNotification"
-          >
-            <q-icon left size="1em" name="fa fa-plus" />
-            <div>Add another email</div>
-          </q-btn>
-        </div>  
-        <dynamic-field
-          v-model="form.attachReport"
-          class="q-mb-md radio-report"
-          :field="formFields.reportsForms.attachReport"
-        />
+          <dynamic-field
+            v-model="form.attachReport"
+            class="q-mb-md radio-report"
+            :field="formFields.reportsForms.attachReport"
+          />
+        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -112,31 +117,36 @@ export default {
       return {
         reportsForms: {
           entity: {
-            value: "1",
+            value: null,
             type: "select",
             isTranslatable: false,
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               label: "Object",
               icon: "fa-solid fa-list-ul",
               color: "primary",
-              options: [
-                { label: this.$tr("isite.cms.label.enabled"), value: "1" },
-                { label: this.$tr("isite.cms.label.disabled"), value: "0" },
-              ],
+            },
+            loadOptions: {
+              apiRoute: "apiRoutes.qreports.entities",
             },
           },
           reportTypeId: {
-            value: "1",
+            value: null,
             type: "select",
             isTranslatable: false,
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               label: "Report Type",
               icon: "description",
               color: "primary",
-              options: [
-                { label: this.$tr("isite.cms.label.enabled"), value: "1" },
-                { label: this.$tr("isite.cms.label.disabled"), value: "0" },
-              ],
+            },
+            loadOptions: {
+              apiRoute: "apiRoutes.qreports.reportTypes",
+              select: { label: "name", id: "id" },
             },
           },
           folderId: {
@@ -144,6 +154,9 @@ export default {
             type: "select",
             isTranslatable: false,
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               label: "Folder",
               icon: "folder_open",
               color: "primary",
@@ -154,8 +167,12 @@ export default {
             },
           },
           title: {
+            value: null,
             type: "input",
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               icon: "text_fields",
               label: "Report Title",
               color: "primary",
@@ -164,6 +181,9 @@ export default {
           description: {
             type: "input",
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               label: "Description",
               type: "textarea",
               counter: true,
@@ -174,6 +194,9 @@ export default {
           email: {
             type: "input",
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               label: "Email Notification",
               icon: "mail",
               color: "primary",
@@ -185,6 +208,9 @@ export default {
             type: "toggle",
             value: "1",
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               size: "md",
               options: [
                 { label: "YES", value: "1" },
@@ -196,6 +222,9 @@ export default {
             value: "pdf",
             type: "optionGroup",
             props: {
+              rules: [
+                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+              ],
               label: "Attach this report as:",
               inline: true,
               stackLabel: true,
@@ -212,12 +241,12 @@ export default {
   },
   methods: {
     addEmailNotification() {
-      if(this.form.emailNotification.length >= 5) return;
+      if (this.form.emailNotification.length >= 5) return;
       descriptionStore().addEmailNotification();
     },
     deleteEmailNotification(index) {
       descriptionStore().deleteEmailNotification(index);
-    }
+    },
   },
 };
 </script>
