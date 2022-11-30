@@ -10,17 +10,21 @@ export default function fieldsDetailsStore() {
     function factoryOfDynamicSelect(multiple) {
         const data = {};
         featureStore().getSelectedFilters().forEach(item => {
-            data[item.field] = {
-                value: [],
-                type: 'select',
-                props: {
-                    label: item.title,
-                    multiple: true,
-                    options: [
-                        { label: 'enable', value: '1' },
-                        { label: 'disabled', value: '2' }
-                    ]
+            let loadOptions = {};
+            if(item.type.type === 'select' && item.type.loadOptions) {
+                loadOptions = {
+                    loadOptions: {
+                        ...item.type.loadOptions
+                    },
                 }
+            }
+            data[item.id] = {
+                value: item.type.value || null,
+                type: item.type.type,
+                props: {
+                    ...item.type.props
+                },
+                ...loadOptions
             };
         });
         return data;
@@ -36,9 +40,16 @@ export default function fieldsDetailsStore() {
             }
         })
     }
+    function payloadFilter() {
+        const filters = state.form;
+        return {
+            filters,
+        }
+    }
     return {
         factoryOfDynamicSelect,
         removeObjectIdentifiers,
         getForm,
+        payloadFilter
     }
 }

@@ -47,21 +47,33 @@ const modelFilterList =[
     },
 ]
 const state = reactive({
-    columnList: modelColumnList,
-    filterList: modelFilterList,
+    columnList: [],
+    filterList: [],
 });
 
 export default function featureStore() {
     function getColumnList() {
         return state.columnList;
     }
+    function setColumnList(columns) {
+        state.columnList = columns.map(item => ({
+            ...item,
+            check: 0,
+        }));
+    }
     function getFilterList() {
         return state.filterList;
+    }
+    function setFilterList(filters) {
+        state.filterList = filters.map(item => ({
+            ...item,
+            check: 0,
+        }));
     }
     function factoryOfDynamicCheck(type) {
         const data = {};
         state[type].forEach(item => {
-            data[item.field] = {
+            data[item.id] = {
                 type: 'checkbox',
                 value: 0,
                 props: {
@@ -77,11 +89,25 @@ export default function featureStore() {
     function getSelectedColumns() {
         return state.columnList.filter(item => Boolean(item.check));
     }
+    function reset() {
+        setColumnList([]);
+        setFilterList([]);
+    }
+    function payloadColumns() {
+        const columns = getSelectedColumns().map(item => item.id)
+        return {
+            columns,
+        }
+    }
     return {
         getColumnList,
         getFilterList,
         factoryOfDynamicCheck,
         getSelectedFilters,
         getSelectedColumns,
+        setColumnList,
+        setFilterList,
+        reset,
+        payloadColumns,
     }
 }

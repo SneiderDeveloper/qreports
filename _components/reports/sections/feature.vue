@@ -26,7 +26,7 @@
           <dynamic-field
             class="check-report-1"
             v-model="list.check"
-            :field="formFields.reportsColumns[list.field]"
+            :field="formFields.reportsColumns[list.id]"
           />
           <q-btn
               flat
@@ -51,7 +51,7 @@
             v-model="filter.check" 
             class="check-report-2"
             :class="{'check-report-text-white check-report-btn': Boolean(filter.check)}"
-            :field="formFields.reportsFilters[filter.field]" 
+            :field="formFields.reportsFilters[filter.id]" 
         />
       </div>
     </div>

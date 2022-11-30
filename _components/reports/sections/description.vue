@@ -8,7 +8,7 @@
         class="
           tw-grid tw-gap-6 tw-grid-cols-1
           md:tw-grid-cols-2
-          xl:tw-grid-cols-3
+          xl:tw-grid-cols-2
           tw-my-4 tw-overflow-hidden
         "
       >
@@ -22,19 +22,20 @@
             v-model="form.reportTypeId"
             class="input-report tw-mb-4"
             :field="formFields.reportsForms.reportTypeId"
+            @input="getSelectedReportType"
           />
           <dynamic-field
             v-model="form.folderId"
             class="input-report tw-mb-4"
             :field="formFields.reportsForms.folderId"
           />
-          <dynamic-field
-            v-model="form.title"
-            class="input-report tw-mb-4"
-            :field="formFields.reportsForms.title"
-          />
         </div>
         <div>
+          <dynamic-field
+            v-model="form.title"
+            class="input-report"
+            :field="formFields.reportsForms.title"
+          />
           <dynamic-field
             v-model="form.description"
             class="input-report tw-mb-4"
@@ -94,6 +95,7 @@
             </q-btn>
           </div>
           <dynamic-field
+            v-if="false"
             v-model="form.attachReport"
             class="q-mb-md radio-report"
             :field="formFields.reportsForms.attachReport"
@@ -105,13 +107,22 @@
 
 <script>
 import descriptionStore from "../../../_store/sections/descriptionStore.js";
+import featureStore from "../../../_store/sections/featureStore.js";
 export default {
+  created() {
+    this.$nextTick(async function () {
+      await descriptionStore().getListOfReportTypes();
+    });
+  },
   data() {
     return {};
   },
   computed: {
     form() {
       return descriptionStore().getDescriptionForm();
+    },
+    reportTypeList() {
+      return descriptionStore().getReportTypeList();
     },
     formFields() {
       return {
@@ -143,15 +154,12 @@ export default {
               label: "Report Type",
               icon: "description",
               color: "primary",
-            },
-            loadOptions: {
-              apiRoute: "apiRoutes.qreports.reportTypes",
-              select: { label: "name", id: "id" },
+              options: this.reportTypeList,
             },
           },
           folderId: {
-            value: "1",
-            type: "select",
+            value: null,
+            type : 'treeSelect',
             isTranslatable: false,
             props: {
               rules: [
@@ -160,10 +168,9 @@ export default {
               label: "Folder",
               icon: "folder_open",
               color: "primary",
-              options: [
-                { label: this.$tr("isite.cms.label.enabled"), value: "1" },
-                { label: this.$tr("isite.cms.label.disabled"), value: "0" },
-              ],
+            },
+            loadOptions: {
+              apiRoute: "apiRoutes.qreports.folders",
             },
           },
           title: {
@@ -181,9 +188,6 @@ export default {
           description: {
             type: "input",
             props: {
-              rules: [
-                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
-              ],
               label: "Description",
               type: "textarea",
               counter: true,
@@ -191,7 +195,7 @@ export default {
               rows: "6",
             },
           },
-          email: {
+          /*email: {
             type: "input",
             props: {
               rules: [
@@ -217,8 +221,8 @@ export default {
                 { label: "NO", value: "0" },
               ],
             },
-          },
-          attachReport: {
+          },*/
+          /*attachReport: {
             value: "pdf",
             type: "optionGroup",
             props: {
@@ -234,7 +238,7 @@ export default {
                 { label: "XLSX", value: "xlsx" },
               ],
             },
-          },
+          },*/
         },
       };
     },
@@ -246,6 +250,14 @@ export default {
     },
     deleteEmailNotification(index) {
       descriptionStore().deleteEmailNotification(index);
+    },
+    getSelectedReportType() {
+      const reportTypeList = this.reportTypeList.find(item => item.id === Number(this.form.reportTypeId));
+      if(reportTypeList) {
+        console.log(reportTypeList);
+        featureStore().setColumnList(reportTypeList.columns || []);
+        featureStore().setFilterList(reportTypeList.filters || []);
+      }
     },
   },
 };

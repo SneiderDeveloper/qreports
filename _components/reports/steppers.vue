@@ -41,9 +41,11 @@
         :title="section.title"
         :done="section.done"
       >
-        <q-form :ref="section.refs">
-          <component :is="section.component" />
-        </q-form>  
+        <div>
+          <q-form :ref="section.refs">
+            <component :is="section.component" />
+          </q-form> 
+        </div> 
       </q-step>
 
       <template v-slot:navigation>
@@ -101,17 +103,20 @@ export default {
   },
   methods: {
     async saveFormReports() {
+      this.$refs.stepper.next();
       const form = this.sections.find(item => item.id === this.step);
-      this.$refs[form.refs][0].validate().then(async (success) => {
-        if (success) {
-          if (this.step === STEP_SCHEDULE) {
-             await qReportsStore().saveReport();
-             return;
+      if(this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
+        this.$refs[form.refs][0].validate().then(async (success) => {
+          if (success) {
+            if (this.step === STEP_SCHEDULE) {
+              await qReportsStore().saveReport();
+              return;
+            }
+            this.$refs.stepper.next();
+            return;
           }
-          this.$refs.stepper.next();
-          return;
-        }
-      });
+        });
+      }
     }
   },
 };
@@ -172,6 +177,9 @@ export default {
 }
 .stepper-report .q-stepper__step-inner {
   @apply tw-p-4 lg:tw-p-5;
+}
+.stepper-report .q-form .q-field {
+  @apply tw-p-0 !important;
 }
 .input-report .q-field.q-field--float .q-field__label {
   @apply tw-font-medium;
