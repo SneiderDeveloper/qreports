@@ -33,7 +33,7 @@
         <div>
           <dynamic-field
             v-model="form.title"
-            class="input-report"
+            class="input-report tw-mb-4"
             :field="formFields.reportsForms.title"
           />
           <dynamic-field

@@ -1,6 +1,7 @@
 import { reactive } from '@vue/composition-api';
 import baseService from '@imagina/qcrud/_services/baseService.js'
 import featureStore from './featureStore.js';
+import _ from 'lodash';
 
 const state = reactive({
     form: {},
@@ -11,9 +12,9 @@ export default function sortStore() {
         const data = {};
         
         featureStore().getSelectedColumns().forEach(item => {
-            const icon = state.form[item.field] === '1' ? 'fas fa-sort-amount-up'
+            const icon = state.form[item.id] === '1' ? 'fas fa-sort-amount-up'
             :'fas fa-sort-amount-down';
-            data[item.field] = {
+            data[item.id] = {
                 value: '1',
                 type: 'select',
                 props: {
@@ -40,9 +41,16 @@ export default function sortStore() {
             }
         })
     }
+    function payloadSort() {
+        const sort = _.mapKeys(state.form, (v, k) => _.camelCase(k))
+        return  {
+            sort,
+        }
+    }
     return {
         factoryOfDynamicSelect,
         removeObjectIdentifiers,
         getForm,
+        payloadSort,
     }
 }
