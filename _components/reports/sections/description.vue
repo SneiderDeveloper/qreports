@@ -108,6 +108,7 @@
 <script>
 import descriptionStore from "../../../_store/sections/descriptionStore.js";
 import featureStore from "../../../_store/sections/featureStore.js";
+import sortStore from "../../../_store/sections/sortStore.js"
 export default {
   created() {
     this.$nextTick(async function () {
@@ -254,9 +255,9 @@ export default {
     getSelectedReportType() {
       const reportTypeList = this.reportTypeList.find(item => item.id === Number(this.form.reportTypeId));
       if(reportTypeList) {
-        console.log(reportTypeList);
         featureStore().setColumnList(reportTypeList.columns || []);
         featureStore().setFilterList(reportTypeList.filters || []);
+        sortStore().setSortList(reportTypeList.sort || []);
       }
     },
   },

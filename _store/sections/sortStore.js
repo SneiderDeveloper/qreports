@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 const state = reactive({
     form: {},
+    sortList: [],
 });
 
 export default function sortStore() {
@@ -14,21 +15,30 @@ export default function sortStore() {
         featureStore().getSelectedColumns().forEach(item => {
             const icon = state.form[item.id] === '1' ? 'fas fa-sort-amount-up'
             :'fas fa-sort-amount-down';
-            data[item.id] = {
-                value: '1',
-                type: 'select',
-                props: {
-                    label: item.title,
-                    icon,
-                    color: 'primary',
-                    options: [
-                        { label: 'Ascending', value: '1' },
-                        { label: 'Descending', value: '0' }
-                    ],
-                }
-            };
+            const sortList = getSortList().find(item => item.id === item.id);
+            if(sortList) {
+                data[item.id] = {
+                    value: '1',
+                    type: 'select',
+                    props: {
+                        label: item.title,
+                        icon,
+                        color: 'primary',
+                        options: [
+                            { label: 'Ascending', value: '1' },
+                            { label: 'Descending', value: '0' }
+                        ],
+                    }
+                };
+            }
         });
         return data;
+    }
+    function getSortList() {
+        return state.sortList;
+    }
+    function setSortList(value) {
+        state.sortList = value;
     }
     function getForm() {
         return state.form;
@@ -52,5 +62,7 @@ export default function sortStore() {
         removeObjectIdentifiers,
         getForm,
         payloadSort,
+        setSortList,
+        getSortList
     }
 }
