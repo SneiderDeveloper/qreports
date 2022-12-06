@@ -67,7 +67,7 @@
             color="primary"
             icon-right="fas fa-arrow-right"
             @click="saveFormReports"
-            :label="step === 5 ? 'Finish' : 'Next'"
+            :label="step === sections.length ? 'Finish' : 'Next'"
             class="tw-mt-6 text-sm btn-small"
           />
         </q-stepper-navigation>
@@ -94,7 +94,9 @@ export default {
     };
   },
   beforeDestroy() {
-    qReportsStore().reset();
+    this.$nextTick(function () {
+      qReportsStore().reset();
+    })
   },
   computed:{
     sections() {
@@ -103,12 +105,11 @@ export default {
   },
   methods: {
     async saveFormReports() {
-      this.$refs.stepper.next();
       const form = this.sections.find(item => item.id === this.step);
       if(this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
         this.$refs[form.refs][0].validate().then(async (success) => {
           if (success) {
-            if (this.step === STEP_SCHEDULE) {
+            if (this.step === this.sections.length) {
               await qReportsStore().saveReport();
               return;
             }

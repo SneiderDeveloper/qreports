@@ -22,7 +22,7 @@ export default {
         crudId: this.crudId,
         entityName: config("main.qfly.entityNames.workOrder"),
         apiRoute: 'apiRoutes.qreports.folders',
-        create: false,
+        create: true,
         read: {
           showAs: 'folders',
           columns: [
@@ -96,7 +96,16 @@ export default {
         },
         update: false,
         delete: true,
-        formLeft: {}
+        formLeft: {
+          id: {value: ''},
+          name: {
+            value: null,
+            type: 'input',
+            props: {
+              label: 'title'
+            },
+          }
+        }
       }
     },
   },

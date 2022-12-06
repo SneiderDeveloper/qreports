@@ -2,7 +2,7 @@ import { reactive } from '@vue/composition-api';
 import baseService from '@imagina/qcrud/_services/baseService.js'
 const modelColumnList = [
     {
-        "id": 1,
+        "id": 'id',
         "title": 'ID',
         "field": 'id',
         "check": 0,
@@ -65,8 +65,11 @@ export default function featureStore() {
         return state.filterList;
     }
     function setFilterList(filters) {
-        state.filterList = filters.map(item => ({
-            ...item,
+        state.filterList = [];
+        state.filterList = Object.keys(filters).map(item => ({
+            id: item,
+            title: filters[item].props.label,
+            ...filters[item],
             check: 0,
         }));
     }

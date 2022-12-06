@@ -10,21 +10,28 @@ const state = reactive({
 
 export default function qReportsStore() {
     async function saveReport() {
-        const descriptionForm = descriptionStore().getDescriptionForm();
-        const columns = featureStore().payloadColumns();
-        const filters = fieldsDetailsStore().payloadFilter();
-        const sort = sortStore().payloadSort()
-        const data = {
-            ...descriptionForm,
-            ...columns,
-            ...filters,
-            ...sort
+        try {
+            const descriptionForm = descriptionStore().getDescriptionForm();
+            const columns = featureStore().payloadColumns();
+            const filters = fieldsDetailsStore().payloadFilter();
+            const sort = sortStore().payloadSort()
+            const data = {
+                ...descriptionForm,
+                ...columns,
+                ...filters,
+                ...sort
+            }
+            console.log(data);
+            baseService.create('apiRoutes.qreports.reports', data);
+        } catch (error) {
+            console.log(error);
         }
-        console.log(data);
+        
     }
     function reset() {
         descriptionStore().reset();
         featureStore().reset();
+        sortStore().setForm({})
     }
     return {
         saveReport,

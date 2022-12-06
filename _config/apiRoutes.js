@@ -8,5 +8,5 @@ export default {
     orderPosition: `${urlBase}/folders/order-position`,
     reports: `${urlBase}/reports`,
     reportTypes: `${urlBase}/report-types`,
-    entities: `${urlBase}/entities`
+    entities: `${urlBase}/reports/entities`
 }

@@ -136,12 +136,14 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
+              selectByDefault: true,
               label: "Object",
               icon: "fa-solid fa-list-ul",
               color: "primary",
             },
             loadOptions: {
               apiRoute: "apiRoutes.qreports.entities",
+              select: {label: 'label', id: 'value'},
             },
           },
           reportTypeId: {
