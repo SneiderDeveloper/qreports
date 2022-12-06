@@ -11,7 +11,6 @@ const state = reactive({
 export default function sortStore() {
     function factoryOfDynamicSelect() {
         const data = {};
-        
         featureStore().getSelectedColumns().forEach(item => {
             const icon = state.form[item.id] === '1' ? 'fas fa-sort-amount-up'
             :'fas fa-sort-amount-down';
@@ -43,6 +42,9 @@ export default function sortStore() {
     function getForm() {
         return state.form;
     }
+    function setForm(value) {
+        state.form = value;
+    }
     function removeObjectIdentifiers() {
         Object.entries(state.form).forEach(([key, value]) => {
             const filter = featureStore().getSelectedColumns().some(item => item.field === key);
@@ -57,12 +59,18 @@ export default function sortStore() {
             sort,
         }
     }
+    function reset() {
+        this.form = {};
+        state.sortList = [];
+    }
     return {
         factoryOfDynamicSelect,
         removeObjectIdentifiers,
         getForm,
         payloadSort,
         setSortList,
-        getSortList
+        getSortList,
+        reset,
+        setForm
     }
 }

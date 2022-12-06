@@ -45,12 +45,12 @@ export default reactive([
         done: false,
         refs: 'sortForm'
     },
-    {
+    /*{
         id: STEP_SCHEDULE,
         title: 'Schedule',
         prefix: 5,
         component: schedule,
         done: false,
         refs: 'schedule'
-    },
+    },*/
 ]);

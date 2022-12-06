@@ -56,7 +56,9 @@ export default {
         };
     },
     created() {
-        sortStore().removeObjectIdentifiers();
+        this.$nextTick(function () {
+            sortStore().removeObjectIdentifiers();
+        })
     },
     computed: {
         form() {
