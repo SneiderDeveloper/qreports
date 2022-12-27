@@ -10,7 +10,7 @@ import {
     STEP_SORT,
     STEP_SCHEDULE 
 } from './constants.js';
-import { reactive } from '@vue/composition-api';
+import { reactive } from 'vue';
 
 export default reactive([
     {

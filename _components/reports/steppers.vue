@@ -77,7 +77,6 @@
 </template>
 
 <script>
-                      import { computed } from '@vue/composition-api'
 import modelSections from "./sections/Model/sections.js";
 import qReportsStore from "../../_store/qReportsStore.js";
 import { 
