@@ -21,6 +21,7 @@ export default {
         },
         read: {
           showAs: 'folders',
+          apiRouteOrderFolders: "apiRoutes.qreports.orderPosition",
           columns: [
             {
               name: 'id',
