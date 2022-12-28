@@ -106,11 +106,21 @@ export default {
         delete: true,
         formLeft: {
           id: {value: ''},
+          is_scheduled: {
+            value: false,
+          },
           name: {
             value: null,
             type: 'input',
             props: {
-              label: 'title'
+              label: 'Name'
+            },
+          },
+          title: {
+            value: null,
+            type: 'input',
+            props: {
+              label: 'Title'
             },
           }
         }
