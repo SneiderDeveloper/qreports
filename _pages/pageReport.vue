@@ -10,6 +10,8 @@
 </template>
 <script>
 import fieldsDetailsStore from "../_store/sections/fieldsDetailsStore.js";
+import _ from 'lodash';
+
 export default {
   data() {
     return {
@@ -59,21 +61,8 @@ export default {
           }
         );
         if (response.data.reportType) {
-          this.columns = response.data.reportType.columns.map((item) => ({
-            name: item.id,
-            label: item.title,
-            field: item.id,
-            align: "left",
-            format: (val) => (val ? val : "-"),
-          }));
-          const filters = response.data.reportType.filters;
-          const filterList = Object.keys(response.data.reportType.filters).map(
-            (item) => ({
-              id: item,
-              title: filters[item].props.label,
-              ...filters[item],
-            })
-          );
+          this.columns = await this.getColumns(response.data);
+          const filterList = await this.getFilter(response.data);
           this.filters = await fieldsDetailsStore().buildfilters(
             filterList,
             true
@@ -84,6 +73,40 @@ export default {
         this.loading = false;
       }
     },
+    async getColumns(data) {
+      try {
+        return data.reportType.columns.map((item) => ({
+            name: item.id,
+            label: item.title,
+            field: item.id,
+            align: "left",
+            format: (val) => (val ? val : "-"),
+          })).filter(column => data.columns.some(item => item === column.field));
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getFilter(data) {
+      try {
+        const filters = data.reportType.filters;
+        return Object.keys(filters).map(
+            (item) => {
+              const existeField = Object.keys(data.filters || {}).some(filter => _.camelCase(filter) === item); 
+              filters[item].value = existeField ? data.filters[_.snakeCase(item)] : null;
+              return {
+                id: item,
+                title: filters[item].props.label,
+                ...filters[item],
+              }
+            }
+          ).filter(filter => {
+            const filterObject = Object.keys(data.filters || {});
+            return filterObject.some(item => item === _.snakeCase(filter.id));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 };
 </script>
