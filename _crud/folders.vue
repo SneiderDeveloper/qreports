@@ -113,7 +113,10 @@ export default {
             value: null,
             type: 'input',
             props: {
-              label: 'Title'
+              label: 'Title',
+              rules: [
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
+              ],
             },
           },
           name: {
