@@ -4,7 +4,7 @@ export default {
         activated: true,
         authenticated: true,
         path: '/folders/index',
-        name: 'qreports.admin.reports',
+        name: 'qreports.admin.folders',
         crud : import('@imagina/qreports/_crud/folders'),
         page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
         layout: () => import('@imagina/qsite/_layouts/master.vue'),

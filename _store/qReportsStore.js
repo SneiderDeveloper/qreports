@@ -21,7 +21,6 @@ export default function qReportsStore() {
                 ...filters,
                 ...sort
             }
-            console.log(data);
             baseService.create('apiRoutes.qreports.reports', data);
         } catch (error) {
             console.log(error);

@@ -110,6 +110,7 @@ export default {
           if (success) {
             if (this.step === this.sections.length) {
               await qReportsStore().saveReport();
+              this.$router.push({name: 'qreports.admin.folders'})
               return;
             }
             this.$refs.stepper.next();
