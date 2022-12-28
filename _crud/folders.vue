@@ -109,20 +109,27 @@ export default {
           is_scheduled: {
             value: false,
           },
-          name: {
-            value: null,
-            type: 'input',
-            props: {
-              label: 'Name'
-            },
-          },
           title: {
             value: null,
             type: 'input',
             props: {
               label: 'Title'
             },
-          }
+          },
+          name: {
+            value: '',
+          },
+        },
+        getDataForm: (formData, type) => {
+          return new Promise(resolve => {
+            if (type == 'create') {
+              //Add system name
+              const title = formData.title || '';
+              formData.name = this.$helper.getSlug(title);
+            }
+            //Resolve
+            resolve(formData)
+          })
         }
       }
     },
