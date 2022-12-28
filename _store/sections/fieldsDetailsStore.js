@@ -10,32 +10,8 @@ const state = reactive({
 export default function fieldsDetailsStore() {
     function factoryOfDynamicSelect(multiple) {
         try {
-            const data = {};
-            featureStore().getSelectedFilters().forEach(item => {
-                let loadOptions = {};
-                const type = !item.type && item.id === 'date' ? 'select' : item.type;
-                const options = !item.type && item.id === 'date' ? { options: optionDate() } : {};
-                if (item.type && item.type === 'select' && item.loadOptions) {
-                    loadOptions = {
-                        loadOptions: {
-                            ...item.loadOptions
-                        },
-                    }
-                }
-                data[item.id] = {
-                    value: state.form[item.id] || item.value || null,
-                    type: type,
-                    props: {
-                        rules: [
-                            val => !!val || Vue.prototype.$tr('isite.cms.message.fieldRequired')
-                        ],
-                        ...item.props,
-                        ...options
-                    },
-                    ...loadOptions
-                };
-            });
-            return data;
+            const filters = featureStore().getSelectedFilters();
+            return buildfilters(filters);
         } catch (error) {
             console.log('Factory::FieldsDetaild', error);
         }
@@ -79,10 +55,56 @@ export default function fieldsDetailsStore() {
             filters,
         }
     }
+    function buildfilters(filterList, crud = false) {
+        const data = {};
+        filterList.forEach(item => {
+            let loadOptions = {};
+            let rules = {};
+            const type = !item.type && item.id === 'date' ? 'select' : item.type;
+            const options = !item.type && item.id === 'date' ? { options: optionDate() } : {};
+            if (item.type && item.type === 'select' && item.loadOptions) {
+                loadOptions = {
+                    loadOptions: {
+                        ...item.loadOptions
+                    },
+                }
+            }
+            if(!crud) {
+                rules = {
+                    rules: [
+                        val => !!val || Vue.prototype.$tr('isite.cms.message.fieldRequired')
+                    ]
+                };
+            }
+            if(crud && item.id === 'date') {
+                data[item.id] = {
+                    props:{
+                        label: item.props.label
+                      },
+                      name: item.name,
+                      field: item.field,
+                }
+            } else {
+                data[item.id] = {
+                    value: state.form[item.id] || item.value || null,
+                    type: type,
+                    props: {
+                        ...rules,
+                        ...item.props,
+                        ...options,
+                        readonly: typeof item.props.readonly === 'boolean' ?  item.props.readonly : false,
+                    },
+                    ...loadOptions
+                };
+            }
+        });
+        return data;
+    }
     return {
         factoryOfDynamicSelect,
         removeObjectIdentifiers,
         getForm,
-        payloadFilter
+        payloadFilter,
+        buildfilters
     }
 }

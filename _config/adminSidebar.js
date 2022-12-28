@@ -1,4 +1,12 @@
 const pages = config('pages') // Get Pages from config
 export default [
-  pages.qreports.reports,
+  
+  {
+    title: 'ireports.cms.sidebar.reportsInfo',
+    icon: 'fal fa-file-alt',
+    children: [
+      pages.qreports.folders,
+      pages.qreports.reportCreate
+    ]
+  },
 ]

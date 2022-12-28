@@ -1,12 +1,6 @@
-<template>
-  <sectionReports />
-</template>
+<template></template>
 <script>
-import sectionReports from '@imagina/qreports/_components/reports/index.vue';
 export default {
-  components: {
-    sectionReports
-  },
   data() {
     return {
       crudId: this.$uid()
@@ -91,7 +85,17 @@ export default {
                 format: (val) => (val ? this.$trd(val) : "-"),
               },
               { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' },
-            ]
+            ],
+            actions: [
+              {
+                name: 'show',
+                icon: 'fal fa-eye',
+                label: this.$tr('isite.cms.label.show'),
+                action: (item) => {
+                  this.$router.push({ name: 'qreports.admin.report', params: {id: item.id} });
+                }
+              },
+            ],
           },
         },
         update: false,

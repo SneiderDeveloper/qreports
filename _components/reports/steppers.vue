@@ -11,7 +11,7 @@
       <h2 class="text-primary tw-text-2xl tw-font-semibold tw-mb-4">
         Create a Report
       </h2>
-      <div class="text-right">
+      <div class="text-right tw-hidden">
         <q-btn
           rounded
           outline
@@ -117,7 +117,7 @@ export default {
           }
         });
       }
-    }
+    },
   },
 };
 </script>
