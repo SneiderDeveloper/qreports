@@ -98,6 +98,7 @@ export default {
   beforeDestroy() {
     this.$nextTick(function () {
       qReportsStore().reset();
+      this.reset();
     });
   },
   computed: {
@@ -141,6 +142,12 @@ export default {
         console.log(error);
       }
     },
+    reset() {
+      this.sections.forEach(element => {
+        element.error = false;
+        element.done = false;
+      });
+    }
   },
 };
 </script>
