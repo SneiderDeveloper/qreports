@@ -10,13 +10,14 @@
 </template>
 <script>
 import fieldsDetailsStore from "../_store/sections/fieldsDetailsStore.js";
-import _ from 'lodash';
+import _ from "lodash";
 
 export default {
   data() {
     return {
       columns: [],
       filters: {},
+      sort: {},
       loading: true,
     };
   },
@@ -36,11 +37,13 @@ export default {
     crudData() {
       return {
         read: {
-          columns: [
-            ...this.columns,
-          ],
+          columns: [...this.columns],
           filters: {
             ...this.filters,
+          },
+          requestParams: {
+            filter: { reportId: this.reportId },
+            order: { ...this.sort },
           },
         },
       };
@@ -63,6 +66,7 @@ export default {
         if (response.data.reportType) {
           this.columns = await this.getColumns(response.data);
           const filterList = await this.getFilter(response.data);
+          this.sort = await this.getSort(response.data);
           this.filters = await fieldsDetailsStore().buildfilters(
             filterList,
             true
@@ -75,13 +79,17 @@ export default {
     },
     async getColumns(data) {
       try {
-        return data.reportType.columns.map((item) => ({
+        return data.reportType.columns
+          .map((item) => ({
             name: item.id,
             label: item.title,
             field: item.id,
             align: "left",
             format: (val) => (val ? val : "-"),
-          })).filter(column => data.columns.some(item => item === column.field));
+          }))
+          .filter((column) =>
+            data.columns.some((item) => item === column.field)
+          );
       } catch (error) {
         console.log(error);
       }
@@ -89,24 +97,39 @@ export default {
     async getFilter(data) {
       try {
         const filters = data.reportType.filters;
-        return Object.keys(filters).map(
-            (item) => {
-              const existeField = Object.keys(data.filters || {}).some(filter => _.camelCase(filter) === item); 
-              filters[item].value = existeField ? data.filters[_.snakeCase(item)] : null;
-              return {
-                id: item,
-                title: filters[item].props.label,
-                ...filters[item],
-              }
-            }
-          ).filter(filter => {
+        return Object.keys(filters)
+          .map((item) => {
+            const existeField = Object.keys(data.filters || {}).some(
+              (filter) => _.camelCase(filter) === item
+            );
+            filters[item].value = existeField
+              ? data.filters[_.snakeCase(item)]
+              : null;
+            return {
+              id: item,
+              title: filters[item].props.label,
+              ...filters[item],
+            };
+          })
+          .filter((filter) => {
             const filterObject = Object.keys(data.filters || {});
-            return filterObject.some(item => item === _.snakeCase(filter.id));
+            return filterObject.some((item) => item === _.snakeCase(filter.id));
           });
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+    async getSort(data) {
+      try {
+        const sort = {};
+        Object.keys(data.sort).forEach((item) => {
+          sort[item] = data.sort[item] === "1" ? "desc" : "asc";
+        });
+        return sort;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

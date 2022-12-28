@@ -8,9 +8,6 @@ export default {
   },
   computed: {
     //Crud info
-    reportId() {
-      return this.$route.params.id  || null;
-    },
     crudInfo() {
       return this.$store.state.qcrudComponent.component[this.crudId] || {}
     },
