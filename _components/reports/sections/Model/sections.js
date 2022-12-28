@@ -19,7 +19,8 @@ export default reactive([
         prefix: 1,
         component: description,
         done: false,
-        refs: 'descriptionForm'
+        refs: 'descriptionForm',
+        error: false
     },
     {
         id: STEP_FEATURE,
@@ -27,7 +28,8 @@ export default reactive([
         prefix: 2,
         component: feature,
         done: false,
-        refs: 'featureForm'
+        refs: 'featureForm',
+        error: false
     },
     {
         id: STEP_FIELDS_DETAILDS,
@@ -35,7 +37,8 @@ export default reactive([
         prefix: 3,
         component: fieldsDetails,
         done: false,
-        refs: 'fieldsDetailsForm'
+        refs: 'fieldsDetailsForm',
+        error: false
     },
     {
         id: STEP_SORT,
@@ -43,7 +46,8 @@ export default reactive([
         prefix: 4,
         component: sort,
         done: false,
-        refs: 'sortForm'
+        refs: 'sortForm',
+        error: false
     },
     /*{
         id: STEP_SCHEDULE,
@@ -51,6 +55,7 @@ export default reactive([
         prefix: 5,
         component: schedule,
         done: false,
-        refs: 'schedule'
+        refs: 'schedule',
+        error: false
     },*/
 ]);

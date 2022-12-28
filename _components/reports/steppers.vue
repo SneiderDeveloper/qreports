@@ -40,12 +40,14 @@
         :prefix="section.prefix"
         :title="section.title"
         :done="section.done"
+        :error="section.error"
+        :active-color="section.error ? 'red' : 'primary'"
       >
         <div>
           <q-form :ref="section.refs">
             <component :is="section.component" />
-          </q-form> 
-        </div> 
+          </q-form>
+        </div>
       </q-step>
 
       <template v-slot:navigation>
@@ -79,13 +81,14 @@
 <script>
 import modelSections from "./sections/Model/sections.js";
 import qReportsStore from "../../_store/qReportsStore.js";
-import { 
-    STEP_DESCRIPTION, 
-    STEP_FEATURE, 
-    STEP_FIELDS_DETAILDS,
-    STEP_SORT,
-    STEP_SCHEDULE 
-} from './sections/Model/constants.js';
+import {
+  STEP_DESCRIPTION,
+  STEP_FEATURE,
+  STEP_FIELDS_DETAILDS,
+  STEP_SORT,
+  STEP_SCHEDULE,
+} from "./sections/Model/constants.js";
+import featureStore from "../../_store/sections/featureStore.js";
 export default {
   data() {
     return {
@@ -95,28 +98,47 @@ export default {
   beforeDestroy() {
     this.$nextTick(function () {
       qReportsStore().reset();
-    })
+    });
   },
-  computed:{
+  computed: {
     sections() {
       return modelSections;
     },
   },
   methods: {
     async saveFormReports() {
-      const form = this.sections.find(item => item.id === this.step);
-      if(this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
-        this.$refs[form.refs][0].validate().then(async (success) => {
-          if (success) {
-            if (this.step === this.sections.length) {
-              await qReportsStore().saveReport();
-              this.$router.push({name: 'qreports.admin.folders'})
+      try {
+        const form = this.sections.find((item) => item.id === this.step);
+        if (this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
+          this.$refs[form.refs][0].validate().then(async (success) => {
+            if (success) {
+              if (this.step === STEP_FEATURE) {
+                if (
+                  featureStore().getSelectedFilters().length === 0 ||
+                  featureStore().getSelectedColumns().length === 0
+                ) {
+                  form.error = true;
+                  this.$alert.error({
+                    message:
+                      "Please select at least one column to continue and a filter",
+                  });
+                  return;
+                }
+              }
+              if (this.step === this.sections.length) {
+                await qReportsStore().saveReport();
+                this.$router.push({ name: "qreports.admin.folders" });
+                return;
+              }
+              form.error = false;
+              this.$refs.stepper.next();
               return;
             }
-            this.$refs.stepper.next();
-            return;
-          }
-        });
+            form.error = true;
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
   },
@@ -181,6 +203,9 @@ export default {
 }
 .stepper-report .q-form .q-field {
   @apply tw-p-0 !important;
+}
+.stepper-report .q-stepper__tab--error-with-icon .q-stepper__dot {
+  background: red !important;
 }
 .input-report .q-field.q-field--float .q-field__label {
   @apply tw-font-medium;
