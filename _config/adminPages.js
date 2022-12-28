@@ -26,6 +26,7 @@ export default {
       icon: 'fa-light fa-file-chart-column',
       subHeader: {
         refresh: true,
+        breadcrumb: ['qreports.folders']
       }
     },
     reportCreate: {
