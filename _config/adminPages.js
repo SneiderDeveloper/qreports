@@ -8,7 +8,7 @@ export default {
         crud : import('@imagina/qreports/_crud/folders'),
         page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
         layout: () => import('@imagina/qsite/_layouts/master.vue'),
-        title: 'ireports.cms.sidebar.folderInfo',
+        title: 'ireports.cms.sidebar.foldersInfo',
         icon: 'fa-light fa-folder',
         subHeader: {
           refresh: true,
