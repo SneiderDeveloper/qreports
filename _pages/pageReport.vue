@@ -123,7 +123,7 @@ export default {
       try {
         const sort = {};
         Object.keys(data.sort).forEach((item) => {
-          sort[item] = data.sort[item] === "1" ? "desc" : "asc";
+          sort[item] = data.sort[item] === "1" ? "asc" : "desc";
         });
         return sort;
       } catch (error) {
