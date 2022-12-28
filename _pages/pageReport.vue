@@ -36,20 +36,6 @@ export default {
         read: {
           columns: [
             ...this.columns,
-            {
-              name: "created_at",
-              label: this.$tr("isite.cms.form.createdAt"),
-              field: "createdAt",
-              align: "left",
-              format: (val) => (val ? this.$trd(val) : "-"),
-            },
-            {
-              name: "updated_at",
-              label: this.$tr("isite.cms.form.updatedAt"),
-              field: "updatedAt",
-              align: "left",
-              format: (val) => (val ? this.$trd(val) : "-"),
-            },
           ],
           filters: {
             ...this.filters,
