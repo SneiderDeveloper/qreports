@@ -16,7 +16,9 @@ export default {
         crudId: this.crudId,
         entityName: config("main.qfly.entityNames.workOrder"),
         apiRoute: 'apiRoutes.qreports.folders',
-        create: true,
+        create: {
+          title: 'Create Folders'
+        },
         read: {
           showAs: 'folders',
           columns: [
@@ -98,7 +100,9 @@ export default {
             ],
           },
         },
-        update: false,
+        update: {
+          title: 'Update Folders'
+        },
         delete: true,
         formLeft: {
           id: {value: ''},
