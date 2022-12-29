@@ -90,7 +90,8 @@ export default {
     },
     async getColumns(data) {
       try {
-        return data.reportType.columns
+        const columns = data.reportType.columns || [];
+        return columns
           .map((item) => ({
             name: item.id,
             label: item.title,
@@ -107,7 +108,7 @@ export default {
     },
     async getFilter(data) {
       try {
-        const filters = data.reportType.filters;
+        const filters = data.reportType.filters || {};
         return Object.keys(filters)
           .map((item) => {
             const existeField = Object.keys(data.filters || {}).some(
@@ -132,9 +133,10 @@ export default {
     },
     async getSort(data) {
       try {
+        const dataSort = data.sort || {};
         const sort = {};
-        Object.keys(data.sort).forEach((item) => {
-          sort[item] = data.sort[item] === "1" ? "asc" : "desc";
+        Object.keys(dataSort).forEach((item) => {
+          sort[item] = dataSort[item] === "1" ? "asc" : "desc";
         });
         return sort;
       } catch (error) {
