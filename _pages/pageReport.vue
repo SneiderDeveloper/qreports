@@ -11,6 +11,7 @@
 <script>
 import fieldsDetailsStore from "../_store/sections/fieldsDetailsStore.js";
 import _ from "lodash";
+import { QSpinnerFacebook } from 'quasar'
 
 export default {
   data() {
@@ -53,6 +54,14 @@ export default {
     async getCrudReport() {
       try {
         this.loading = true;
+        await this.$q.loading.show({
+          spinner: QSpinnerFacebook,
+          spinnerColor: 'blue',
+          spinnerSize: 140,
+          backgroundColor: 'white',
+          message: 'Wait a moment we are loading your report',
+          messageColor: 'black'
+        })
         const response = await this.$crud.show(
           "apiRoutes.qreports.reports",
           this.reportId,
@@ -72,8 +81,10 @@ export default {
             true
           );
         }
+        await this.$q.loading.hide();
         this.loading = false;
       } catch (error) {
+        this.$q.loading.hide();
         this.loading = false;
       }
     },
