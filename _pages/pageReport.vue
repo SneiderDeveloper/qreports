@@ -30,6 +30,7 @@ export default {
   computed: {
     //Crud info
     reportId() {
+      console.log(this.$route.params);
       return this.$route.params.id || null;
     },
     crudInfo() {
@@ -41,9 +42,6 @@ export default {
           columns: [...this.columns],
           filters: {
             ...this.filters,
-            reportId: {
-              value: this.reportId
-            },
           },
           requestParams: {
             filter: { reportId: this.reportId },

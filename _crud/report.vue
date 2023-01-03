@@ -22,9 +22,7 @@ export default {
         entityName: config("main.qfly.entityNames.workOrder"),
         apiRoute: 'apiRoutes.qreports.reportData',
         create: false,
-        read: {
-          requestParams: {filter: {reportId: this.reportId}},
-        },
+        read: {},
         update: false,
         delete: false,
         formLeft: {}
