@@ -80,9 +80,11 @@ export default function fieldsDetailsStore() {
                 data[item.id] = {
                     props:{
                         label: item.props.label
-                      },
-                      name: item.name,
-                      field: item.field,
+                    },
+                    name: item.name,
+                    field: item.field,
+                    type: item.value || null,
+                    value: item.value || null
                 }
             } else {
                 data[item.id] = {
@@ -98,6 +100,7 @@ export default function fieldsDetailsStore() {
                 };
             }
         });
+        console.log(data);
         return data;
     }
     function setForm(value) {
