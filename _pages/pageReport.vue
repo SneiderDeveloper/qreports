@@ -41,6 +41,9 @@ export default {
           columns: [...this.columns],
           filters: {
             ...this.filters,
+            reportId: {
+              value: this.reportId
+            },
           },
           requestParams: {
             filter: { reportId: this.reportId },
