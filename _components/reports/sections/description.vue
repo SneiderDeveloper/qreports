@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="q-stepper-title">
-      <h3 class="text-primary">Identify your report</h3>
+      <h3 class="text-primary">
+        {{  $tr('ireports.cms.identifyYourReport') }}
+      </h3>
       <div></div>
     </div>
       <div

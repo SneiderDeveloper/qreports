@@ -1,11 +1,19 @@
 <template>
   <div class="tw-overflow-x-hidden">
     <div class="q-stepper-title">
-      <h3 class="text-primary">Select columns and filters</h3>
+      <h3 class="text-primary">
+        {{ $tr('ireports.cms.selectColumnsFilters')  }}
+      </h3>
       <div></div>
     </div>
-    <h4 class="text-primary tw-text-base tw-font-extrabold tw-mb-6">
-      Select and sort the columns
+    <h4 
+      class="
+        text-primary 
+        tw-text-base 
+        tw-font-extrabold 
+        tw-mb-6"
+    >
+      {{ $tr('ireports.cms.selectSortColumns') }}
     </h4>
     <div>
       <draggable
@@ -19,10 +27,15 @@
           tw-grid-cols-1
           md:tw-grid-cols-2
           xl:tw-grid-cols-3
-          tw-my-4 tw-overflow-hidden
+          tw-my-4 
+          tw-overflow-hidden
         "
       >
-        <div v-for="list in columnList" :key="list.id" class="check-report-div">
+        <div 
+          v-for="list in columnList" 
+          :key="list.id" 
+          class="check-report-div"
+        >
           <dynamic-field
             class="check-report-1"
             v-model="list.check"
@@ -34,18 +47,28 @@
               size="6px"
               class="check-report-icon"
             >
-              <q-tooltip> Move column </q-tooltip>
+              <q-tooltip> 
+                {{ $tr('ireports.cms.moveColumn') }} 
+              </q-tooltip>
             </q-btn>
         </div>
       </draggable>
     </div>
-    <h4 class="text-primary tw-text-base tw-font-extrabold tw-mt-8 tw-mb-6">
-      Select the first {{ totalSelectedFilters }} filters
+    <h4 
+      class="
+        text-primary 
+        tw-text-base 
+        tw-font-extrabold 
+        tw-mt-8 
+        tw-mb-6"
+    >
+      {{ labelTotalFilter }}
     </h4>
     <div class="tw-flex tw-flex-wrap">
       <div
         v-for="(filter) in filterList"
-        :key="filter.id" class="tw-mr-2 tw-mb-2"
+        :key="filter.id" 
+        class="tw-mr-2 tw-mb-2"
       >
         <dynamic-field
             v-model="filter.check" 
@@ -69,6 +92,9 @@ export default {
     return {};
   },
   computed: {
+    labelTotalFilter() {
+      return `${this.$tr('ireports.cms.selectFirst', {total: this.totalSelectedFilters} )}`;
+    },
     columnList() {
       return featureStore().getColumnList();
     },
