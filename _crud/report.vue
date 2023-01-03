@@ -6,6 +6,11 @@ export default {
       crudId: this.$uid(),
     }
   },
+  created() {   
+    this.$nextTick(() => {
+      this.$filter.reset();
+    });
+  },
   computed: {
     //Crud info
     crudInfo() {
