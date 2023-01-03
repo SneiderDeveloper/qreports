@@ -30,7 +30,8 @@ export default function qReportsStore() {
     function reset() {
         descriptionStore().reset();
         featureStore().reset();
-        sortStore().setForm({})
+        sortStore().setForm({});
+        fieldsDetailsStore().setForm({});
     }
     return {
         saveReport,

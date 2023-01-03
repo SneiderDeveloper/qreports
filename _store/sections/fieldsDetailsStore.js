@@ -100,11 +100,15 @@ export default function fieldsDetailsStore() {
         });
         return data;
     }
+    function setForm(value) {
+        state.form = value;
+    }
     return {
         factoryOfDynamicSelect,
         removeObjectIdentifiers,
         getForm,
         payloadFilter,
-        buildfilters
+        buildfilters,
+        setForm
     }
 }
