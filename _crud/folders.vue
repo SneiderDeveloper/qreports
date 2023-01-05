@@ -30,9 +30,9 @@ export default {
               style: 'width: 50px'
             },
             {
-              name: 'name',
-              label: this.$tr('isite.cms.form.name'),
-              field: 'name',
+                name: 'title',
+                label: this.$tr('isite.cms.form.title'),
+                field: 'title',
             },
             {
               name: "created_at",
