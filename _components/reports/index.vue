@@ -1,8 +1,5 @@
 <template>
-    <div>
-        <folders />
-        <steppers />
-    </div>
+    <steppers />
 </template>
 
 <script>
@@ -11,10 +8,6 @@ export default {
     components: {
        steppers,
     },
-    data() {
-        return {
-        };
-    }
 }
 </script>
 

@@ -10,12 +10,12 @@ import {
     STEP_SORT,
     STEP_SCHEDULE 
 } from './constants.js';
-import { reactive } from 'vue';
+import Vue ,{ reactive } from 'vue';
 
 export default reactive([
     {
         id: STEP_DESCRIPTION,
-        title: 'Description',
+        title: Vue.prototype.$tr('isite.cms.form.description'),
         prefix: 1,
         component: description,
         done: false,
@@ -24,7 +24,7 @@ export default reactive([
     },
     {
         id: STEP_FEATURE,
-        title: 'Feature',
+        title: Vue.prototype.$tr('isite.cms.form.feature'),
         prefix: 2,
         component: feature,
         done: false,
@@ -33,7 +33,7 @@ export default reactive([
     },
     {
         id: STEP_FIELDS_DETAILDS,
-        title: 'Fields Details',
+        title: Vue.prototype.$tr('isite.cms.form.fieldsDetails'),
         prefix: 3,
         component: fieldsDetails,
         done: false,
@@ -42,7 +42,7 @@ export default reactive([
     },
     {
         id: STEP_SORT,
-        title: 'Sort',
+        title: Vue.prototype.$tr('isite.cms.form.sort'),
         prefix: 4,
         component: sort,
         done: false,
@@ -51,7 +51,7 @@ export default reactive([
     },
     /*{
         id: STEP_SCHEDULE,
-        title: 'Schedule',
+        title: Vue.prototype.$tr('isite.cms.form.schedule'),
         prefix: 5,
         component: schedule,
         done: false,

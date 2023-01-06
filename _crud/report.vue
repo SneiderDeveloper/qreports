@@ -21,6 +21,7 @@ export default {
         crudId: this.crudId,
         entityName: config("main.qfly.entityNames.workOrder"),
         apiRoute: 'apiRoutes.qreports.reportData',
+        permission: 'ireport.reports',
         create: false,
         read: {},
         update: false,

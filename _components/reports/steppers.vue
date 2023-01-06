@@ -3,13 +3,21 @@
   <div class="stepper-report">
     <div
       class="
-        tw-flex tw-flex-col
-        sm:tw-flex-row sm:tw-items-end
+        tw-flex 
+        tw-flex-col
+        sm:tw-flex-row 
+        sm:tw-items-end
         tw-justify-between
       "
     >
-      <h2 class="text-primary tw-text-2xl tw-font-semibold tw-mb-4">
-        Create a Report
+      <h2 
+        class="
+          text-primary 
+          tw-text-2xl 
+          tw-font-semibold 
+          tw-mb-4"
+      >
+        {{  $tr('ireports.cms.sidebar.reportCreate') }}
       </h2>
       <div class="text-right tw-hidden">
         <q-btn
@@ -20,7 +28,13 @@
           class="q-mr-sm tw-mb-4"
           no-caps
         />
-        <q-btn rounded color="primary" label="Save" class="tw-mb-4" no-caps />
+        <q-btn 
+          rounded 
+          color="primary" 
+          label="Save" 
+          class="tw-mb-4" 
+          no-caps 
+        />
       </div>
     </div>
     <q-stepper
@@ -61,7 +75,12 @@
             color="primary"
             v-if="step > 1"
             @click="$refs.stepper.previous()"
-            class="q-mr-sm tw-mt-6 text-sm btn-small rounded-sm"
+            class="
+             q-mr-sm 
+             tw-mt-6 
+             text-sm 
+             btn-small 
+             rounded-sm"
           />
           <q-btn
             rounded
@@ -120,8 +139,7 @@ export default {
                 ) {
                   form.error = true;
                   this.$alert.error({
-                    message:
-                      "Please select at least one column to continue and a filter",
+                    message: this.$tr('ireports.cms.message.selectColumn'),
                   });
                   return;
                 }
