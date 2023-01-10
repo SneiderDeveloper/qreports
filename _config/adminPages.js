@@ -1,6 +1,6 @@
 export default {
     folders: {
-        //permission: 'page.pages.manage',
+        permission: 'ireport.reports.manage',
         activated: true,
         authenticated: true,
         path: '/folders/index',
@@ -15,7 +15,7 @@ export default {
         }
     },
     report: {
-      //permission: 'page.pages.manage',
+      permission: 'ireport.reports.manage',
       activated: true,
       authenticated: true,
       path: '/report/index/:id',
@@ -30,7 +30,7 @@ export default {
       }
     },
     reportCreate: {
-      //permission: 'page.pages.manage',
+      permission: 'ireport.reports.create',
       activated: true,
       authenticated: true,
       path: '/report/create/',

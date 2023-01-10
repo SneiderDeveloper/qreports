@@ -30,7 +30,6 @@ export default {
   computed: {
     //Crud info
     reportId() {
-      console.log(this.$route.params);
       return this.$route.params.id || null;
     },
     crudInfo() {
