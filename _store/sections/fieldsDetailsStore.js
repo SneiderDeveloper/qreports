@@ -100,7 +100,6 @@ export default function fieldsDetailsStore() {
                 };
             }
         });
-        console.log(data);
         return data;
     }
     function setForm(value) {
