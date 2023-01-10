@@ -24,6 +24,7 @@ export default {
   },
   created() {
     this.$nextTick(async function () {
+      this.$filter.reset();
       this.getCrudReport();
     });
   },
@@ -41,9 +42,11 @@ export default {
           columns: [...this.columns],
           filters: {
             ...this.filters,
+            reportId: {
+              value: this.reportId
+            },
           },
           requestParams: {
-            filter: { reportId: this.reportId },
             order: { ...this.sort },
           },
         },
