@@ -6,6 +6,8 @@ import fieldsDetailsStore from './sections/fieldsDetailsStore.js';
 import sortStore from './sections/sortStore.js';
 
 const state = reactive({
+    columns: [],
+    filters: [],
 });
 
 export default function qReportsStore() {
@@ -21,20 +23,54 @@ export default function qReportsStore() {
                 ...filters,
                 ...sort
             }
-            baseService.create('apiRoutes.qreports.reports', data);
+            await baseService.create('apiRoutes.qreports.reports', data);
         } catch (error) {
             console.log(error);
         }
         
+    }
+    async function showReport(reportId) {
+        try {
+            const response = await baseService
+            .show('apiRoutes.qreports.reports', reportId, 
+              {
+                refresh: true,
+              } 
+             );
+            setColumns(response.data.columns || []);
+            setFilters(response.data.filters || {})
+            descriptionStore().setForm(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    function setColumns(value) {
+        state.columns = value;
+    }
+    function getColumns() {
+        return state.columns;
+    }
+    function setFilters(value) {
+        state.filters = value;
+    }
+    function getFilters() {
+        return state.columns;
     }
     function reset() {
         descriptionStore().reset();
         featureStore().reset();
         sortStore().setForm({});
         fieldsDetailsStore().setForm({});
+        setColumns([]);
+        setFilters({});
     }
     return {
         saveReport,
+        showReport,
+        getColumns,
+        setColumns,
+        setFilters,
+        getFilters,
         reset,
     }
 }

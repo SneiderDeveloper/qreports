@@ -120,9 +120,19 @@ export default {
       this.reset();
     });
   },
+  created() {
+    this.$nextTick(async function () {
+      if(this.reportId) {
+        await qReportsStore().showReport(this.reportId);
+      }
+    });
+  },
   computed: {
     sections() {
       return modelSections;
+    },
+    reportId() {
+      return this.$route.params.id || null;
     },
   },
   methods: {
@@ -165,7 +175,7 @@ export default {
         element.error = false;
         element.done = false;
       });
-    }
+    },
   },
 };
 </script>

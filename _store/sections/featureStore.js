@@ -1,51 +1,6 @@
 import { reactive } from 'vue';
 import baseService from '@imagina/qcrud/_services/baseService.js'
-const modelColumnList = [
-    {
-        "id": 'id',
-        "title": 'ID',
-        "field": 'id',
-        "check": 0,
-    },
-    {
-        "id": 2,
-        "field": 'referenceId',
-        "title": 'Reference Id',
-        "check": 0,
-    },
-    {
-        "id": 3,
-        "field": 'customer',
-        "title": 'Customer',
-        "check": 0,
-    },
-    {
-        "id": 4,
-        "field": 'adHoc',
-        "title": 'Ad Hoc',
-        "check": 0,
-    },
-];
-const modelFilterList =[
-    {
-        "id": 1,
-        "field": 'status',
-        "title": 'Status',
-        "check": 0,
-    },
-    {
-        "id": 2,
-        "field": 'customer',
-        "title": 'Customer',
-        "check": 0,
-    },
-    {
-        "id": 3,
-        "field": 'date',
-        "title": 'Date',
-        "check": 0,
-    },
-]
+
 const state = reactive({
     columnList: [],
     filterList: [],
