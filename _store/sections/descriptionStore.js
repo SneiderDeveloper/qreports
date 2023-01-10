@@ -38,7 +38,7 @@ export default function descriptionStore() {
             reportTypeId: data.reportTypeId || null,
             folderId: data.folderId || null,
             title: data.title || null,
-            description: data.title || null,
+            description: data.description || null,
         }
     }
     function getReportTypeList() {
