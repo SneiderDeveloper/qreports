@@ -2,6 +2,7 @@ import { reactive } from 'vue';
 import baseService from '@imagina/qcrud/_services/baseService.js'
 import featureStore from './featureStore.js';
 import _ from 'lodash';
+import qReportsStore from '../qReportsStore.js';
 
 const state = reactive({
     form: {},
@@ -11,13 +12,14 @@ const state = reactive({
 export default function sortStore() {
     function factoryOfDynamicSelect() {
         const data = {};
+        const sort = qReportsStore().getSort();
         featureStore().getSelectedColumns().forEach(item => {
             const icon = state.form[item.id] === '1' ? 'fas fa-sort-amount-up'
             :'fas fa-sort-amount-down';
             const sortList = getSortList().find(item => item.id === item.id);
             if(sortList) {
                 data[item.id] = {
-                    value: '1',
+                    value: sort[_.snakeCase(item.id)] || '1',
                     type: 'select',
                     props: {
                         label: item.title,

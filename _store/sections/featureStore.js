@@ -1,5 +1,7 @@
 import { reactive } from 'vue';
 import baseService from '@imagina/qcrud/_services/baseService.js'
+import qReportsStore from '../qReportsStore.js';
+import _ from 'lodash';
 
 const state = reactive({
     columnList: [],
@@ -11,9 +13,10 @@ export default function featureStore() {
         return state.columnList;
     }
     function setColumnList(columns) {
+        const selectColumns = qReportsStore().getColumns();
         state.columnList = columns.map(item => ({
             ...item,
-            check: 0,
+            check: selectColumns.some(column => column === item.id) ? 1 : 0,
         }));
     }
     function getFilterList() {
@@ -21,11 +24,13 @@ export default function featureStore() {
     }
     function setFilterList(filters) {
         state.filterList = [];
+        const selectFilters = qReportsStore().getFilters();
         state.filterList = Object.keys(filters).map(item => ({
             id: item,
             title: filters[item].props.label,
             ...filters[item],
-            check: 0,
+            value: selectFilters[_.snakeCase(item)] || null,
+            check: selectFilters[_.snakeCase(item)] ? 1 : 0,
         }));
     }
     function factoryOfDynamicCheck(type) {

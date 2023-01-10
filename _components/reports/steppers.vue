@@ -17,7 +17,7 @@
           tw-font-semibold 
           tw-mb-4"
       >
-        {{  $tr('ireports.cms.sidebar.reportCreate') }}
+        {{  titleReport }}
       </h2>
       <div class="text-right tw-hidden">
         <q-btn
@@ -114,6 +114,14 @@ export default {
       step: 1,
     };
   },
+  watch: {
+    '$route.name': {
+      deep: true,
+      handler: function (newValue) {
+        this.$router.go();
+      }
+    },
+  },
   beforeDestroy() {
     this.$nextTick(function () {
       qReportsStore().reset();
@@ -133,6 +141,10 @@ export default {
     },
     reportId() {
       return this.$route.params.id || null;
+    },
+    titleReport() {
+      return this.reportId ? this.$tr('ireports.cms.sidebar.reportEdit') 
+        : this.$tr('ireports.cms.sidebar.reportCreate')
     },
   },
   methods: {
@@ -155,7 +167,7 @@ export default {
                 }
               }
               if (this.step === this.sections.length) {
-                await qReportsStore().saveReport();
+                await qReportsStore().saveReport(this.reportId);
                 this.$router.push({ name: "qreports.admin.folders" });
                 return;
               }
