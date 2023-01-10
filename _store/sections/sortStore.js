@@ -3,6 +3,7 @@ import baseService from '@imagina/qcrud/_services/baseService.js'
 import featureStore from './featureStore.js';
 import _ from 'lodash';
 import qReportsStore from '../qReportsStore.js';
+import {DESCENDING, ASCENDING} from './model/constants.js';
 
 const state = reactive({
     form: {},
@@ -14,20 +15,20 @@ export default function sortStore() {
         const data = {};
         const sort = qReportsStore().getSort();
         featureStore().getSelectedColumns().forEach(item => {
-            const icon = state.form[item.id] === '1' ? 'fas fa-sort-amount-up'
+            const icon = state.form[item.id] === ASCENDING ? 'fas fa-sort-amount-up'
             :'fas fa-sort-amount-down';
             const sortList = getSortList().find(item => item.id === item.id);
             if(sortList) {
                 data[item.id] = {
-                    value: sort[_.snakeCase(item.id)] || '1',
+                    value: sort[_.snakeCase(item.id)] || ASCENDING,
                     type: 'select',
                     props: {
                         label: item.title,
                         icon,
                         color: 'primary',
                         options: [
-                            { label: 'Ascending', value: '1' },
-                            { label: 'Descending', value: '0' }
+                            { label: 'Ascending', value: ASCENDING },
+                            { label: 'Descending', value: DESCENDING }
                         ],
                     }
                 };
