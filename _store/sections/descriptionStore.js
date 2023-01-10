@@ -32,6 +32,15 @@ export default function descriptionStore() {
     function getDescriptionForm() {
         return state.form;
     }
+    function setForm(data) {
+        state.form = {
+            entity: data.entity || null,
+            reportTypeId: data.reportTypeId || null,
+            folderId: data.folderId || null,
+            title: data.title || null,
+            description: data.description || null,
+        }
+    }
     function getReportTypeList() {
         return state.reportTypeList.map(item => ({
             label: item.name,
@@ -72,5 +81,6 @@ export default function descriptionStore() {
         getReportTypeList,
         setReportTypeList,
         getListOfReportTypes,
+        setForm,
     }
 }

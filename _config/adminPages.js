@@ -42,5 +42,20 @@ export default {
       subHeader: {
         refresh: true,
       }
+    },
+    reportEdit: {
+      permission: 'ireport.reports.edit',
+      activated: true,
+      authenticated: true,
+      path: '/report/edit/:id?',
+      name: 'qreports.admin.reportEdit',
+      page: () => import('@imagina/qreports/_components/reports/steppers'),
+      layout: () => import('@imagina/qsite/_layouts/master.vue'),
+      title: 'ireports.cms.sidebar.reportEdit',
+      icon: 'fa-light fa-file-chart-column',
+      subHeader: {
+        refresh: true,
+        breadcrumb: ['qreports.folders']
+      }
   }
 }

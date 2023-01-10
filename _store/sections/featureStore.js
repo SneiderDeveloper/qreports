@@ -1,51 +1,8 @@
 import { reactive } from 'vue';
 import baseService from '@imagina/qcrud/_services/baseService.js'
-const modelColumnList = [
-    {
-        "id": 'id',
-        "title": 'ID',
-        "field": 'id',
-        "check": 0,
-    },
-    {
-        "id": 2,
-        "field": 'referenceId',
-        "title": 'Reference Id',
-        "check": 0,
-    },
-    {
-        "id": 3,
-        "field": 'customer',
-        "title": 'Customer',
-        "check": 0,
-    },
-    {
-        "id": 4,
-        "field": 'adHoc',
-        "title": 'Ad Hoc',
-        "check": 0,
-    },
-];
-const modelFilterList =[
-    {
-        "id": 1,
-        "field": 'status',
-        "title": 'Status',
-        "check": 0,
-    },
-    {
-        "id": 2,
-        "field": 'customer',
-        "title": 'Customer',
-        "check": 0,
-    },
-    {
-        "id": 3,
-        "field": 'date',
-        "title": 'Date',
-        "check": 0,
-    },
-]
+import qReportsStore from '../qReportsStore.js';
+import _ from 'lodash';
+
 const state = reactive({
     columnList: [],
     filterList: [],
@@ -56,9 +13,10 @@ export default function featureStore() {
         return state.columnList;
     }
     function setColumnList(columns) {
+        const selectColumns = qReportsStore().getColumns();
         state.columnList = columns.map(item => ({
             ...item,
-            check: 0,
+            check: selectColumns.some(column => column === item.id) ? 1 : 0,
         }));
     }
     function getFilterList() {
@@ -66,11 +24,13 @@ export default function featureStore() {
     }
     function setFilterList(filters) {
         state.filterList = [];
+        const selectFilters = qReportsStore().getFilters();
         state.filterList = Object.keys(filters).map(item => ({
             id: item,
             title: filters[item].props.label,
             ...filters[item],
-            check: 0,
+            value: selectFilters[_.snakeCase(item)] || null,
+            check: selectFilters[_.snakeCase(item)] ? 1 : 0,
         }));
     }
     function factoryOfDynamicCheck(type) {
