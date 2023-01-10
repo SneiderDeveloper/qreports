@@ -91,7 +91,7 @@ export default {
             ],
             actions: [
               {
-                name: 'View Report',
+                name: this.$tr('isite.cms.label.show'),
                 icon: 'fal fa-eye',
                 label: this.$tr('isite.cms.label.show'),
                 action: (item) => {
