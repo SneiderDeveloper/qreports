@@ -11,6 +11,12 @@ export default {
     crudInfo() {
       return this.$store.state.qcrudComponent.component[this.crudId] || {}
     },
+    reportPermissionsEdit() {
+      return this.$auth.hasAccess('ireport.reports.edit');
+    },
+    reportPermissionsIndex() {
+      return this.$auth.hasAccess('ireport.reports.index');
+    },
     crudData() {
       return {
         crudId: this.crudId,
@@ -94,6 +100,7 @@ export default {
                 name: this.$tr('isite.cms.label.show'),
                 icon: 'fal fa-eye',
                 label: this.$tr('isite.cms.label.show'),
+                vIf: this.reportPermissionsIndex,
                 action: (item) => {
                   this.$router.push({ name: 'qreports.admin.report', params: {id: item.id} });
                 }
@@ -102,6 +109,7 @@ export default {
                 name: this.$tr('isite.cms.label.edit'),
                 icon: 'fal fa-edit',
                 label: this.$tr('isite.cms.label.edit'),
+                vIf: this.reportPermissionsEdit,
                 action: (item) => {
                   this.$router.push({ name: 'qreports.admin.reportEdit', params: {id: item.id} });
                 }
