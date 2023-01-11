@@ -174,6 +174,10 @@ export default {
               }
               if (this.step === this.sections.length) {
                 await qReportsStore().saveReport(this.reportId);
+                await this.$alert.success({
+                    message: this.reportId ? 'The report was updated correctly' 
+                      :'the report was saved correctly',
+                });
                 this.$router.push({ name: "qreports.admin.folders" });
                 return;
               }

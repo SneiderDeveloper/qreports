@@ -14,7 +14,7 @@ export default function sortStore() {
     function factoryOfDynamicSelect() {
         const data = {};
         const sort = qReportsStore().getSort();
-        featureStore().getSelectedColumns().forEach(item => {
+        state.sortList.forEach(item => {
             const icon = state.form[item.id] === ASCENDING ? 'fas fa-sort-amount-up'
             :'fas fa-sort-amount-down';
             const sortList = getSortList().find(item => item.id === item.id);

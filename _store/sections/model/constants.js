@@ -1,2 +1,2 @@
-export const ASCENDING = '1';
-export const DESCENDING = '0';
+export const ASCENDING = 'asc';
+export const DESCENDING = 'desc';
