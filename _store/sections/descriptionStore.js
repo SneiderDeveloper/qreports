@@ -11,6 +11,7 @@ const descriptionModel = {
     folderId: null,
     title: null,
     description: null,
+    roles: [],
     /*emails: [ // tenerlo encuenta para schedule
         {
             email: null,
