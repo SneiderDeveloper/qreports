@@ -20,7 +20,6 @@ export default {
     crudData() {
       return {
         crudId: this.crudId,
-        entityName: config("main.qfly.entityNames.workOrder"),
         apiRoute: 'apiRoutes.qreports.folders',
         create: {
           title: 'Create Folders'

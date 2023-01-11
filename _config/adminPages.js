@@ -1,6 +1,6 @@
 export default {
     folders: {
-        permission: 'ireport.reports.manage',
+        permission: 'ireport.folders.manage',
         activated: true,
         authenticated: true,
         path: '/folders/index',
