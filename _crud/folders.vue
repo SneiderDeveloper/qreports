@@ -107,7 +107,7 @@ export default {
               },
               {
                 name: this.$tr('isite.cms.label.edit'),
-                icon: 'fal fa-edit',
+                icon: 'fa-regular fa-pencil',
                 label: this.$tr('isite.cms.label.edit'),
                 vIf: this.reportPermissionsEdit,
                 action: (item) => {
