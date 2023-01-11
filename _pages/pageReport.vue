@@ -12,6 +12,8 @@
 import fieldsDetailsStore from "../_store/sections/fieldsDetailsStore.js";
 import _ from "lodash";
 import { QSpinnerFacebook } from 'quasar'
+import { SORT_ASC, SORT_DESC } from '../_components/reports/sections/Model/constants.js';
+import { ASCENDING } from '../_store/sections/model/constants.js';
 
 export default {
   data() {
@@ -62,7 +64,7 @@ export default {
           spinnerColor: 'blue',
           spinnerSize: 140,
           backgroundColor: 'white',
-          message: 'Wait a moment we are loading your report',
+          message: this.$tr('ireports.cms.message.waitMoment'),
           messageColor: 'black'
         })
         const response = await this.$crud.show(
@@ -139,7 +141,7 @@ export default {
         const dataSort = data.sort || {};
         const sort = {};
         Object.keys(dataSort).forEach((item) => {
-          sort[item] = dataSort[item] === "1" ? "asc" : "desc";
+          sort[item] = dataSort[item] === ASCENDING ? SORT_ASC : SORT_DESC;
         });
         return sort;
       } catch (error) {
