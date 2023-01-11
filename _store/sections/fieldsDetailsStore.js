@@ -1,7 +1,6 @@
-import { reactive } from 'vue';
+import Vue, { reactive } from 'vue';
 import baseService from '@imagina/qcrud/_services/baseService.js'
 import featureStore from './featureStore.js';
-import Vue from "vue";
 
 const state = reactive({
     form: {},

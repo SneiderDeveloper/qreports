@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
 import baseService from '@imagina/qcrud/_services/baseService.js';
-import Vue from "vue";
+
 const modelEmailNotification = {
     email: null,
     status: false,

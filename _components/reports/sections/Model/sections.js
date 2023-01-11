@@ -10,9 +10,8 @@ import {
     STEP_SORT,
     STEP_SCHEDULE 
 } from './constants.js';
-import Vue ,{ reactive } from 'vue';
-
-export default reactive([
+import Vue , { ref } from 'vue';
+const data = ref([
     {
         id: STEP_DESCRIPTION,
         title: Vue.prototype.$tr('isite.cms.form.description'),
@@ -59,3 +58,5 @@ export default reactive([
         error: false
     },*/
 ]);
+
+export default data.value;
