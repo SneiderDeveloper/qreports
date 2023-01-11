@@ -111,14 +111,20 @@ import featureStore from "../../_store/sections/featureStore.js";
 export default {
   data() {
     return {
-      step: 1,
+      step: STEP_DESCRIPTION,
     };
   },
   watch: {
     '$route.name': {
       deep: true,
       handler: function (newValue) {
-        this.$router.go();
+        qReportsStore().reset();
+        this.reset();
+        const form = this.sections.find((item) => item.id === this.step);
+        if(this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
+          this.step = STEP_DESCRIPTION;
+          this.$refs[form.refs][0].reset();
+        }
       }
     },
   },
