@@ -148,9 +148,6 @@ export default {
                 label: `${this.$trp('isite.cms.label.role', {capitalize: true})}*`,
                 multiple: true,
                 useChips: true,
-                rules: [
-                  val => (!!val && val.length) || this.$tr('isite.cms.message.fieldRequired')
-                ]
               },
               config: {options: {label: 'name', value: 'id'}},
             }
