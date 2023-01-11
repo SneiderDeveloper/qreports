@@ -31,6 +31,11 @@
             class="input-report tw-mb-4"
             :field="formFields.reportsForms.folderId"
           />
+          <dynamic-field
+            v-model="form.roles"
+            class="input-report tw-mb-4"
+            :field="formFields.reportsForms.roles"
+          />
         </div>
         <div>
           <dynamic-field
@@ -177,6 +182,23 @@ export default {
             loadOptions: {
               apiRoute: "apiRoutes.qreports.folders",
             },
+          },
+          roles: {
+            value: [],
+            type: 'crud',
+            props: {
+              crudType: 'select',
+              crudData: import('@imagina/quser/_crud/roles'),
+              crudProps: {
+                label: `${this.$trp('isite.cms.label.role', {capitalize: true})}*`,
+                multiple: true,
+                useChips: true,
+                rules: [
+                  val => (!!val && val.length) || this.$tr('isite.cms.message.fieldRequired')
+                ]
+              },
+              config: {options: {label: 'name', value: 'id'}},
+            }
           },
           title: {
             value: null,

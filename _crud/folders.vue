@@ -138,6 +138,23 @@ export default {
           name: {
             value: '',
           },
+          roles: {
+            value: [],
+            type: 'crud',
+            props: {
+              crudType: 'select',
+              crudData: import('@imagina/quser/_crud/roles'),
+              crudProps: {
+                label: `${this.$trp('isite.cms.label.role', {capitalize: true})}*`,
+                multiple: true,
+                useChips: true,
+                rules: [
+                  val => (!!val && val.length) || this.$tr('isite.cms.message.fieldRequired')
+                ]
+              },
+              config: {options: {label: 'name', value: 'id'}},
+            }
+          },
         },
         getDataForm: (formData, type) => {
           return new Promise(resolve => {
