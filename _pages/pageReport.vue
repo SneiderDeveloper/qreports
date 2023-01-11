@@ -41,6 +41,7 @@ export default {
     crudData() {
       return {
         read: {
+          search: false,
           columns: [...this.columns],
           filters: {
             ...this.filters,
