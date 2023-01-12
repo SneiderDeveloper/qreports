@@ -161,7 +161,7 @@ export default {
         },
         getDataForm: (formData, type) => {
           return new Promise(resolve => {
-            if (type == 'create') {
+            if (type == 'create' || type == 'update') {
               //Add system name
               const title = formData.title || '';
               formData.name = this.$helper.getSlug(title);
