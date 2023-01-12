@@ -58,7 +58,6 @@ export default function fieldsDetailsStore() {
         const data = {};
         filterList.forEach(item => {
             let loadOptions = {};
-            let rules = {};
             const type = !item.type && item.id === 'date' ? 'select' : item.type;
             const options = !item.type && item.id === 'date' ? { options: optionDate() } : {};
             if (item.type && item.type === 'select' && item.loadOptions) {
@@ -67,13 +66,6 @@ export default function fieldsDetailsStore() {
                         ...item.loadOptions
                     },
                 }
-            }
-            if(!crud) {
-                rules = {
-                    rules: [
-                        val => !!val || Vue.prototype.$tr('isite.cms.message.fieldRequired')
-                    ]
-                };
             }
             if(crud && item.id === 'date') {
                 data[item.id] = {
@@ -90,7 +82,6 @@ export default function fieldsDetailsStore() {
                     value: state.form[item.id] || item.value || null,
                     type: type,
                     props: {
-                        ...rules,
                         ...item.props,
                         ...options,
                         readonly: typeof item.props.readonly === 'boolean' ?  item.props.readonly : false,

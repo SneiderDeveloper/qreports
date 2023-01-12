@@ -3,7 +3,7 @@ import baseService from '@imagina/qcrud/_services/baseService.js'
 import featureStore from './featureStore.js';
 import _ from 'lodash';
 import qReportsStore from '../qReportsStore.js';
-import {DESCENDING, ASCENDING} from './model/constants.js';
+import {DESCENDING, ASCENDING, NOT_SET} from './model/constants.js';
 
 const state = reactive({
     form: {},
@@ -15,12 +15,17 @@ export default function sortStore() {
         const data = {};
         const sort = qReportsStore().getSort();
         state.sortList.forEach(item => {
-            const icon = state.form[item.id] === ASCENDING ? 'fas fa-sort-amount-up'
-            :'fas fa-sort-amount-down';
+            let icon = 'fa-light fa-do-not-enter';
+            if(state.form[item.id] === ASCENDING) {
+                icon = 'fas fa-sort-amount-up'
+            }
+            if(state.form[item.id] === DESCENDING) {
+                icon = 'fas fa-sort-amount-down'
+            }
             const sortList = getSortList().find(item => item.id === item.id);
             if(sortList) {
                 data[item.id] = {
-                    value: sort[_.snakeCase(item.id)] || ASCENDING,
+                    value: sort[_.snakeCase(item.id)] || NOT_SET,
                     type: 'select',
                     props: {
                         label: item.title,
@@ -28,7 +33,8 @@ export default function sortStore() {
                         color: 'primary',
                         options: [
                             { label: 'Ascending', value: ASCENDING },
-                            { label: 'Descending', value: DESCENDING }
+                            { label: 'Descending', value: DESCENDING },
+                            { label: 'Not Set', value: NOT_SET },
                         ],
                     }
                 };
@@ -50,17 +56,25 @@ export default function sortStore() {
     }
     function removeObjectIdentifiers() {
         Object.entries(state.form).forEach(([key, value]) => {
-            const filter = featureStore().getSelectedColumns().some(item => item.field === key);
+            const filter = state.sortList.some(item => item.field === key);
             if (!filter) {
                 delete state.form[key];
             }
         })
     }
     function payloadSort() {
-        const sort = _.mapKeys(state.form, (v, k) => _.camelCase(k))
+        deleteNotSet();
+        const sort = _.mapKeys(state.form, (v, k) => _.camelCase(k)) || {};
         return  {
             sort,
         }
+    }
+    function deleteNotSet() {
+        Object.entries(state.form).forEach(([key, value]) => {
+            if (state.form[key] === NOT_SET) {
+                delete state.form[key];
+            }
+        })
     }
     function reset() {
         this.form = {};

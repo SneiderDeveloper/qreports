@@ -13,11 +13,37 @@ export default function featureStore() {
         return state.columnList;
     }
     function setColumnList(columns) {
-        const selectColumns = qReportsStore().getColumns();
-        state.columnList = columns.map(item => ({
-            ...item,
-            check: selectColumns.some(column => column === item.id) ? 1 : 0,
-        }));
+        try {
+            const selectColumns = qReportsStore().getColumns();
+            const columnsList = columns.map(item => ({
+                ...item,
+                check: selectColumns.some(column => column === item.id) ? 1 : 0,
+            }));
+            const sortSelectedColumns = sortSelectedColumnsList(columnsList.filter(item => item.check === 1));
+            state.columnList = [
+                ...sortSelectedColumns,
+                ...columnsList.filter(item => item.check === 0)
+            ]
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    function sortSelectedColumnsList(columns) {
+        try {
+            const selectColumns = qReportsStore().getColumns();
+            const data = [];
+            selectColumns.forEach(item => {
+                const column = columns.find(column => column.id === item);
+                if (column) {
+                    data.push({ ...column })
+                }
+            });
+            return data;
+        } catch (error) {
+            console.log(error)
+        }
+
     }
     function getFilterList() {
         return state.filterList;
