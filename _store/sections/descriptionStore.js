@@ -40,6 +40,7 @@ export default function descriptionStore() {
             folderId: data.folderId || null,
             title: data.title || null,
             description: data.description || null,
+            roles: data.roles || [],
         }
     }
     function getReportTypeList() {

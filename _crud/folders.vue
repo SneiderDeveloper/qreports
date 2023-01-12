@@ -57,7 +57,9 @@ export default {
             { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' },
           ],
           filters: {},
-          requestParams: {},
+          requestParams: {
+            include: 'roles',
+          },
           actions: [],
           relation: {
             //permission: "",
@@ -118,7 +120,10 @@ export default {
           },
         },
         update: {
-          title: 'Update Folders'
+          title: 'Update Folders',
+          requestParams: {
+            include: 'roles',
+          }
         },
         delete: true,
         formLeft: {

@@ -41,6 +41,9 @@ export default function qReportsStore() {
                 .show('apiRoutes.qreports.reports', reportId,
                     {
                         refresh: true,
+                        params: {
+                            include: 'roles'
+                        },
                     }
                 );
             setColumns(response.data.columns || []);
