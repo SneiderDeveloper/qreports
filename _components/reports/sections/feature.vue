@@ -45,7 +45,7 @@
               flat
               round
               size="6px"
-              class="check-report-icon"
+              class="f-cursor-grab check-report-icon"
             >
               <q-tooltip> 
                 {{ $tr('ireports.cms.moveColumn') }} 
@@ -129,7 +129,7 @@ export default {
 }
 
 .check-report-icon {
-  @apply tw-cursor-pointer tw-right-2.5 tw-w-4 tw-h-4 tw-block tw-bg-no-repeat tw-bg-center tw-bg-contain tw-absolute tw-top-3 tw-z-10;
+  @apply tw-right-2.5 tw-w-4 tw-h-4 tw-block tw-bg-no-repeat tw-bg-center tw-bg-contain tw-absolute tw-top-3 tw-z-10;
   content: "";
   background-image: url("data:image/svg+xml,%3Csvg width='15' height='5' viewBox='0 0 15 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.0835 1.75H0.583496V0.25H14.0835V1.75ZM14.0835 3.25H0.583496V4.75H14.0835V3.25Z' fill='black' fill-opacity='0.4'/%3E%3C/svg%3E");
 }
