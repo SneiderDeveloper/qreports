@@ -57,6 +57,7 @@ export default function fieldsDetailsStore() {
     function buildfilters(filterList, crud = false) {
         const data = {};
         filterList.forEach(item => {
+            state.form[item.id] = item.value || null;
             let loadOptions = {};
             const type = !item.type && item.id === 'date' ? 'select' : item.type;
             const options = !item.type && item.id === 'date' ? { options: optionDate() } : {};
