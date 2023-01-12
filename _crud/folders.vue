@@ -21,6 +21,7 @@ export default {
       return {
         crudId: this.crudId,
         apiRoute: 'apiRoutes.qreports.folders',
+        permission: 'ireport.folders',
         create: {
           title: 'Create Folders'
         },
