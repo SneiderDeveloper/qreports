@@ -97,7 +97,7 @@ export default {
     async getColumns(data) {
       try {
         const columns = data.reportType.columns || [];
-        return columns
+        const columnsFilter = columns
           .map((item) => ({
             name: item.id,
             label: item.title,
@@ -108,9 +108,20 @@ export default {
           .filter((column) =>
             data.columns.some((item) => item === column.field)
           );
+        return await this.sortColumns(columnsFilter, data.columns);
       } catch (error) {
         console.log(error);
       }
+    },
+    async sortColumns(columns, orderColumns) {
+      let data = [];
+      orderColumns.forEach(orderColumn => {
+        const column = columns.find((item) => orderColumn === item.field) || null;
+        if(column) {
+          data.push({...column})
+        }
+      });
+      return data || [];
     },
     async getFilter(data) {
       try {
