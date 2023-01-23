@@ -94,6 +94,7 @@
         </q-stepper-navigation>
       </template>
     </q-stepper>
+    <inner-loading :visible="loading"/>
   </div>
 </template>
 
@@ -123,7 +124,6 @@ export default {
         const form = this.sections.find((item) => item.id === this.step);
         if(this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
           this.step = STEP_DESCRIPTION;
-          this.$refs[form.refs][0].reset();
         }
       }
     },
@@ -142,6 +142,9 @@ export default {
     });
   },
   computed: {
+    loading() {
+      return qReportsStore().getLoading();
+    },
     sections() {
       return modelSections;
     },
@@ -173,12 +176,14 @@ export default {
                 }
               }
               if (this.step === this.sections.length) {
+                await qReportsStore().setLoading(true);
                 await qReportsStore().saveReport(this.reportId);
                 await this.$alert.success({
                     message: this.reportId ? 'The report was updated correctly' 
                       :'the report was saved correctly',
                 });
                 this.$router.push({ name: "qreports.admin.folders" });
+                await qReportsStore().setLoading(false);
                 return;
               }
               form.error = false;

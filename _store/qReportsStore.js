@@ -9,6 +9,7 @@ const state = reactive({
     columns: [],
     filters: [],
     sort: [],
+    loading: false,
 });
 
 export default function qReportsStore() {
@@ -37,6 +38,7 @@ export default function qReportsStore() {
     }
     async function showReport(reportId) {
         try {
+            await setLoading(true);
             const response = await baseService
                 .show('apiRoutes.qreports.reports', reportId,
                     {
@@ -50,6 +52,7 @@ export default function qReportsStore() {
             setFilters(response.data.filters || {});
             setSort(response.data.sort || {});
             descriptionStore().setForm(response.data);
+            await setLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -72,6 +75,13 @@ export default function qReportsStore() {
     function getSort() {
         return state.sort;
     }
+    function getLoading() {
+        return state.loading;
+    }
+    async function setLoading(value) {
+        state.loading = value;
+    }
+    
     function reset() {
         descriptionStore().reset();
         featureStore().reset();
@@ -90,5 +100,7 @@ export default function qReportsStore() {
         getSort,
         setSort,
         reset,
+        getLoading,
+        setLoading,
     }
 }
