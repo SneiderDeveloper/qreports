@@ -14,6 +14,7 @@ import _ from "lodash";
 import { QSpinnerFacebook } from 'quasar'
 import { SORT_ASC, SORT_DESC } from '../_components/reports/sections/Model/constants.js';
 import { ASCENDING } from '../_store/sections/model/constants.js';
+import cache from '@imagina/qsite/_plugins/cache';
 
 export default {
   data() {
@@ -26,8 +27,9 @@ export default {
   },
   created() {
     this.$nextTick(async function () {
-      this.$filter.reset();
-      this.getCrudReport();
+      await cache.restore(config('app.saveCache.refresh'))//Reset cache
+      await this.$filter.reset();
+      await this.getCrudReport();
     });
   },
   computed: {
