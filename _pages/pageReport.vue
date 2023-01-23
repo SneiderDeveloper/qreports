@@ -114,14 +114,18 @@ export default {
       }
     },
     async sortColumns(columns, orderColumns) {
-      let data = [];
-      orderColumns.forEach(orderColumn => {
-        const column = columns.find((item) => orderColumn === item.field) || null;
-        if(column) {
-          data.push({...column})
-        }
-      });
-      return data || [];
+      try {
+        let data = [];
+        orderColumns.forEach(orderColumn => {
+          const column = columns.find((item) => orderColumn === item.field) || null;
+          if(column) {
+            data.push({...column})
+          }
+        });
+        return data || [];
+      } catch (error) {
+        console.log(error);
+      }
     },
     async getFilter(data) {
       try {
