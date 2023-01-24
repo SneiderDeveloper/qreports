@@ -124,6 +124,7 @@ export default {
         this.reset();
         const form = this.sections.find((item) => item.id === this.step);
         if(this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
+          if(this.step === STEP_DESCRIPTION) this.$refs[form.refs][0].reset();
           this.step = STEP_DESCRIPTION;
         }
       }
@@ -137,8 +138,8 @@ export default {
   },
   created() {
     this.$nextTick(async function () {
+      await descriptionStore().getListOfReportTypes();
       if(this.reportId) {
-        await descriptionStore().getListOfReportTypes();
         await qReportsStore().showReport(this.reportId);
       }
     });
