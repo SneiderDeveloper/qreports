@@ -29,6 +29,11 @@ export default function featureStore() {
         }
 
     }
+    function selectedAllColumns(value) {
+        state.columnList.forEach((item) => {
+            item.check = value; 
+        })
+    }
     function sortSelectedColumnsList(columns) {
         try {
             const selectColumns = qReportsStore().getColumns();
@@ -98,5 +103,6 @@ export default function featureStore() {
         setFilterList,
         reset,
         payloadColumns,
+        selectedAllColumns,
     }
 }

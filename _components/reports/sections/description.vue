@@ -117,11 +117,6 @@ import descriptionStore from "../../../_store/sections/descriptionStore.js";
 import featureStore from "../../../_store/sections/featureStore.js";
 import sortStore from "../../../_store/sections/sortStore.js"
 export default {
-  created() {
-    this.$nextTick(async function () {
-      await descriptionStore().getListOfReportTypes();
-    });
-  },
   data() {
     return {};
   },

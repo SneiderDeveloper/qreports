@@ -2,79 +2,61 @@
   <div class="tw-overflow-x-hidden">
     <div class="q-stepper-title">
       <h3 class="text-primary">
-        {{ $tr('ireports.cms.selectColumnsFilters')  }}
+        {{ $tr("ireports.cms.selectColumnsFilters") }}
       </h3>
       <div></div>
     </div>
-    <h4 
-      class="
-        text-primary 
-        tw-text-base 
-        tw-font-extrabold 
-        tw-mb-6"
-    >
-      {{ $tr('ireports.cms.selectSortColumns') }}
+    <h4 class="text-primary tw-text-base tw-font-extrabold tw-mb-6">
+      {{ $tr("ireports.cms.selectSortColumns") }}
     </h4>
     <div>
+      <dynamic-field
+        v-model="checkAllComputed"
+        class="check-report-1"
+        :field="fields.checkAll"
+      />
       <draggable
         :list="columnList"
         :animation="300"
         ghostClass="ghost"
         handle=".check-report-icon"
         class="
-          tw-grid
-          tw-gap-6
-          tw-grid-cols-1
+          tw-grid tw-gap-6 tw-grid-cols-1
           md:tw-grid-cols-2
           xl:tw-grid-cols-3
-          tw-my-4 
-          tw-overflow-hidden
+          tw-my-4 tw-overflow-hidden
         "
       >
-        <div 
-          v-for="list in columnList" 
-          :key="list.id" 
-          class="check-report-div"
-        >
+        <div v-for="list in columnList" :key="list.id" class="check-report-div">
           <dynamic-field
             class="check-report-1"
             v-model="list.check"
             :field="formFields.reportsColumns[list.id]"
           />
-          <q-btn
-              flat
-              round
-              size="6px"
-              class="f-cursor-grab check-report-icon"
-            >
-              <q-tooltip> 
-                {{ $tr('ireports.cms.moveColumn') }} 
-              </q-tooltip>
-            </q-btn>
+          <q-btn flat round size="6px" class="f-cursor-grab check-report-icon">
+            <q-tooltip>
+              {{ $tr("ireports.cms.moveColumn") }}
+            </q-tooltip>
+          </q-btn>
         </div>
       </draggable>
     </div>
-    <h4 
-      class="
-        text-primary 
-        tw-text-base 
-        tw-font-extrabold 
-        tw-mt-8 
-        tw-mb-6"
-    >
+    <h4 class="text-primary tw-text-base tw-font-extrabold tw-mt-8 tw-mb-6">
       {{ labelTotalFilter }}
     </h4>
     <div class="tw-flex tw-flex-wrap">
       <div
-        v-for="(filter) in filterList"
-        :key="filter.id" 
+        v-for="filter in filterList"
+        :key="filter.id"
         class="tw-mr-2 tw-mb-2"
       >
         <dynamic-field
-            v-model="filter.check" 
-            class="check-report-2"
-            :class="{'check-report-text-white check-report-btn': Boolean(filter.check)}"
-            :field="formFields.reportsFilters[filter.id]" 
+          v-model="filter.check"
+          class="check-report-2"
+          :class="{
+            'check-report-text-white check-report-btn': Boolean(filter.check),
+          }"
+          :field="formFields.reportsFilters[filter.id]"
         />
       </div>
     </div>
@@ -89,11 +71,33 @@ export default {
     draggable,
   },
   data() {
-    return {};
+    return {
+      checkALL: 0,
+    };
   },
   computed: {
+    checkAllComputed: {
+      get() {
+        return this.checkALL;
+      },
+      set(value) {
+        this.checkALL = value;
+        featureStore().selectedAllColumns(value);
+      }
+    },
     labelTotalFilter() {
       return `${this.$tr('ireports.cms.selectFirst', {total: this.totalSelectedFilters} )}`;
+    },
+    fields() {
+      return {
+        checkAll: {
+            type: 'checkbox',
+            value: 0,
+            props: {
+              label: 'Select all columns',
+            }, 
+        }
+       }
     },
     columnList() {
       return featureStore().getColumnList();
@@ -200,6 +204,6 @@ export default {
   @apply tw-hidden;
 }
 .check-report-2.check-active .q-item__label {
-    @apply tw-text-white;
+  @apply tw-text-white;
 }
 </style>

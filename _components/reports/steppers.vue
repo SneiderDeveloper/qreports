@@ -109,6 +109,7 @@ import {
   STEP_SCHEDULE,
 } from "./sections/Model/constants.js";
 import featureStore from "../../_store/sections/featureStore.js";
+import descriptionStore from "../../_store/sections/descriptionStore.js";
 export default {
   data() {
     return {
@@ -137,6 +138,7 @@ export default {
   created() {
     this.$nextTick(async function () {
       if(this.reportId) {
+        await descriptionStore().getListOfReportTypes();
         await qReportsStore().showReport(this.reportId);
       }
     });
