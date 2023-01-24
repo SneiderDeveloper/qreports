@@ -11,9 +11,10 @@
     </h4>
     <div>
       <dynamic-field
-        v-model="checkAllComputed"
+        v-model="checkALL"
         class="check-report-1"
         :field="fields.checkAll"
+        @input="seleteAllColumns"
       />
       <draggable
         :list="columnList"
@@ -70,23 +71,22 @@ export default {
   components: {
     draggable,
   },
+  mounted() {
+    this.$nextTick(async function () {
+      this.checkALL = Number(this.totalSelectColumn);
+    });
+  },
   data() {
     return {
       checkALL: 0,
     };
   },
   computed: {
-    checkAllComputed: {
-      get() {
-        return this.checkALL;
-      },
-      set(value) {
-        this.checkALL = value;
-        featureStore().selectedAllColumns(value);
-      }
-    },
     labelTotalFilter() {
       return `${this.$tr('ireports.cms.selectFirst', {total: this.totalSelectedFilters} )}`;
+    },
+    totalSelectColumn() {
+      return featureStore().getSelectedColumns().length === this.columnList.length;
     },
     fields() {
       return {
@@ -115,6 +115,11 @@ export default {
       };
     },
   },
+  methods: {
+    seleteAllColumns() {
+      featureStore().selectedAllColumns(this.checkALL);
+    },
+  }
 };
 </script>
 
