@@ -164,18 +164,23 @@ export default {
           },
           folderId: {
             value: null,
-            type : 'treeSelect',
-            isTranslatable: false,
+            type: 'crud',
+            permission: 'ireport.folders',
             props: {
-              rules: [
-                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
-              ],
-              label: "Folder",
-              icon: "folder_open",
-              color: "primary",
-            },
-            loadOptions: {
-              apiRoute: "apiRoutes.qreports.folders",
+              crudType: 'select',
+              crudData: import('@imagina/qreports/_crud/folders'),
+              crudProps: {
+                label: "Folder",
+                rules: [
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
+                ],
+              },
+              config: {
+                filterByQuery: true,
+                options: {
+                  label: 'title', value: 'id'
+                }
+              }
             },
           },
           roles: {

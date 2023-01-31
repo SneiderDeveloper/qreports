@@ -23,6 +23,7 @@ export default {
       filters: {},
       sort: {},
       loading: true,
+      title: '',
     };
   },
   created() {
@@ -43,6 +44,7 @@ export default {
     crudData() {
       return {
         read: {
+          title: this.title,
           search: false,
           columns: [...this.columns],
           filters: {
@@ -81,6 +83,7 @@ export default {
           }
         );
         if (response.data.reportType) {
+          this.title = `${this.$tr('ireports.cms.sidebar.reportInfo')}: ${response.data.title || ''}`;
           this.columns = await this.getColumns(response.data);
           const filterList = await this.getFilter(response.data);
           this.sort = await this.getSort(response.data);
