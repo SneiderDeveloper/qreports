@@ -96,12 +96,12 @@ export default {
     },
     async getColumns(data) {
       try {
-        const columns = data.reportType.columns || [];
+        const columns = data.columns || [];
         return columns
           .map((item) => ({
-            name: item.id,
-            label: item.title,
-            field: item.id,
+            name: item,
+            label: item,
+            field: item,
             align: "left",
             format: (val) => (val ? val : "-"),
           }))
