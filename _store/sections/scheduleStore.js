@@ -62,7 +62,7 @@ const store = computed(() => ({
         if (state.timeInterval == 1) {
             state.form.on = null;
         }
-        return { schedule: state.form };
+        return { schedule: state.form.scheduleReport == 0 ? {} : state.form };
     },
     reset() {
         state.form = { ...model }
