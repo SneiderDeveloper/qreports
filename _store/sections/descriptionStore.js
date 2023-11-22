@@ -12,13 +12,6 @@ const descriptionModel = {
     title: null,
     description: null,
     roles: [],
-    /*emails: [ // tenerlo encuenta para schedule
-        {
-            email: null,
-            status: false,
-        }
-    ],*/
-    //attachReport: 'pdf'
 }
 
 const state = reactive({
