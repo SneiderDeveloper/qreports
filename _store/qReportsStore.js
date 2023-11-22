@@ -50,6 +50,7 @@ export default function qReportsStore() {
             setFilters(response.data.filters || {});
             setSort(response.data.sort || {});
             descriptionStore().setForm(response.data);
+            scheduleStore.form = response.data.schedule || {};
         } catch (error) {
             console.log(error);
         }

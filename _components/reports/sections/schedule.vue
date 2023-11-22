@@ -117,7 +117,7 @@ export default {
             return scheduleStore.form
         },
         modelOn() {
-            return this.form.timeInterval === 2 ? weekly : monthly;
+            return this.form.timeInterval == 2 ? weekly : monthly;
         },
         formFields() {
             return {
@@ -174,7 +174,7 @@ export default {
                         },
                     },
                     on: {
-                        value: '0',
+                        value: null,
                         type: 'select',
                         props: {
                             rules: [

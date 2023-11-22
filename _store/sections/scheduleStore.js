@@ -1,5 +1,20 @@
 import { reactive, computed } from 'vue';
-
+const model = {
+    scheduleReport: 1,
+    timeInterval: null,
+    timeZone: null,
+    on: null,
+    at: null,
+    startingOn: null,
+    endingOn: null,
+    emails: [
+        {
+            email: null,
+            status: 1,
+        }
+    ],
+    format: 'pdf'
+}
 const state = reactive({
     form: {
         scheduleReport: 1,
@@ -24,7 +39,15 @@ const store = computed(() => ({
         return state.form
     },
     set form(data) {
-        state.form = data;
+        state.form.scheduleReport = data.scheduleReport || 0;
+        state.form.timeInterval = data.timeInterval || null;
+        state.form.timeZone = data.timeZone || null;
+        state.form.on = data.on || null;
+        state.form.at = data.at || null;
+        state.form.startingOn = data.startingOn || null;
+        state.form.endingOn = data.endingOn || null;
+        state.form.emails = data.emails || [];
+        state.form.format = data.format || 'pdf';
     },
     addEmailNotification() {
         state.form.emails.push({
@@ -36,28 +59,13 @@ const store = computed(() => ({
         state.form.emails.splice(index, 1)
     },
     payload() {
-        if(state.timeInterval == 1) {
+        if (state.timeInterval == 1) {
             state.form.on = null;
         }
         return { schedule: state.form };
     },
     reset() {
-        state.form = {
-            scheduleReport: 1,
-            timeInterval: null,
-            timeZone: null,
-            on: null,
-            at: null,
-            startingOn: null,
-            EndingOn: null,
-            emails: [
-                {
-                    email: null,
-                    status: 1,
-                }
-            ],
-            format: 'pdf'
-        }
+        state.form = { ...model }
     },
 })).value
 
