@@ -157,7 +157,6 @@ export default {
     async saveFormReports() {
       try {
         const form = this.sections.find((item) => item.id === this.step);
-        console.log(form);
         if (this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
           this.$refs[form.refs][0].validate().then(async (success) => {
             if (success) {
