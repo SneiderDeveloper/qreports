@@ -46,7 +46,12 @@ const store = computed(() => ({
         state.form.at = data.at || null;
         state.form.startingOn = data.startingOn || null;
         state.form.endingOn = data.endingOn || null;
-        state.form.emails = data.emails || [];
+        state.form.emails = data.emails || [
+            {
+                email: null,
+                status: 1,
+            }
+        ];
         state.form.format = data.format || 'pdf';
     },
     addEmailNotification() {
