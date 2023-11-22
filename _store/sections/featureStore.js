@@ -6,9 +6,25 @@ import _ from 'lodash';
 const state = reactive({
     columnList: [],
     filterList: [],
+    selectedAll: {
+        columnList: 0,
+        filterList: 0,
+    }
 });
 
 export default function featureStore() {
+    function getColumnCheck() {
+        return state.selectedAll.columnList
+    }
+    function setColumnCheck(value) {
+        state.selectedAll.columnList = value;
+    }
+    function getFilterListCheck() {
+        return state.selectedAll.filterList
+    }
+    function setFilterListCheck(value) {
+        state.selectedAll.filterList = value;
+    }
     function getColumnList() {
         return state.columnList;
     }
@@ -88,6 +104,14 @@ export default function featureStore() {
             columns,
         }
     }
+    function selecdAll(type) {
+        state[type].forEach(item => {
+            item.check = state.selectedAll[type];
+        })
+    }
+    function checkIfAllChecksSelected(type) {
+        state.selectedAll[type] = Number(state[type].every(item => item.check == 1));
+    }
     return {
         getColumnList,
         getFilterList,
@@ -98,5 +122,11 @@ export default function featureStore() {
         setFilterList,
         reset,
         payloadColumns,
+        selecdAll,
+        getColumnCheck,
+        setColumnCheck,
+        getFilterListCheck,
+        setFilterListCheck,
+        checkIfAllChecksSelected
     }
 }

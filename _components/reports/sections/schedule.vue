@@ -35,8 +35,11 @@
             md:tw-grid-cols-2
             tw-mt-4 
             tw-overflow-hidden
-            ">
-                <dynamic-field v-model="form.on" class="input-report-nolabel tw-w-full"
+            "
+            :class="{'md:tw-grid-cols-1': form.timeInterval == 1}">
+                <dynamic-field
+                  v-if="this.form.timeInterval != 1" 
+                  v-model="form.on" class="input-report-nolabel tw-w-full"
                     :field="formFields.reportsForms.on" />
                 <dynamic-field v-model="form.at" class="input-report-nolabel tw-w-full"
                     :field="formFields.reportsForms.at" />
