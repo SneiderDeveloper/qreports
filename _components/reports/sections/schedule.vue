@@ -58,22 +58,29 @@
                     :field="formFields.reportsForms.endingOn" />
             </div>
 
-            <div>
+            <div class="
+            tw-grid 
+            tw-gap-x-10 
+            tw-gap-y-4
+            tw-grid-cols-1 
+            md:tw-grid-cols-2
+            tw-my-4 tw-overflow-hidden
+            ">
                 <div>
                     <div class="
-                tw-w-full
-                tw-flex
-                tw-flex-col
-                tw-items-start
-                tw-space-x-4
-                tw-mb-6
-                lg:tw-flex-row lg:tw-mb-8
-              " v-for="(item, index) in form.emails">
-                        <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
+                        tw-w-full
+                        tw-flex
+                        tw-flex-col
+                        tw-items-start
+                        tw-space-x-4
+                        tw-mb-6 tw-mt-8
+                        lg:tw-flex-row lg:tw-mb-8
+                        " v-for="(item, index) in form.emails">
+                        <div class="tw-w-full tw-mb-4 lg:tw-mb-0">
                             <dynamic-field v-model="item.email" class="input-report"
                                 :field="formFields.reportsForms.email" />
                         </div>
-                        <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
+                        <div class="tw-flex lg:tw-w-auto tw-overflow-hidden w-120">
                             <div>
                                 <dynamic-field v-model="item.status" :field="formFields.reportsForms.status" />
                             </div>
@@ -83,21 +90,36 @@
                             </div>
                         </div>
                     </div>
-                    <q-btn v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-8" no-caps
+                </div>
+                <div  class="
+                        tw-w-full
+                        tw-flex
+                        tw-flex-col
+                        xl:tw-flex-row
+                        tw-items-baseline
+                        tw-space-x-4
+                        tw-mb-6">
+                    
+                    <q-btn rounded v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-8" no-caps
                         @click="addEmailNotification">
                         <q-icon left size="1em" name="fa fa-plus" />
                         <div>Add another email</div>
                     </q-btn>
+
+                    <dynamic-field v-model="form.format" class="q-mb-md radio-report" :field="formFields.reportsForms.format" />
+                
                 </div>
-                <dynamic-field v-model="form.format" class="q-mb-md radio-report" :field="formFields.reportsForms.format" />
+
+               
             </div>
+
         </div>
 
-
+        <!--
         <p class="tw-text-sm tw-text-black">
             <q-icon name="emergency" class="tw-text-red-600" />
             Remember to add all the emails you need to send this report on “Step 1”
-        </p>
+        </p>-->
     </div>
 </template>
 
@@ -142,7 +164,6 @@ export default {
                             ],
                             label: 'Time Interval',
                             icon: 'more_time',
-                            color: 'primary',
                             options: timeInterval,
                         },
                     },
@@ -183,7 +204,6 @@ export default {
                             vIf: this.form.timeInterval != 1,
                             label: 'On',
                             icon: 'event_available',
-                            color: 'primary',
                             options: this.modelOn,
                         },
                     },
@@ -195,7 +215,6 @@ export default {
                             ],
                             label: 'Starting On',
                             icon: 'calendar_month',
-                            color: 'primary',
                             hint: 'Format: MM/DD/YYYY HH:mm',
                             mask: 'MM/DD/YYYY HH:mm',
                             iconRight: 'watch_later',
@@ -210,7 +229,6 @@ export default {
                             ],
                             label: 'Ending On',
                             icon: 'calendar_month',
-                            color: 'primary',
                             hint: 'Format: MM/DD/YYYY HH:mm',
                             mask: 'MM/DD/YYYY HH:mm',
                             iconRight: 'watch_later',
@@ -224,7 +242,6 @@ export default {
                             ],
                             label: "Email Notification",
                             icon: "mail",
-                            color: "primary",
                             counter: true,
                             maxlength: 40,
                         },
@@ -290,5 +307,8 @@ export default {
     @apply tw-max-w-full tw-w-full lg:tw-w-2.5;
     flex-basis: 0;
     flex-grow: 1;
+}
+.w-120 {
+    width: 120px;
 }
 </style>

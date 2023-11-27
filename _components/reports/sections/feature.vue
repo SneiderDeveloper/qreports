@@ -36,7 +36,7 @@
           tw-gap-6
           tw-grid-cols-1
           md:tw-grid-cols-2
-          xl:tw-grid-cols-6
+          xl:tw-grid-cols-4
           tw-my-4 
           tw-overflow-hidden
         "
