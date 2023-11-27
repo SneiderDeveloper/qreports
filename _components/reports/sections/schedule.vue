@@ -53,7 +53,7 @@
             tw-my-4 tw-overflow-hidden
             ">
                 <dynamic-field v-model="form.startingOn" class="input-report tw-mb-4"
-                    :field="formFields.reportsForms.startingOn" />
+                    :field="formFields.reportsForms.startingOn" @input="changeValidateDate" />
                 <dynamic-field v-model="form.endingOn" class="input-report tw-mb-4"
                     :field="formFields.reportsForms.endingOn" />
             </div>
@@ -199,7 +199,7 @@ export default {
                             hint:'Format: MM/DD/YYYY HH:mm',
                             mask:'MM/DD/YYYY HH:mm',
                             'place-holder': 'MM/DD/YYYY HH:mm',
-                            iconRight: 'watch_later',
+                            iconRight: 'watch_later'
                         },
                     },
                     endingOn: {
@@ -216,6 +216,8 @@ export default {
                             mask:'MM/DD/YYYY HH:mm',
                             'place-holder': 'MM/DD/YYYY HH:mm',
                             iconRight: 'watch_later',
+                            options: this.validateDate,
+                            readonly: !this.form.startingOn
                         },
                     },
                     email: {
@@ -223,6 +225,7 @@ export default {
                         props: {
                             rules: [
                                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+                                (val) => /.+@.+\..+/.test(val) || "Please enter a valid email address",
                             ],
                             label: "Email Notification",
                             icon: "mail",
@@ -274,6 +277,16 @@ export default {
         deleteEmailNotification(index) {
             scheduleStore.deleteEmailNotification(index);
         },
+        validateDate(date) {
+            return date >= this.$moment(this.form.startingOn).format('YYYY/MM/DD');
+        },
+        changeValidateDate() {
+            const start = this.$moment(this.form.startingOn).format('YYYY/MM/DD');
+            const end = this.$moment(this.form.endingOn).format('YYYY/MM/DD');
+            if(end < start) {
+                this.form.endingOn = null;
+            }
+        }
     }
 }
 </script>
