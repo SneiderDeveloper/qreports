@@ -276,7 +276,9 @@ export default {
 .stepper-report .q-stepper__tab--done .q-stepper__dot:before {
   background-color: var(--q-color-primary) !important;
 }
-
+.stepper-report .q-stepper__tab--done.q-stepper__tab--active .q-stepper__dot span {
+  color: #fff !important;
+}
 .stepper-report .q-stepper__nav {
   background-color: #fafafa;
 }
