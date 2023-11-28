@@ -48,15 +48,15 @@ const data = ref([
         refs: 'sortForm',
         error: false
     },
-    /*{
+    {
         id: STEP_SCHEDULE,
         title: Vue.prototype.$tr('isite.cms.form.schedule'),
         prefix: 5,
         component: schedule,
         done: false,
-        refs: 'schedule',
+        refs: 'scheduleForm',
         error: false
-    },*/
+    },
 ]);
 
 export default data.value;

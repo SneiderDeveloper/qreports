@@ -42,6 +42,7 @@
       :contracted="$q.screen.lt.sm"
       ref="stepper"
       color="primary"
+      header-nav
       alternative-labels
       active-color="primary"
       animated
@@ -70,12 +71,12 @@
             rounded
             no-caps
             outline
-            icon="fas fa-arrow-left"
             label="Back"
             color="primary"
             v-if="step > 1"
-            @click="$refs.stepper.previous()"
+            @click="formPrevious"
             class="
+             tw-w-28
              q-mr-sm 
              tw-mt-6 
              text-sm 
@@ -86,10 +87,9 @@
             rounded
             no-caps
             color="primary"
-            icon-right="fas fa-arrow-right"
             @click="saveFormReports"
             :label="step === sections.length ? 'Finish' : 'Next'"
-            class="tw-mt-6 text-sm btn-small"
+            class="tw-w-28 tw-mt-6 text-sm btn-small"
           />
         </q-stepper-navigation>
       </template>
@@ -157,6 +157,8 @@ export default {
     async saveFormReports() {
       try {
         const form = this.sections.find((item) => item.id === this.step);
+       // console.log(form);
+        
         if (this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
           this.$refs[form.refs][0].validate().then(async (success) => {
             if (success) {
@@ -182,6 +184,7 @@ export default {
                 return;
               }
               form.error = false;
+              form.done = true;
               this.$refs.stepper.next();
               return;
             }
@@ -191,6 +194,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    formPrevious() {
+        this.$refs.stepper.previous()
     },
     reset() {
       this.sections.forEach(element => {
@@ -206,10 +212,11 @@ export default {
   @apply tw-relative tw-mb-6 tw-overflow-x-hidden;
 }
 .stepper-report .q-stepper .q-stepper-title > h3 {
-  @apply tw-text-lg tw-font-bold tw-bg-white tw-pr-4 tw-inline-block tw-z-20 tw-relative;
+  @apply tw-text-lg tw-font-bold tw-bg-white tw-pr-4 tw-inline-block tw-relative;
+  z-index: 1;
 }
 .stepper-report .q-stepper .q-stepper-title > div {
-  @apply tw-block tw-w-full tw-h-px tw-bg-gray-200 tw-top-2/4 tw-absolute tw-z-10;
+  @apply tw-block tw-w-full tw-h-px tw-bg-gray-200 tw-top-2/4 tw-absolute tw-z-0;
 }
 .stepper-report .q-stepper {
   @apply tw-rounded-xl tw-border tw-shadow-none;
@@ -218,19 +225,20 @@ export default {
 .stepper-report .q-stepper__header {
   @apply tw-border-b-0;
 }
+
 .stepper-report .q-stepper__tab .q-stepper__dot {
   @apply sm:tw-w-10 sm:tw-h-10 tw-font-bold sm:tw-text-base tw-border-0;
 }
 .stepper-report .q-stepper__tab:not(.q-stepper__tab--active) .q-stepper__dot {
   @apply tw-border-2;
-  background-color: #f1f4fa;
-  border-color: #f1f4fa;
+  background-color: transparent;
+  border-color: #cccccc;
 }
 .stepper-report
   .q-stepper__tab:not(.q-stepper__tab--active)
   .q-stepper__dot
   span {
-  color: #8a98c3;
+    color: #808080;
 }
 .stepper-report .q-stepper__tab--active .q-stepper__dot {
   @apply tw-border-current tw-border-2;
@@ -239,21 +247,40 @@ export default {
   @apply tw-text-white;
 }
 .stepper-report .q-stepper .q-stepper__dot:before {
-  @apply sm:tw-mr-4 md:tw-mr-8;
+  margin-right: 2px; 
 }
 .stepper-report .q-stepper .q-stepper__dot:after {
-  @apply sm:tw-ml-4 md:tw-ml-8;
+  margin-left: 2px; 
 }
 .stepper-report .q-stepper .q-stepper__line:after,
 .stepper-report .q-stepper .q-stepper__line:before {
   @apply tw-h-0.5;
+  background-color: #cccccc;
 }
 .stepper-report .q-stepper__title {
   font-size: 0.5rem;
-  @apply tw-font-bold sm:tw-text-xs md:tw-text-base md:tw-font-normal tw-text-black;
+  color: #808080;
+  @apply tw-font-bold sm:tw-text-xs md:tw-text-base;
+}
+
+.stepper-report .q-stepper__tab--done .q-stepper__dot span,
+.stepper-report .q-stepper__tab--done .q-stepper__title,
+.stepper-report .q-stepper__tab--active .q-stepper__title {
+  color: var(--q-color-primary) !important;
+}
+.stepper-report .q-stepper__tab--done .q-stepper__dot {
+  border-color: var(--q-color-primary) !important;
+  color: var(--q-color-primary) !important;
+}
+.stepper-report .q-stepper__tab--done .q-stepper__dot:after,
+.stepper-report .q-stepper__tab--done .q-stepper__dot:before {
+  background-color: var(--q-color-primary) !important;
+}
+.stepper-report .q-stepper__tab--done.q-stepper__tab--active .q-stepper__dot span {
+  color: #fff !important;
 }
 .stepper-report .q-stepper__nav {
-  background-color: #f1f4fa;
+  background-color: #fafafa;
 }
 .stepper-report .q-stepper__step-inner {
   @apply tw-p-4 lg:tw-p-5;
@@ -284,7 +311,7 @@ export default {
   @apply tw-text-xs;
 }
 .input-report-nolabel .q-field .q-field__label {
-  @apply tw-font-medium lg:tw-hidden;
+  @apply tw-font-medium;
   color: var(--q-color-primary);
 }
 .input-report .q-field .q-field__native input {
@@ -293,7 +320,7 @@ export default {
 .input-report-nolabel .q-field--labeled .q-field__control-container {
   @apply lg:tw-pt-px !important;
 }
-.input-report .q-icon,
+/*.input-report .q-icon,*/
 .input-report-nolabel .q-select__dropdown-icon {
   color: var(--q-color-primary);
 }

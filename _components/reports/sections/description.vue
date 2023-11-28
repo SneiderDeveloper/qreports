@@ -49,65 +49,6 @@
             :field="formFields.reportsForms.description"
           />
         </div>
-        <div>
-          <div v-if="false">
-            <div
-              class="
-                tw-w-full
-                tw-flex
-                tw-flex-col
-                tw-items-start
-                tw-space-x-4
-                tw-mb-6
-                lg:tw-flex-row lg:tw-mb-8
-              "
-              v-for="(item, index) in form.emails"
-            >
-              <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
-                <dynamic-field
-                  v-model="item.email"
-                  class="input-report"
-                  :field="formFields.reportsForms.email"
-                />
-              </div>
-              <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
-                <div>
-                  <dynamic-field
-                    v-model="item.status"
-                    :field="formFields.reportsForms.status"
-                  />
-                </div>
-                <div>
-                  <q-btn
-                    flat
-                    round
-                    color="primary"
-                    icon="fa-regular fa-trash-can"
-                    size="12px"
-                    @click="deleteEmailNotification(index)"
-                  />
-                </div>
-              </div>
-            </div>
-            <q-btn
-              v-if="form.emails.length <= 4"
-              outline
-              color="primary"
-              class="tw-mb-8"
-              no-caps
-              @click="addEmailNotification"
-            >
-              <q-icon left size="1em" name="fa fa-plus" />
-              <div>Add another email</div>
-            </q-btn>
-          </div>
-          <dynamic-field
-            v-if="false"
-            v-model="form.attachReport"
-            class="q-mb-md radio-report"
-            :field="formFields.reportsForms.attachReport"
-          />
-        </div>
       </div>
   </div>
 </template>
@@ -146,7 +87,6 @@ export default {
               selectByDefault: true,
               label: "Object",
               icon: "fa-solid fa-list-ul",
-              color: "primary",
             },
             loadOptions: {
               apiRoute: "apiRoutes.qreports.entities",
@@ -163,7 +103,6 @@ export default {
               ],
               label: "Report Type",
               icon: "description",
-              color: "primary",
               options: this.reportTypeList,
             },
           },
@@ -177,7 +116,6 @@ export default {
               ],
               label: "Folder",
               icon: "folder_open",
-              color: "primary",
             },
             loadOptions: {
               apiRoute: "apiRoutes.qreports.folders",
@@ -206,7 +144,6 @@ export default {
               ],
               icon: "text_fields",
               label: "Report Title",
-              color: "primary",
             },
           },
           description: {
@@ -219,62 +156,11 @@ export default {
               rows: "6",
             },
           },
-          /*email: {
-            type: "input",
-            props: {
-              rules: [
-                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
-              ],
-              label: "Email Notification",
-              icon: "mail",
-              color: "primary",
-              counter: true,
-              maxlength: 40,
-            },
-          },
-          status: {
-            type: "toggle",
-            value: "1",
-            props: {
-              rules: [
-                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
-              ],
-              size: "md",
-              options: [
-                { label: "YES", value: "1" },
-                { label: "NO", value: "0" },
-              ],
-            },
-          },*/
-          /*attachReport: {
-            value: "pdf",
-            type: "optionGroup",
-            props: {
-              rules: [
-                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
-              ],
-              label: "Attach this report as:",
-              inline: true,
-              stackLabel: true,
-              options: [
-                { label: "PDF", value: "pdf" },
-                { label: "CSV", value: "csv" },
-                { label: "XLSX", value: "xlsx" },
-              ],
-            },
-          },*/
         },
       };
     },
   },
   methods: {
-    addEmailNotification() {
-      if (this.form.emailNotification.length >= 5) return;
-      descriptionStore().addEmailNotification();
-    },
-    deleteEmailNotification(index) {
-      descriptionStore().deleteEmailNotification(index);
-    },
     getSelectedReportType() {
       const reportTypeList = this.reportTypeList.find(item => item.id === Number(this.form.reportTypeId));
       if(reportTypeList) {

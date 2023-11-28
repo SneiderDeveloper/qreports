@@ -6,15 +6,27 @@
       </h3>
       <div></div>
     </div>
-    <h4 
-      class="
-        text-primary 
-        tw-text-base 
-        tw-font-extrabold 
-        tw-mb-6"
-    >
-      {{ $tr('ireports.cms.selectSortColumns') }}
-    </h4>
+    <div class="tw-flex">
+      <div>
+        <h4 
+          class="
+            text-primary 
+            tw-text-base 
+            tw-font-extrabold 
+            ">
+          {{ $tr('ireports.cms.selectColumns') }}
+        </h4>
+      </div>
+      <div class="tw--mt-1.5">
+        <dynamic-field
+            v-model="columnCheck"
+            :field="check"
+          />
+      </div>
+    </div>
+    <div>
+       <p class="tw-mb-6 tw-font-bold">{{ $tr('ireports.cms.dragColumns') }}</p> 
+    </div>
     <div>
       <draggable
         :list="columnList"
@@ -26,7 +38,7 @@
           tw-gap-6
           tw-grid-cols-1
           md:tw-grid-cols-2
-          xl:tw-grid-cols-3
+          xl:tw-grid-cols-6
           tw-my-4 
           tw-overflow-hidden
         "
@@ -36,10 +48,14 @@
           :key="list.id" 
           class="check-report-div"
         >
+          <q-tooltip anchor="bottom middle" self="center middle"> 
+            {{ list.title }}
+          </q-tooltip>
           <dynamic-field
             class="check-report-1"
             v-model="list.check"
             :field="formFields.reportsColumns[list.id]"
+            @input="checkIfAllChecksSelected('columnList')"
           />
           <q-btn
               flat
@@ -47,23 +63,35 @@
               size="6px"
               class="f-cursor-grab check-report-icon"
             >
-              <q-tooltip> 
+              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]"> 
                 {{ $tr('ireports.cms.moveColumn') }} 
               </q-tooltip>
             </q-btn>
         </div>
       </draggable>
     </div>
-    <h4 
-      class="
-        text-primary 
-        tw-text-base 
-        tw-font-extrabold 
-        tw-mt-8 
-        tw-mb-6"
-    >
-      {{ labelTotalFilter }}
-    </h4>
+    <div class="tw-flex tw-pt-5">
+      <div>
+        <h4 
+          class="
+            text-primary 
+            tw-text-base 
+            tw-font-extrabold 
+          "
+        >
+          {{ $tr('ireports.cms.selectFirst') }}
+        </h4>
+      </div>
+      <div class="tw--mt-1.5">
+        <dynamic-field
+            v-model="filterCheck"
+            :field="check"
+          />
+      </div>
+    </div>
+    <div>
+       <p class="tw-mb-6 tw-font-bold">{{ labelTotalFilter }}</p> 
+    </div>
     <div class="tw-flex tw-flex-wrap">
       <div
         v-for="(filter) in filterList"
@@ -74,7 +102,8 @@
             v-model="filter.check" 
             class="check-report-2"
             :class="{'check-report-text-white check-report-btn': Boolean(filter.check)}"
-            :field="formFields.reportsFilters[filter.id]" 
+            :field="formFields.reportsFilters[filter.id]"
+            @input="checkIfAllChecksSelected('filterList')" 
         />
       </div>
     </div>
@@ -84,16 +113,25 @@
 <script>
 import draggable from "vuedraggable";
 import featureStore from "../../../_store/sections/featureStore.js";
+
 export default {
   components: {
     draggable,
   },
   data() {
-    return {};
+    return {
+      check: {
+        type: 'checkbox',
+        value: 0,
+        props: {
+          label: this.$tr('ireports.cms.label.selectAll'),
+        }
+      }
+    };
   },
   computed: {
     labelTotalFilter() {
-      return `${this.$tr('ireports.cms.selectFirst', {total: this.totalSelectedFilters} )}`;
+      return `${this.$tr('ireports.cms.selectFirstSummary', {total: this.totalSelectedFilters} )}`;
     },
     columnList() {
       return featureStore().getColumnList();
@@ -110,7 +148,30 @@ export default {
         reportsFilters: featureStore().factoryOfDynamicCheck("filterList"),
       };
     },
+    columnCheck: {
+      get() {
+        return featureStore().getColumnCheck()
+      },
+      async set(value) {
+        await featureStore().setColumnCheck(value)
+        await featureStore().selecdAll("columnList");
+      }
+    },
+    filterCheck: {
+      get() {
+        return featureStore().getFilterListCheck()
+      },
+      async set(value) {
+        await featureStore().setFilterListCheck(value)
+        await featureStore().selecdAll("filterList");
+      }
+    },
   },
+  methods: {
+    checkIfAllChecksSelected(type) {
+      featureStore().checkIfAllChecksSelected(type)
+    }
+  }
 };
 </script>
 
@@ -201,5 +262,11 @@ export default {
 }
 .check-report-2.check-active .q-item__label {
     @apply tw-text-white;
+}
+.check-report-1 .q-item__label--caption .float-right {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 </style>

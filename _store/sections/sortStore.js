@@ -30,7 +30,6 @@ export default function sortStore() {
                     props: {
                         label: item.title,
                         icon,
-                        color: 'primary',
                         options: [
                             { label: 'Ascending', value: ASCENDING },
                             { label: 'Descending', value: DESCENDING },

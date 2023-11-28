@@ -4,6 +4,7 @@ import descriptionStore from './sections/descriptionStore';
 import featureStore from './sections/featureStore.js'
 import fieldsDetailsStore from './sections/fieldsDetailsStore.js';
 import sortStore from './sections/sortStore.js';
+import scheduleStore from './sections/scheduleStore.js';
 
 const state = reactive({
     columns: [],
@@ -19,11 +20,13 @@ export default function qReportsStore() {
             const columns = featureStore().payloadColumns();
             const filters = fieldsDetailsStore().payloadFilter();
             const sort = sortStore().payloadSort()
+            const schedule = scheduleStore.payload();
             const data = {
                 ...descriptionForm,
                 ...columns,
                 ...filters,
-                ...sort
+                ...sort,
+                ...schedule
             }
             if (reportId) {
                 await baseService.update(route, reportId, data);
@@ -47,6 +50,7 @@ export default function qReportsStore() {
             setFilters(response.data.filters || {});
             setSort(response.data.sort || {});
             descriptionStore().setForm(response.data);
+            scheduleStore.form = response.data.schedule || {};
         } catch (error) {
             console.log(error);
         }
@@ -73,9 +77,11 @@ export default function qReportsStore() {
         descriptionStore().reset();
         featureStore().reset();
         sortStore().setForm({});
+        scheduleStore.reset();
         fieldsDetailsStore().setForm({});
         setColumns([]);
         setFilters({});
+        
     }
     return {
         saveReport,
