@@ -39,7 +39,7 @@
             :class="{'md:tw-grid-cols-1': form.timeInterval == 1}">
                 <dynamic-field
                   v-if="this.form.timeInterval != 1" 
-                  v-model="form.on" class="input-report-nolabel tw-w-full"
+                  v-model="form.on" class="input-report-nolabel tw-w-full input-report-on"
                     :field="formFields.reportsForms.on" />
                 <dynamic-field v-model="form.at" class="input-report-nolabel tw-w-full"
                     :field="formFields.reportsForms.at" />
@@ -73,7 +73,7 @@
                         tw-flex-col
                         tw-items-start
                         tw-space-x-4
-                        tw-mb-6 tw-mt-8
+                        tw-mb-6 
                         lg:tw-flex-row lg:tw-mb-8
                         " v-for="(item, index) in form.emails">
                         <div class="tw-w-full tw-mb-4 lg:tw-mb-0">
@@ -95,15 +95,17 @@
                         tw-w-full
                         tw-flex
                         tw-flex-col
-                        xl:tw-flex-row
-                        tw-items-baseline
-                        tw-space-x-4
-                        tw-mb-6">
+                        sm:tw-flex-row
+                        tw-items-start
+                        sm:tw-space-x-4
+                        tw-mb-4">
                     
                     <q-btn rounded v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-8" no-caps
                         @click="addEmailNotification">
-                        <q-icon left size="1em" name="fa fa-plus" />
-                        <div>Add another email</div>
+                        <q-icon  size="1em" name="fa fa-plus" />
+                        <q-tooltip anchor="bottom middle" self="center middle"> 
+                            {{ $tr('ireports.cms.addAnotherEmail') }}
+                        </q-tooltip>
                     </q-btn>
 
                     <dynamic-field v-model="form.format" class="q-mb-md radio-report" :field="formFields.reportsForms.format" />
@@ -310,5 +312,8 @@ export default {
 }
 .w-120 {
     width: 120px;
+}
+.input-report-on .q-field__native span {
+    margin-top: 12px;
 }
 </style>

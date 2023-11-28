@@ -13,9 +13,8 @@
             text-primary 
             tw-text-base 
             tw-font-extrabold 
-            tw-mb-6"
-        >
-          {{ $tr('ireports.cms.selectSortColumns') }}
+            ">
+          {{ $tr('ireports.cms.selectColumns') }}
         </h4>
       </div>
       <div class="tw--mt-1.5">
@@ -24,6 +23,9 @@
             :field="check"
           />
       </div>
+    </div>
+    <div>
+       <p class="tw-mb-6 tw-font-bold">{{ $tr('ireports.cms.dragColumns') }}</p> 
     </div>
     <div>
       <draggable
@@ -46,6 +48,9 @@
           :key="list.id" 
           class="check-report-div"
         >
+          <q-tooltip anchor="bottom middle" self="center middle"> 
+            {{ list.title }}
+          </q-tooltip>
           <dynamic-field
             class="check-report-1"
             v-model="list.check"
@@ -58,14 +63,14 @@
               size="6px"
               class="f-cursor-grab check-report-icon"
             >
-              <q-tooltip> 
+              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]"> 
                 {{ $tr('ireports.cms.moveColumn') }} 
               </q-tooltip>
             </q-btn>
         </div>
       </draggable>
     </div>
-    <div class="tw-flex tw-py-5">
+    <div class="tw-flex tw-pt-5">
       <div>
         <h4 
           class="
@@ -74,7 +79,7 @@
             tw-font-extrabold 
           "
         >
-          {{ labelTotalFilter }}
+          {{ $tr('ireports.cms.selectFirst') }}
         </h4>
       </div>
       <div class="tw--mt-1.5">
@@ -83,6 +88,9 @@
             :field="check"
           />
       </div>
+    </div>
+    <div>
+       <p class="tw-mb-6 tw-font-bold">{{ labelTotalFilter }}</p> 
     </div>
     <div class="tw-flex tw-flex-wrap">
       <div
@@ -123,7 +131,7 @@ export default {
   },
   computed: {
     labelTotalFilter() {
-      return `${this.$tr('ireports.cms.selectFirst', {total: this.totalSelectedFilters} )}`;
+      return `${this.$tr('ireports.cms.selectFirstSummary', {total: this.totalSelectedFilters} )}`;
     },
     columnList() {
       return featureStore().getColumnList();
@@ -254,5 +262,11 @@ export default {
 }
 .check-report-2.check-active .q-item__label {
     @apply tw-text-white;
+}
+.check-report-1 .q-item__label--caption .float-right {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 </style>
