@@ -74,7 +74,7 @@
                         tw-items-start
                         tw-space-x-4
                         tw-mb-6 
-                        lg:tw-flex-row lg:tw-mb-8
+                        sm:tw-flex-row lg:tw-mb-8
                         " v-for="(item, index) in form.emails">
                         <div class="tw-w-full tw-mb-4 lg:tw-mb-0">
                             <dynamic-field v-model="item.email" class="input-report"
