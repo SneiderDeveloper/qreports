@@ -96,9 +96,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="
+                    <div class="
                         tw-w-full
                         tw-flex
                         tw-flex-col
@@ -110,10 +108,8 @@
                         :field="formFields.reportsForms.format" />
 
                 </div>
-
-
+                </div>
             </div>
-
         </div>
 
         <!--
