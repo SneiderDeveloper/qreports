@@ -87,7 +87,6 @@ export default {
               selectByDefault: true,
               label: "Object",
               icon: "fa-solid fa-list-ul",
-              color: "primary",
             },
             loadOptions: {
               apiRoute: "apiRoutes.qreports.entities",
@@ -104,7 +103,6 @@ export default {
               ],
               label: "Report Type",
               icon: "description",
-              color: "primary",
               options: this.reportTypeList,
             },
           },
@@ -118,7 +116,6 @@ export default {
               ],
               label: "Folder",
               icon: "folder_open",
-              color: "primary",
             },
             loadOptions: {
               apiRoute: "apiRoutes.qreports.folders",
@@ -147,7 +144,6 @@ export default {
               ],
               icon: "text_fields",
               label: "Report Title",
-              color: "primary",
             },
           },
           description: {

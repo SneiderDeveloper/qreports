@@ -35,12 +35,9 @@
             md:tw-grid-cols-2
             tw-mt-4 
             tw-overflow-hidden
-            "
-            :class="{'md:tw-grid-cols-1': form.timeInterval == 1}">
-                <dynamic-field
-                  v-if="this.form.timeInterval != 1" 
-                  v-model="form.on" class="input-report-nolabel tw-w-full"
-                    :field="formFields.reportsForms.on" />
+            " :class="{ 'md:tw-grid-cols-1': form.timeInterval == 1 }">
+                <dynamic-field v-if="this.form.timeInterval != 1" v-model="form.on"
+                    class="input-report-nolabel tw-w-full input-report-on" :field="formFields.reportsForms.on" />
                 <dynamic-field v-model="form.at" class="input-report-nolabel tw-w-full"
                     :field="formFields.reportsForms.at" />
             </div>
@@ -57,23 +54,39 @@
                 <dynamic-field v-model="form.endingOn" class="input-report tw-mb-4"
                     :field="formFields.reportsForms.endingOn" />
             </div>
-
             <div>
-                <div>
+                <q-btn rounded v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-1" size="sm" no-caps
+                    @click="addEmailNotification">
+                    <q-icon size="1em" name="fa fa-plus" />
+                    <q-tooltip anchor="bottom middle" self="center middle">
+                        {{ $tr('ireports.cms.addAnotherEmail') }}
+                    </q-tooltip>
+                </q-btn>
+            </div>
+            <div>
+                <div class="
+            tw-grid 
+            tw-gap-x-10 
+            tw-gap-y-4
+            tw-grid-cols-1 
+            md:tw-grid-cols-2
+            tw-my-4 tw-overflow-hidden
+            ">
+
                     <div class="
-                tw-w-full
-                tw-flex
-                tw-flex-col
-                tw-items-start
-                tw-space-x-4
-                tw-mb-6
-                lg:tw-flex-row lg:tw-mb-8
-              " v-for="(item, index) in form.emails">
-                        <div class="tw-w-full tw-mb-4 lg:tw-mb-0 lg:tw-w-3/4">
+                        tw-w-full
+                        tw-flex
+                        tw-flex-col
+                        tw-items-start
+                        tw-space-x-4
+                        tw-mb-6 
+                        sm:tw-flex-row lg:tw-mb-8
+                        " v-for="(item, index) in form.emails">
+                        <div class="tw-w-full tw-mb-4 lg:tw-mb-0">
                             <dynamic-field v-model="item.email" class="input-report"
                                 :field="formFields.reportsForms.email" />
                         </div>
-                        <div class="tw-flex tw-w-full lg:tw-w-auto tw-overflow-hidden">
+                        <div class="tw-flex lg:tw-w-auto tw-overflow-hidden w-120">
                             <div>
                                 <dynamic-field v-model="item.status" :field="formFields.reportsForms.status" />
                             </div>
@@ -83,21 +96,27 @@
                             </div>
                         </div>
                     </div>
-                    <q-btn v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-8" no-caps
-                        @click="addEmailNotification">
-                        <q-icon left size="1em" name="fa fa-plus" />
-                        <div>Add another email</div>
-                    </q-btn>
+                    <div class="
+                        tw-w-full
+                        tw-flex
+                        tw-flex-col
+                        sm:tw-flex-row
+                        tw-items-start
+                        sm:tw-space-x-4
+                        tw-mb-4">
+                    <dynamic-field v-model="form.format" class="q-mb-md radio-report"
+                        :field="formFields.reportsForms.format" />
+
                 </div>
-                <dynamic-field v-model="form.format" class="q-mb-md radio-report" :field="formFields.reportsForms.format" />
+                </div>
             </div>
         </div>
 
-
+        <!--
         <p class="tw-text-sm tw-text-black">
             <q-icon name="emergency" class="tw-text-red-600" />
             Remember to add all the emails you need to send this report on “Step 1”
-        </p>
+        </p>-->
     </div>
 </template>
 
@@ -142,7 +161,6 @@ export default {
                             ],
                             label: 'Time Interval',
                             icon: 'more_time',
-                            color: 'primary',
                             options: timeInterval,
                         },
                     },
@@ -183,7 +201,6 @@ export default {
                             vIf: this.form.timeInterval != 1,
                             label: 'On',
                             icon: 'event_available',
-                            color: 'primary',
                             options: this.modelOn,
                         },
                     },
@@ -195,11 +212,9 @@ export default {
                             ],
                             label: 'Starting On',
                             icon: 'calendar_month',
-                            color: 'primary',
-                            hint:'Format: MM/DD/YYYY HH:mm',
-                            mask:'MM/DD/YYYY HH:mm',
-                            'place-holder': 'MM/DD/YYYY HH:mm',
-                            iconRight: 'watch_later'
+                            hint: 'Format: MM/DD/YYYY HH:mm',
+                            mask: 'MM/DD/YYYY HH:mm',
+                            iconRight: 'watch_later',
                         },
                     },
                     endingOn: {
@@ -211,10 +226,8 @@ export default {
                             ],
                             label: 'Ending On',
                             icon: 'calendar_month',
-                            color: 'primary',
-                            hint:'Format: MM/DD/YYYY HH:mm',
-                            mask:'MM/DD/YYYY HH:mm',
-                            'place-holder': 'MM/DD/YYYY HH:mm',
+                            hint: 'Format: MM/DD/YYYY HH:mm',
+                            mask: 'MM/DD/YYYY HH:mm',
                             iconRight: 'watch_later',
                             options: this.validateDate,
                             readonly: !this.form.startingOn
@@ -229,7 +242,6 @@ export default {
                             ],
                             label: "Email Notification",
                             icon: "mail",
-                            color: "primary",
                             counter: true,
                             maxlength: 40,
                         },
@@ -283,7 +295,7 @@ export default {
         changeValidateDate() {
             const start = this.$moment(this.form.startingOn).format('YYYY/MM/DD');
             const end = this.$moment(this.form.endingOn).format('YYYY/MM/DD');
-            if(end < start) {
+            if (end < start) {
                 this.form.endingOn = null;
             }
         }
@@ -305,5 +317,13 @@ export default {
     @apply tw-max-w-full tw-w-full lg:tw-w-2.5;
     flex-basis: 0;
     flex-grow: 1;
+}
+
+.w-120 {
+    width: 120px;
+}
+
+.input-report-on .q-field__native span {
+    margin-top: 12px;
 }
 </style>
