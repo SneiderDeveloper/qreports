@@ -35,12 +35,9 @@
             md:tw-grid-cols-2
             tw-mt-4 
             tw-overflow-hidden
-            "
-            :class="{'md:tw-grid-cols-1': form.timeInterval == 1}">
-                <dynamic-field
-                  v-if="this.form.timeInterval != 1" 
-                  v-model="form.on" class="input-report-nolabel tw-w-full input-report-on"
-                    :field="formFields.reportsForms.on" />
+            " :class="{ 'md:tw-grid-cols-1': form.timeInterval == 1 }">
+                <dynamic-field v-if="this.form.timeInterval != 1" v-model="form.on"
+                    class="input-report-nolabel tw-w-full input-report-on" :field="formFields.reportsForms.on" />
                 <dynamic-field v-model="form.at" class="input-report-nolabel tw-w-full"
                     :field="formFields.reportsForms.at" />
             </div>
@@ -53,12 +50,21 @@
             tw-my-4 tw-overflow-hidden
             ">
                 <dynamic-field v-model="form.startingOn" class="input-report tw-mb-4"
-                    :field="formFields.reportsForms.startingOn" />
+                    :field="formFields.reportsForms.startingOn" @input="changeValidateDate" />
                 <dynamic-field v-model="form.endingOn" class="input-report tw-mb-4"
                     :field="formFields.reportsForms.endingOn" />
             </div>
-
-            <div class="
+            <div>
+                <q-btn rounded v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-1" size="sm" no-caps
+                    @click="addEmailNotification">
+                    <q-icon size="1em" name="fa fa-plus" />
+                    <q-tooltip anchor="bottom middle" self="center middle">
+                        {{ $tr('ireports.cms.addAnotherEmail') }}
+                    </q-tooltip>
+                </q-btn>
+            </div>
+            <div>
+                <div class="
             tw-grid 
             tw-gap-x-10 
             tw-gap-y-4
@@ -66,7 +72,7 @@
             md:tw-grid-cols-2
             tw-my-4 tw-overflow-hidden
             ">
-                <div>
+
                     <div class="
                         tw-w-full
                         tw-flex
@@ -91,7 +97,8 @@
                         </div>
                     </div>
                 </div>
-                <div  class="
+
+                <div class="
                         tw-w-full
                         tw-flex
                         tw-flex-col
@@ -99,20 +106,12 @@
                         tw-items-start
                         sm:tw-space-x-4
                         tw-mb-4">
-                    
-                    <q-btn rounded v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-8" no-caps
-                        @click="addEmailNotification">
-                        <q-icon  size="1em" name="fa fa-plus" />
-                        <q-tooltip anchor="bottom middle" self="center middle"> 
-                            {{ $tr('ireports.cms.addAnotherEmail') }}
-                        </q-tooltip>
-                    </q-btn>
+                    <dynamic-field v-model="form.format" class="q-mb-md radio-report"
+                        :field="formFields.reportsForms.format" />
 
-                    <dynamic-field v-model="form.format" class="q-mb-md radio-report" :field="formFields.reportsForms.format" />
-                
                 </div>
 
-               
+
             </div>
 
         </div>
@@ -234,6 +233,8 @@ export default {
                             hint: 'Format: MM/DD/YYYY HH:mm',
                             mask: 'MM/DD/YYYY HH:mm',
                             iconRight: 'watch_later',
+                            options: this.validateDate,
+                            readonly: !this.form.startingOn
                         },
                     },
                     email: {
@@ -241,6 +242,7 @@ export default {
                         props: {
                             rules: [
                                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
+                                (val) => /.+@.+\..+/.test(val) || "Please enter a valid email address",
                             ],
                             label: "Email Notification",
                             icon: "mail",
@@ -291,6 +293,16 @@ export default {
         deleteEmailNotification(index) {
             scheduleStore.deleteEmailNotification(index);
         },
+        validateDate(date) {
+            return date >= this.$moment(this.form.startingOn).format('YYYY/MM/DD');
+        },
+        changeValidateDate() {
+            const start = this.$moment(this.form.startingOn).format('YYYY/MM/DD');
+            const end = this.$moment(this.form.endingOn).format('YYYY/MM/DD');
+            if (end < start) {
+                this.form.endingOn = null;
+            }
+        }
     }
 }
 </script>
@@ -310,9 +322,11 @@ export default {
     flex-basis: 0;
     flex-grow: 1;
 }
+
 .w-120 {
     width: 120px;
 }
+
 .input-report-on .q-field__native span {
     margin-top: 12px;
 }
