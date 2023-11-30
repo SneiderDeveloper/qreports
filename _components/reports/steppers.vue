@@ -42,7 +42,6 @@
       :contracted="$q.screen.lt.sm"
       ref="stepper"
       color="primary"
-      header-nav
       alternative-labels
       active-color="primary"
       animated

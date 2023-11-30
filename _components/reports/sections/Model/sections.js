@@ -32,7 +32,7 @@ const data = ref([
     },
     {
         id: STEP_FIELDS_DETAILDS,
-        title: Vue.prototype.$tr('isite.cms.form.fieldsDetails'),
+        title: Vue.prototype.$tr('isite.cms.form.filtersDetails'),
         prefix: 3,
         component: fieldsDetails,
         done: false,

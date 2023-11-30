@@ -65,15 +65,16 @@
             </div>
             <div>
                 <div class="
-            tw-grid 
-            tw-gap-x-10 
-            tw-gap-y-4
-            tw-grid-cols-1 
-            md:tw-grid-cols-2
-            tw-my-4 tw-overflow-hidden
-            ">
+                    tw-grid 
+                    tw-gap-x-10 
+                    tw-gap-y-4
+                    tw-grid-cols-1 
+                    md:tw-grid-cols-2
+                    tw-my-4 tw-overflow-hidden
+                ">
 
-                    <div class="
+                    <div>
+                        <div class="
                         tw-w-full
                         tw-flex
                         tw-flex-col
@@ -82,20 +83,22 @@
                         tw-mb-6 
                         sm:tw-flex-row lg:tw-mb-8
                         " v-for="(item, index) in form.emails">
-                        <div class="tw-w-full tw-mb-4 lg:tw-mb-0">
-                            <dynamic-field v-model="item.email" class="input-report"
-                                :field="formFields.reportsForms.email" />
-                        </div>
-                        <div class="tw-flex lg:tw-w-auto tw-overflow-hidden w-120">
-                            <div>
-                                <dynamic-field v-model="item.status" :field="formFields.reportsForms.status" />
+                            <div class="tw-w-full tw-mb-4 lg:tw-mb-0">
+                                <dynamic-field v-model="item.email" class="input-report"
+                                    :field="formFields.reportsForms.email" />
                             </div>
-                            <div>
-                                <q-btn flat round color="primary" icon="fa-regular fa-trash-can" size="12px"
-                                    @click="deleteEmailNotification(index)" />
+                            <div class="tw-flex lg:tw-w-auto tw-overflow-hidden w-120">
+                                <div>
+                                    <dynamic-field v-model="item.status" :field="formFields.reportsForms.status" />
+                                </div>
+                                <div>
+                                    <q-btn flat round color="primary" icon="fa-regular fa-trash-can" size="12px"
+                                        @click="deleteEmailNotification(index)" />
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="
                         tw-w-full
                         tw-flex
@@ -104,10 +107,10 @@
                         tw-items-start
                         sm:tw-space-x-4
                         tw-mb-4">
-                    <dynamic-field v-model="form.format" class="q-mb-md radio-report"
-                        :field="formFields.reportsForms.format" />
+                        <dynamic-field v-model="form.format" class="q-mb-md radio-report"
+                            :field="formFields.reportsForms.format" />
 
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,7 +195,7 @@ export default {
                         },
                     },
                     on: {
-                        value: null,
+                        value: this.form.timeInterval == 2 ? [] : null,
                         type: 'select',
                         props: {
                             rules: [
@@ -202,6 +205,7 @@ export default {
                             label: 'On',
                             icon: 'event_available',
                             options: this.modelOn,
+                            multiple: this.form.timeInterval == 2 ? true : false,
                         },
                     },
                     startingOn: {
