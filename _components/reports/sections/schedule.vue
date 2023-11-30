@@ -24,7 +24,7 @@
             tw-overflow-hidden
             ">
                 <dynamic-field v-model="form.timeInterval" class="input-report"
-                    :field="formFields.reportsForms.timeInterval" />
+                    :field="formFields.reportsForms.timeInterval" @input="changeTimeInterval"/>
                 <dynamic-field v-model="form.timeZone" class="input-report" :field="formFields.reportsForms.timeZone" />
             </div>
             <div v-if="form.timeInterval" class="
@@ -302,6 +302,9 @@ export default {
             if (end < start) {
                 this.form.endingOn = null;
             }
+        },
+        changeTimeInterval() {
+            this.form.on = this.form.timeInterval == 2 ? [] : null;
         }
     }
 }
