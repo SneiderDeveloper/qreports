@@ -165,6 +165,7 @@ export default {
                             label: 'Time Interval',
                             icon: 'more_time',
                             options: timeInterval,
+                            sortOptions: false,
                         },
                     },
                     timeZone: {
@@ -206,6 +207,7 @@ export default {
                             icon: 'event_available',
                             options: this.modelOn,
                             multiple: this.form.timeInterval == 2 ? true : false,
+                            sortOptions: false
                         },
                     },
                     startingOn: {
