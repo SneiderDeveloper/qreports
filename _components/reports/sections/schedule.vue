@@ -10,10 +10,10 @@
                     parameters:</h4>
             </div>
             <div class="tw-pl-4">
-                <dynamic-field v-model="form.scheduleReport" :field="formFields.reportsForms.scheduleReport" />
+                <dynamic-field v-model="form.status" :field="formFields.reportsForms.status" />
             </div>
         </div>
-        <div v-if="form.scheduleReport == 1">
+        <div v-if="form.status == 1">
             <div class="
             tw-grid 
             tw-gap-x-10 
@@ -144,7 +144,7 @@ export default {
         formFields() {
             return {
                 reportsForms: {
-                    scheduleReport: {
+                    status: {
                         type: 'toggle',
                         value: '1',
                         props: {

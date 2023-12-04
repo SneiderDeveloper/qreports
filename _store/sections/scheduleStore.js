@@ -1,6 +1,6 @@
 import { reactive, computed } from 'vue';
 const model = {
-    scheduleReport: 1,
+    status: 1,
     timeInterval: null,
     timeZone: null,
     on: null,
@@ -17,7 +17,7 @@ const model = {
 }
 const state = reactive({
     form: {
-        scheduleReport: 1,
+        status: 1,
         timeInterval: null,
         timeZone: null,
         on: null,
@@ -39,7 +39,7 @@ const store = computed(() => ({
         return state.form
     },
     set form(data) {
-        state.form.scheduleReport = data.scheduleReport || 0;
+        state.form.status = data.status || 0;
         state.form.timeInterval = data.timeInterval || null;
         state.form.timeZone = data.timeZone || null;
         state.form.on = data.on || null;
@@ -67,7 +67,7 @@ const store = computed(() => ({
         if (state.timeInterval == 1) {
             state.form.on = null;
         }
-        return { schedule: state.form.scheduleReport == 0 ? {} : state.form };
+        return { schedule: state.form.status == 0 ? {} : state.form };
     },
     reset() {
         state.form = { ...model }
