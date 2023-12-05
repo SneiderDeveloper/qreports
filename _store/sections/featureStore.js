@@ -97,6 +97,10 @@ export default function featureStore() {
     function reset() {
         setColumnList([]);
         setFilterList([]);
+        state.selectedAll = {
+            columnList: 0,
+            filterList: 0,
+        }
     }
     function payloadColumns() {
         const columns = getSelectedColumns().map(item => item.id)
