@@ -63,6 +63,9 @@ const store = computed(() => ({
         if (state.timeInterval == 1) {
             state.form.on = null;
         }
+        if (state.form.status == 0) {
+            state.form.timeZone = null;
+        }
         return { schedule: state.form };
     },
     reset() {
