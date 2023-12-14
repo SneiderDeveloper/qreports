@@ -42,26 +42,17 @@
                     :field="formFields.reportsForms.at" />
             </div>
             <div class="
-            tw-grid 
-            tw-gap-x-10 
-            tw-gap-y-4
-            tw-grid-cols-1 
-            md:tw-grid-cols-2
-            tw-my-4 tw-overflow-hidden
+                tw-grid 
+                tw-gap-x-10 
+                tw-gap-y-4
+                tw-grid-cols-1 
+                md:tw-grid-cols-2
+                tw-my-4 tw-overflow-hidden
             ">
                 <dynamic-field v-model="form.startingOn" class="input-report tw-mb-4"
                     :field="formFields.reportsForms.startingOn" @input="changeValidateDate" />
                 <dynamic-field v-model="form.endingOn" class="input-report tw-mb-4"
                     :field="formFields.reportsForms.endingOn" />
-            </div>
-            <div>
-                <q-btn rounded v-if="form.emails.length <= 4" outline color="primary" class="tw-mb-1" size="sm" no-caps
-                    @click="addEmailNotification">
-                    <q-icon size="1em" name="fa fa-plus" />
-                    <q-tooltip anchor="bottom middle" self="center middle">
-                        {{ $tr('ireports.cms.addAnotherEmail') }}
-                    </q-tooltip>
-                </q-btn>
             </div>
             <div>
                 <div class="
@@ -72,8 +63,8 @@
                     md:tw-grid-cols-2
                     tw-my-4 tw-overflow-hidden
                 ">
-
                     <div>
+                        <div>
                         <div class="
                         tw-w-full
                         tw-flex
@@ -98,7 +89,21 @@
                             </div>
                         </div>
                     </div>
-
+                        <div>
+                            <q-btn 
+                                rounded 
+                                v-if="form.emails.length <= 4" 
+                                outline 
+                                color="primary" 
+                                class="tw-mb-1" size="sm" no-caps
+                                    @click="addEmailNotification">
+                                    <q-icon size="1em" name="fa fa-plus" />
+                                    <q-tooltip anchor="bottom middle" self="center middle">
+                                        {{ $tr('ireports.cms.addAnotherEmail') }}
+                                    </q-tooltip>
+                                </q-btn>
+                            </div>
+                    </div>
                     <div class="
                         tw-w-full
                         tw-flex

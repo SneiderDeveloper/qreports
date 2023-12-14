@@ -1,4 +1,6 @@
 import { reactive, computed } from 'vue';
+import axios from "axios";
+
 const model = {
     status: 1,
     timeInterval: null,
@@ -7,29 +9,25 @@ const model = {
     at: null,
     startingOn: null,
     endingOn: null,
-    emails: [
-        {
-            email: null,
-            status: 1,
-        }
-    ],
+    emails: [{
+        email: null,
+        status: 1,
+    }],
     format: 'pdf'
 }
 const state = reactive({
     form: {
-        status: 1,
+        status: 0,
         timeInterval: null,
-        timeZone: null,
+        timeZone: axios.defaults.params.setting.timezone,
         on: null,
         at: null,
         startingOn: null,
         endingOn: null,
-        emails: [
-            {
-                email: null,
-                status: 1,
-            }
-        ],
+        emails: [{
+            email: null,
+            status: 1,
+        }],
         format: 'pdf'
     }
 });
@@ -41,17 +39,15 @@ const store = computed(() => ({
     set form(data) {
         state.form.status = data.status || 0;
         state.form.timeInterval = data.timeInterval || null;
-        state.form.timeZone = data.timeZone || null;
+        state.form.timeZone = data.timeZone || axios.defaults.params.setting.timezone;
         state.form.on = data.on || null;
         state.form.at = data.at || null;
         state.form.startingOn = data.startingOn || null;
         state.form.endingOn = data.endingOn || null;
-        state.form.emails = data.emails || [
-            {
-                email: null,
-                status: 1,
-            }
-        ];
+        state.form.emails = data.emails || [{
+            email: null,
+            status: 1,
+        }];
         state.form.format = data.format || 'pdf';
     },
     addEmailNotification() {
@@ -70,7 +66,7 @@ const store = computed(() => ({
         return { schedule: state.form };
     },
     reset() {
-        state.form = { ...model }
+        state.form = {...model }
     },
 })).value
 
