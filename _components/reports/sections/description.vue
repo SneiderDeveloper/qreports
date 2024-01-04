@@ -71,7 +71,9 @@ export default {
       return descriptionStore().getDescriptionForm();
     },
     reportTypeList() {
-      return descriptionStore().getReportTypeList();
+      return descriptionStore()
+        .getReportTypeList()
+        .filter(item => item.entity.includes(this.form.entity));
     },
     formFields() {
       return {
