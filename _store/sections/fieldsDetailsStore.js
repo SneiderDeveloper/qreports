@@ -177,8 +177,8 @@ export default function fieldsDetailsStore() {
                     },
                     name: item.name,
                     field: item.field,
-                    type: item.value || null,
-                    value: item.value || null
+                    type: valueItem || null,
+                    value: valueItem || null
                 }
             } else {
                 const valueItem  = item.id === 'date' ? item.value && item.value.type ? item.value.type : null : state.form[item.id] || item.value || null

@@ -122,7 +122,7 @@ export default {
               (filter) => _.camelCase(filter) === item
             );
             filters[item].value = existeField
-              ? data.filters[_.snakeCase(item)]
+              ? data.filters[item]
               : null;
             return {
               id: item,
@@ -132,7 +132,7 @@ export default {
           })
           .filter((filter) => {
             const filterObject = Object.keys(data.filters || {});
-            return filterObject.some((item) => item === _.snakeCase(filter.id));
+            return filterObject.some((item) => item === filter.id);
           });
       } catch (error) {
         console.log(error);
