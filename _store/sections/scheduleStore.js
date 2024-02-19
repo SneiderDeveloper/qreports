@@ -2,7 +2,7 @@ import { reactive, computed } from 'vue';
 import axios from "axios";
 
 const model = {
-    status: 1,
+    status: 0,
     timeInterval: null,
     timeZone: null,
     on: null,

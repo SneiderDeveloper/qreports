@@ -158,7 +158,7 @@ export default function fieldsDetailsStore() {
     function buildfilters(filterList, crud = false) {
         const data = {};
         filterList.forEach(item => {
-            const valueItem  = item.id === 'date' ? item.value.type : item.value;
+            const valueItem  = item.id === 'date' ? item.value && item.value.type ? item.value.type : null : item.value || null;
             state.form[item.id] = valueItem || null;
             let loadOptions = {};
             const type = !item.type && item.id === 'date' ? 'select' : item.type;
@@ -181,7 +181,7 @@ export default function fieldsDetailsStore() {
                     value: item.value || null
                 }
             } else {
-                const valueItem  = item.id === 'date' ? item.value.type || null : state.form[item.id] || item.value || null
+                const valueItem  = item.id === 'date' ? item.value && item.value.type ? item.value.type : null : state.form[item.id] || item.value || null
                 data[item.id] = {
                     value: valueItem,
                     type: type,
