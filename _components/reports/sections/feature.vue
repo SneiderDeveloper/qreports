@@ -129,6 +129,10 @@ export default {
       }
     };
   },
+  mounted() {
+    this.columnCheck = Number(this.columnList.some(item => item.check));
+    this.filterCheck = Number(this.filterList.some(item => item.check));
+  },
   computed: {
     labelTotalFilter() {
       return `${this.$tr('ireports.cms.selectFirstSummary', {total: this.totalSelectedFilters} )}`;

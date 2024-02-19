@@ -15,6 +15,9 @@ const state = reactive({
 export default function qReportsStore() {
     async function saveReport(reportId = null) {
         try {
+            const params = {
+                notToSnakeCase: ['filters'],
+            }
             const route = 'apiRoutes.qreports.reports';
             const descriptionForm = descriptionStore().getDescriptionForm();
             const columns = featureStore().payloadColumns();
@@ -29,10 +32,10 @@ export default function qReportsStore() {
                 ...schedule
             }
             if (reportId) {
-                await baseService.update(route, reportId, data);
+                await baseService.update(route, reportId, data, params);
                 return;
             }
-            await baseService.create(route, data);
+            await baseService.create(route, data, params);
         } catch (error) {
             console.log(error);
         }

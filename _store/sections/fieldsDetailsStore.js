@@ -1,6 +1,7 @@
 import Vue, { reactive } from 'vue';
 import baseService from '@imagina/qcrud/_services/baseService.js'
 import featureStore from './featureStore.js';
+import moment from 'moment'
 
 const state = reactive({
     form: {},
@@ -48,8 +49,108 @@ export default function fieldsDetailsStore() {
             }
         })
     }
+    function changeDate(typeDate) {
+        let fromDate = null;
+        let toDate = null;
+        switch (typeDate) {
+            case 'today':
+                fromDate = moment().format('YYYY-MM-DD 00:00:00')
+                toDate = moment().format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'yesterday':
+                fromDate = moment().subtract(1, 'd').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().subtract(1, 'd').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'tomorrow':
+                fromDate = moment().add(1, 'd').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().add(1, 'd').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'lastSevenDays':
+                fromDate = moment().subtract(6, 'd').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'currentWeek':
+                fromDate = moment().startOf('isoWeek').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().endOf('isoWeek').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'lastWeek':
+                fromDate = moment().subtract(1, 'weeks').startOf('isoWeek').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().subtract(1, 'weeks').endOf('isoWeek').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'nextWeek':
+                fromDate = moment().add(1, 'weeks').startOf('isoWeek').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().add(1, 'weeks').endOf('isoWeek').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'lastThirtyDays':
+                fromDate = moment().subtract(29, 'd').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'lastSixtyDays':
+                fromDate = moment().subtract(59, 'd').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'currentMonth':
+                fromDate = moment().startOf('month').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().endOf('month').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'lastMonth':
+                fromDate = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'nextMonth':
+                fromDate = moment().add(1, 'months').startOf('month').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().add(1, 'months').endOf('month').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'twoMonthsAgo':
+                fromDate = moment().subtract(2, 'months').startOf('month').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().subtract(2, 'months').endOf('month').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'twoYearsAgo':
+                fromDate = moment().subtract(2, 'year').startOf('year').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().subtract(2, 'year').endOf('year').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'lastYear':
+                fromDate = moment().subtract(1, 'year').startOf('year').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().subtract(1, 'year').endOf('year').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'lastTwoYears':
+                fromDate = moment().subtract(1, 'year').startOf('year').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().endOf('year').format('YYYY-MM-DD 23:59:59')
+                break;
+            case 'currentYear':
+                fromDate = moment().startOf('year').format('YYYY-MM-DD 00:00:00')
+                toDate = moment().endOf('year').format('YYYY-MM-DD 23:59:59')
+                break;
+            case '15daysAroundToday':
+                fromDate = moment().subtract(7, 'days').format('YYYY-MM-DD 00:00:00');
+                toDate = moment().add(7, 'days').format('YYYY-MM-DD 23:59:59');
+                break;
+            case '5daysAroundToday':
+                fromDate = moment().subtract(2, 'days').format('YYYY-MM-DD 00:00:00');
+                toDate = moment().add(2, 'days').format('YYYY-MM-DD 23:59:59');
+                break;
+            case 'customRange':
+                if (fromDate)
+                    fromDate = moment(fromDate).format('YYYY-MM-DD 00:00:00')
+                if (toDate)
+                    toDate = moment(toDate).format('YYYY-MM-DD 23:59:59')
+                break;
+        }
+        return {fromDate, toDate}
+
+    }
     function payloadFilter() {
         const filters = state.form;
+        if (filters.date) {
+            const selectedFilters = featureStore().getSelectedFilters();
+            const date = selectedFilters.find(item  => item.id === 'date');
+            filters.date = {
+                "field": date.name,
+                "type": filters.date,
+                "from": changeDate(filters.date).fromDate,
+                "to": changeDate(filters.date).toDate
+            }
+        }
         return {
             filters,
         }
@@ -57,7 +158,8 @@ export default function fieldsDetailsStore() {
     function buildfilters(filterList, crud = false) {
         const data = {};
         filterList.forEach(item => {
-            state.form[item.id] = item.value || null;
+            const valueItem  = item.id === 'date' ? item.value.type : item.value;
+            state.form[item.id] = valueItem || null;
             let loadOptions = {};
             const type = !item.type && item.id === 'date' ? 'select' : item.type;
             const options = !item.type && item.id === 'date' ? { options: optionDate() } : {};
@@ -68,9 +170,9 @@ export default function fieldsDetailsStore() {
                     },
                 }
             }
-            if(crud && item.id === 'date') {
+            if (crud && item.id === 'date') {
                 data[item.id] = {
-                    props:{
+                    props: {
                         label: item.props.label
                     },
                     name: item.name,
@@ -79,13 +181,14 @@ export default function fieldsDetailsStore() {
                     value: item.value || null
                 }
             } else {
+                const valueItem  = item.id === 'date' ? item.value.type || null : state.form[item.id] || item.value || null
                 data[item.id] = {
-                    value: state.form[item.id] || item.value || null,
+                    value: valueItem,
                     type: type,
                     props: {
                         ...item.props,
                         ...options,
-                        readonly: typeof item.props.readonly === 'boolean' ?  item.props.readonly : false,
+                        readonly: typeof item.props.readonly === 'boolean' ? item.props.readonly : false,
                     },
                     ...loadOptions
                 };

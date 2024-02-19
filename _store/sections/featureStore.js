@@ -71,8 +71,8 @@ export default function featureStore() {
             id: item,
             title: filters[item].props.label,
             ...filters[item],
-            value: selectFilters[_.snakeCase(item)] || null,
-            check: selectFilters.hasOwnProperty(_.snakeCase(item)) ? 1 : 0,
+            value: selectFilters[item] || null,
+            check: selectFilters.hasOwnProperty(item) ? 1 : 0,
         }));
     }
     function factoryOfDynamicCheck(type) {
