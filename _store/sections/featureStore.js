@@ -28,9 +28,9 @@ export default function featureStore() {
     function getColumnList() {
         return state.columnList;
     }
-    function setColumnList(columns) {
+    async function setColumnList(columns) {
         try {
-            const selectColumns = qReportsStore().getColumns();
+            const selectColumns = await qReportsStore().getColumns();
             const columnsList = columns.map(item => ({
                 ...item,
                 check: selectColumns.some(column => column === item.id) ? 1 : 0,

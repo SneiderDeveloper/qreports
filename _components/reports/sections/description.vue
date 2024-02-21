@@ -19,6 +19,7 @@
             v-model="form.entity"
             class="input-report tw-mb-4"
             :field="formFields.reportsForms.entity"
+            @input="changeEntity"
           />
           <dynamic-field
             v-model="form.reportTypeId"
@@ -71,9 +72,10 @@ export default {
       return descriptionStore().getDescriptionForm();
     },
     reportTypeList() {
-      return descriptionStore()
+      const reportType = descriptionStore()
         .getReportTypeList()
         .filter(item => item.entity.includes(this.form.entity));
+      return reportType;  
     },
     formFields() {
       return {
@@ -171,6 +173,9 @@ export default {
         sortStore().setSortList(reportTypeList.sort || []);
       }
     },
+    changeEntity() {
+      this.form.reportTypeId = null;
+    }
   },
 };
 </script>

@@ -46,6 +46,7 @@
       active-color="primary"
       animated
       class="tw-bg-white"
+      :header-nav="!!this.reportId"
     >
       <q-step
         v-for="section in sections"
@@ -93,6 +94,7 @@
         </q-stepper-navigation>
       </template>
     </q-stepper>
+    <inner-loading :visible="loading" />
   </div>
 </template>
 
@@ -141,6 +143,9 @@ export default {
     });
   },
   computed: {
+    loading() {
+      return qReportsStore().getLoading();
+    },
     sections() {
       return modelSections;
     },
