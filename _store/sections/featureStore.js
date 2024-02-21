@@ -1,5 +1,4 @@
 import { reactive } from 'vue';
-import baseService from '@imagina/qcrud/_services/baseService.js'
 import qReportsStore from '../qReportsStore.js';
 import _ from 'lodash';
 

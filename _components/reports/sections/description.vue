@@ -130,7 +130,7 @@ export default {
             type: 'crud',
             props: {
               crudType: 'select',
-              crudData: import('@imagina/quser/_crud/roles'),
+              crudData: import('modules/quser/_crud/roles'),
               crudProps: {
                 label: `${this.$trp('isite.cms.label.role', {capitalize: true})}*`,
                 multiple: true,
