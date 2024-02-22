@@ -34,7 +34,7 @@ export default {
   computed: {
     //Crud info
     reportId() {
-      return this.$route.params.id || null;
+      return this.$route.params?.id || null;
     },
     crudInfo() {
       return this.$store.state.qcrudComponent.component[this.crudId] || {};
@@ -132,7 +132,7 @@ export default {
           })
           .filter((filter) => {
             const filterObject = Object.keys(data.filters || {});
-            return filterObject.some((item) => item === filter.id);
+            return filterObject.some((item) => item === filter?.id);
           });
       } catch (error) {
         console.log(error);

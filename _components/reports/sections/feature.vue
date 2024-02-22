@@ -42,32 +42,31 @@
           tw-my-4 
           tw-overflow-hidden
         "
+        item-key="id"
       >
-        <div 
-          v-for="list in columnList" 
-          :key="list.id" 
-          class="check-report-div"
-        >
-          <q-tooltip anchor="bottom middle" self="center middle"> 
-            {{ list.title }}
-          </q-tooltip>
-          <dynamic-field
-            class="check-report-1"
-            v-model="list.check"
-            :field="formFields.reportsColumns[list.id]"
-            @input="checkIfAllChecksSelected('columnList')"
-          />
-          <q-btn
-              flat
-              round
-              size="6px"
-              class="f-cursor-grab check-report-icon"
-            >
-              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]"> 
-                {{ $tr('ireports.cms.moveColumn') }} 
-              </q-tooltip>
-            </q-btn>
-        </div>
+        <template #item="{ element }">
+          <div class="check-report-div">
+            <q-tooltip anchor="bottom middle" self="center middle">
+              {{ element?.title }}
+            </q-tooltip>
+            <dynamic-field
+              class="check-report-1"
+              v-model="element.check"
+              :field="formFields.reportsColumns[element?.id]"
+              @input="checkIfAllChecksSelected('columnList')"
+            />
+            <q-btn
+                flat
+                round
+                size="6px"
+                class="f-cursor-grab check-report-icon"
+              >
+                <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                  {{ $tr('ireports.cms.moveColumn') }}
+                </q-tooltip>
+              </q-btn>
+          </div>
+        </template>
       </draggable>
     </div>
     <div class="tw-flex tw-pt-5">
@@ -94,15 +93,15 @@
     </div>
     <div class="tw-flex tw-flex-wrap">
       <div
-        v-for="(filter) in filterList"
-        :key="filter.id" 
+        v-for="filter in filterList"
+        :key="filter?.id" 
         class="tw-mr-2 tw-mb-2"
       >
         <dynamic-field
             v-model="filter.check" 
             class="check-report-2"
             :class="{'check-report-text-white check-report-btn': Boolean(filter.check)}"
-            :field="formFields.reportsFilters[filter.id]"
+            :field="formFields.reportsFilters[filter?.id]"
             @input="checkIfAllChecksSelected('filterList')" 
         />
       </div>
