@@ -223,8 +223,8 @@ export default {
                             ],
                             label: 'Starting On',
                             icon: 'calendar_month',
-                            hint: 'Format: MM/DD/YYYY HH:mm',
-                            mask: 'MM/DD/YYYY HH:mm',
+                            hint: 'Format: MM/DD/YYYY',
+                            mask: 'MM/DD/YYYY',
                             iconRight: 'watch_later',
                         },
                     },
@@ -237,8 +237,8 @@ export default {
                             ],
                             label: 'Ending On',
                             icon: 'calendar_month',
-                            hint: 'Format: MM/DD/YYYY HH:mm',
-                            mask: 'MM/DD/YYYY HH:mm',
+                            hint: 'Format: MM/DD/YYYY',
+                            mask: 'MM/DD/YYYY',
                             iconRight: 'watch_later',
                             options: this.validateDate,
                             readonly: !this.form.startingOn
@@ -272,7 +272,7 @@ export default {
                         },
                     },
                     format: {
-                        value: "pdf",
+                        value: "csv",
                         type: "optionGroup",
                         props: {
                             rules: [

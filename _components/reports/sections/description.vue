@@ -89,7 +89,7 @@ export default {
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
               selectByDefault: true,
-              label: "Object",
+              label: "Object*",
               icon: "fa-solid fa-list-ul",
             },
             loadOptions: {
@@ -105,7 +105,7 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              label: "Report Type",
+              label: "Report Type*",
               icon: "description",
               options: this.reportTypeList,
             },
@@ -118,7 +118,7 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              label: "Folder",
+              label: "Folder*",
               icon: "folder_open",
             },
             loadOptions: {
@@ -147,7 +147,7 @@ export default {
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
               icon: "text_fields",
-              label: "Report Title",
+              label: "Report Title*",
             },
           },
           description: {
