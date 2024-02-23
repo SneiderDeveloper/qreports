@@ -282,9 +282,9 @@ export default {
                             inline: true,
                             stackLabel: true,
                             options: [
-                                { label: "PDF", value: "pdf" },
+                                //{ label: "PDF", value: "pdf" },
                                 { label: "CSV", value: "csv" },
-                                { label: "XLSX", value: "xlsx" },
+                                //{ label: "XLSX", value: "xlsx" },
                             ],
                         },
                     },

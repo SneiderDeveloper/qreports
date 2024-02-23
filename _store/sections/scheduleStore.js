@@ -13,7 +13,7 @@ const model = {
         email: null,
         status: 1,
     }],
-    format: 'pdf'
+    format: 'cvs'
 }
 const state = reactive({
     form: {
@@ -28,7 +28,7 @@ const state = reactive({
             email: null,
             status: 1,
         }],
-        format: 'pdf'
+        format: 'cvs'
     }
 });
 
@@ -48,7 +48,7 @@ const store = computed(() => ({
             email: null,
             status: 1,
         }];
-        state.form.format = data.format || 'pdf';
+        state.form.format = data.format || 'cvs';
     },
     addEmailNotification() {
         state.form.emails.push({
