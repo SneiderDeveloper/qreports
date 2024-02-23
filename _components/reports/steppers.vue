@@ -109,6 +109,7 @@ import {
   STEP_SCHEDULE,
 } from "./sections/Model/constants.js";
 import featureStore from "../../_store/sections/featureStore.js";
+import sortStore from '../../_store/sections/sortStore.js';
 export default {
   data() {
     return {
@@ -146,8 +147,13 @@ export default {
     loading() {
       return qReportsStore().getLoading();
     },
+    sortList() {
+      return sortStore().getSortList()
+    },
     sections() {
-      return modelSections;
+      return modelSections
+        .filter(item => (this.sortList.length === 0 ? item.id !== 4 : true))
+        .map(({ id, ...rest }, index) => ({ ...rest, id: index + 1, prefix: index + 1 }));
     },
     reportId() {
       return this.$route.params.id || null;
