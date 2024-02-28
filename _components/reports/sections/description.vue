@@ -64,6 +64,11 @@ export default {
       await descriptionStore().getListOfReportTypes();
     });
   },
+  watch: {
+    'form.reportTypeId': function(newValue, oldValue) {
+      this.getSelectedReportType();
+    }
+  },
   data() {
     return {};
   },
