@@ -56,7 +56,10 @@ export default function qReportsStore() {
             await setSort(response.data.sort || {});
             await descriptionStore().setForm(response.data);
             scheduleStore.form = response.data.schedule || {};
-            state.loading = false;
+            setTimeout(() => {
+                state.loading = false;
+            }, 1000);
+            
         } catch (error) {
             state.loading = false;
             console.log(error);
