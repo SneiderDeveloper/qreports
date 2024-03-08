@@ -15,12 +15,12 @@
         </div>
         <div v-if="form.status == 1">
             <div class="
-            tw-grid 
-            tw-gap-x-10 
+            tw-grid
+            tw-gap-x-10
             tw-gap-y-4
-            tw-grid-cols-1 
+            tw-grid-cols-1
             md:tw-grid-cols-2
-            tw-mt-4 
+            tw-mt-4
             tw-overflow-hidden
             ">
                 <dynamic-field v-model="form.timeInterval" class="input-report"
@@ -28,12 +28,12 @@
                 <dynamic-field v-model="form.timeZone" class="input-report" :field="formFields.reportsForms.timeZone" />
             </div>
             <div v-if="form.timeInterval" class="
-            tw-grid 
-            tw-gap-x-10 
+            tw-grid
+            tw-gap-x-10
             tw-gap-y-4
-            tw-grid-cols-1 
+            tw-grid-cols-1
             md:tw-grid-cols-2
-            tw-mt-4 
+            tw-mt-4
             tw-overflow-hidden
             " :class="{ 'md:tw-grid-cols-1': form.timeInterval == 1 }">
                 <dynamic-field v-if="this.form.timeInterval != 1" v-model="form.on"
@@ -42,10 +42,10 @@
                     :field="formFields.reportsForms.at" />
             </div>
             <div class="
-                tw-grid 
-                tw-gap-x-10 
+                tw-grid
+                tw-gap-x-10
                 tw-gap-y-4
-                tw-grid-cols-1 
+                tw-grid-cols-1
                 md:tw-grid-cols-2
                 tw-my-4 tw-overflow-hidden
             ">
@@ -56,10 +56,10 @@
             </div>
             <div>
                 <div class="
-                    tw-grid 
-                    tw-gap-x-10 
+                    tw-grid
+                    tw-gap-x-10
                     tw-gap-y-4
-                    tw-grid-cols-1 
+                    tw-grid-cols-1
                     md:tw-grid-cols-2
                     tw-my-4 tw-overflow-hidden
                 ">
@@ -71,7 +71,7 @@
                         tw-flex-col
                         tw-items-start
                         tw-space-x-4
-                        tw-mb-6 
+                        tw-mb-6
                         sm:tw-flex-row lg:tw-mb-8
                         " v-for="(item, index) in form.emails">
                             <div class="tw-w-full tw-mb-4 lg:tw-mb-0">
@@ -90,11 +90,11 @@
                         </div>
                     </div>
                         <div>
-                            <q-btn 
-                                rounded 
-                                v-if="form.emails.length <= 4" 
-                                outline 
-                                color="primary" 
+                            <q-btn
+                                rounded
+                                v-if="form.emails.length <= 4"
+                                outline
+                                color="primary"
                                 class="tw-mb-1" size="sm" no-caps
                                     @click="addEmailNotification">
                                     <q-icon size="1em" name="fa fa-plus" />
@@ -255,20 +255,6 @@ export default {
                             icon: "mail",
                             counter: true,
                             maxlength: 40,
-                        },
-                    },
-                    status: {
-                        type: "toggle",
-                        value: "1",
-                        props: {
-                            rules: [
-                                (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
-                            ],
-                            size: "md",
-                            options: [
-                                { label: "YES", value: "1" },
-                                { label: "NO", value: "0" },
-                            ],
                         },
                     },
                     format: {

@@ -80,7 +80,7 @@ export default {
       const reportType = descriptionStore()
         .getReportTypeList()
         .filter(item => item.entity.includes(this.form.entity));
-      return reportType;  
+      return reportType;
     },
     formFields() {
       return {
@@ -111,7 +111,7 @@ export default {
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
               label: "Report Type*",
-              icon: "description",
+              icon: "fa-thin fa-file-lines",
               options: this.reportTypeList,
             },
           },
@@ -151,7 +151,7 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              icon: "text_fields",
+              icon: "fa-regular fa-text-size",
               label: "Report Title*",
             },
           },
