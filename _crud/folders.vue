@@ -1,5 +1,7 @@
 <template></template>
 <script>
+import { store, i18n, helper } from 'src/plugins/utils'
+
 export default {
   data() {
     return {
@@ -9,13 +11,13 @@ export default {
   computed: {
     //Crud info
     crudInfo() {
-      return this.$store.state.qcrudComponent.component[this.crudId] || {}
+      return store.state.qcrudComponent.component[this.crudId] || {}
     },
     reportPermissionsEdit() {
-      return this.$auth.hasAccess('ireport.reports.edit');
+      return store.hasAccess('ireport.reports.edit');
     },
     reportPermissionsIndex() {
-      return this.$auth.hasAccess('ireport.reports.index');
+      return store.hasAccess('ireport.reports.index');
     },
     crudData() {
       return {
@@ -31,30 +33,30 @@ export default {
           columns: [
             {
               name: 'id',
-              label: this.$tr('isite.cms.form.id'),
+              label: i18n.tr('isite.cms.form.id'),
               field: 'id',
               style: 'width: 50px'
             },
             {
                 name: 'title',
-                label: this.$tr('isite.cms.form.title'),
+                label: i18n.tr('isite.cms.form.title'),
                 field: 'title',
             },
             {
               name: "created_at",
-              label: this.$tr("isite.cms.form.createdAt"),
+              label: i18n.tr("isite.cms.form.createdAt"),
               field: "createdAt",
               align: "left",
-              format: (val) => (val ? this.$trd(val) : "-"),
+              format: (val) => (val ? i18n.trd(val) : "-"),
             },
             {
               name: "updated_at",
-              label: this.$tr("isite.cms.form.updatedAt"),
+              label: i18n.tr("isite.cms.form.updatedAt"),
               field: "updatedAt",
               align: "left",
-              format: (val) => (val ? this.$trd(val) : "-"),
+              format: (val) => (val ? i18n.trd(val) : "-"),
             },
-            { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' },
+            { name: 'actions', label: i18n.tr('isite.cms.form.actions'), align: 'left' },
           ],
           filters: {},
           requestParams: {},
@@ -64,54 +66,54 @@ export default {
             apiRoute: 'apiRoutes.qreports.reports',
             requestParams: (row) => {
               return {
-                filter: { folderId: row.id },
+                filter: { folderId: row?.id },
               }
             },
             columns: [
               {
                 name: 'id',
-                label: this.$tr('isite.cms.form.id'),
+                label: i18n.tr('isite.cms.form.id'),
                 field: 'id',
                 style: 'width: 50px'
               },
               {
                 name: 'name',
-                label: this.$tr('isite.cms.form.name'),
+                label: i18n.tr('isite.cms.form.name'),
                 field: 'name',
               },
               {
                 name: "created_at",
-                label: this.$tr("isite.cms.form.createdAt"),
+                label: i18n.tr("isite.cms.form.createdAt"),
                 field: "createdAt",
                 align: "left",
-                format: (val) => (val ? this.$trd(val) : "-"),
+                format: (val) => (val ? i18n.trd(val) : "-"),
               },
               {
                 name: "updated_at",
-                label: this.$tr("isite.cms.form.updatedAt"),
+                label: i18n.tr("isite.cms.form.updatedAt"),
                 field: "updatedAt",
                 align: "left",
-                format: (val) => (val ? this.$trd(val) : "-"),
+                format: (val) => (val ? i18n.trd(val) : "-"),
               },
-              { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' },
+              { name: 'actions', label: i18n.tr('isite.cms.form.actions'), align: 'left' },
             ],
             actions: [
               {
-                name: this.$tr('isite.cms.label.show'),
+                name: i18n.tr('isite.cms.label.show'),
                 icon: 'fal fa-eye',
-                label: this.$tr('isite.cms.label.show'),
+                label: i18n.tr('isite.cms.label.show'),
                 vIf: this.reportPermissionsIndex,
                 action: (item) => {
-                  this.$router.push({ name: 'qreports.admin.report', params: {id: item.id} });
+                  this.$router.push({ name: 'qreports.admin.report', params: {id: item?.id} });
                 }
               },
               {
-                name: this.$tr('isite.cms.label.edit'),
+                name: i18n.tr('isite.cms.label.edit'),
                 icon: 'fa-regular fa-pencil',
-                label: this.$tr('isite.cms.label.edit'),
+                label: i18n.tr('isite.cms.label.edit'),
                 vIf: this.reportPermissionsEdit,
                 action: (item) => {
-                  this.$router.push({ name: 'qreports.admin.reportEdit', params: {id: item.id} });
+                  this.$router.push({ name: 'qreports.admin.reportEdit', params: {id: item?.id} });
                 }
               },
             ],
@@ -132,7 +134,7 @@ export default {
             props: {
               label: 'Title',
               rules: [
-                val => !!val || this.$tr('isite.cms.message.fieldRequired')
+                val => !!val || i18n.tr('isite.cms.message.fieldRequired')
               ],
             },
           },
@@ -144,9 +146,9 @@ export default {
             type: 'crud',
             props: {
               crudType: 'select',
-              crudData: import('@imagina/quser/_crud/roles'),
+              crudData: import('modules/quser/_crud/roles'),
               crudProps: {
-                label: `${this.$trp('isite.cms.label.role', {capitalize: true})}*`,
+                label: `${i18n.trp('isite.cms.label.role', {capitalize: true})}*`,
                 multiple: true,
                 useChips: true,
               },
@@ -159,7 +161,7 @@ export default {
             if (type == 'create') {
               //Add system name
               const title = formData.title || '';
-              formData.name = this.$helper.getSlug(title);
+              formData.name = helper.getSlug(title);
             }
             //Resolve
             resolve(formData)

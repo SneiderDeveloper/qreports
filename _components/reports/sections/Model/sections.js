@@ -10,11 +10,13 @@ import {
     STEP_SORT,
     STEP_SCHEDULE 
 } from './constants.js';
-import Vue , { ref } from 'vue';
+import { ref } from 'vue';
+import { i18n } from 'src/plugins/utils'
+
 const data = ref([
     {
         id: STEP_DESCRIPTION,
-        title: Vue.prototype.$tr('isite.cms.form.description'),
+        title: i18n.tr('isite.cms.form.description'),
         prefix: 1,
         component: description,
         done: false,
@@ -23,7 +25,7 @@ const data = ref([
     },
     {
         id: STEP_FEATURE,
-        title: Vue.prototype.$tr('isite.cms.form.feature'),
+        title: i18n.tr('isite.cms.form.feature'),
         prefix: 2,
         component: feature,
         done: false,
@@ -32,7 +34,7 @@ const data = ref([
     },
     {
         id: STEP_FIELDS_DETAILDS,
-        title: Vue.prototype.$tr('isite.cms.form.filtersDetails'),
+        title: i18n.tr('isite.cms.form.fieldsDetails'),
         prefix: 3,
         component: fieldsDetails,
         done: false,
@@ -41,7 +43,7 @@ const data = ref([
     },
     {
         id: STEP_SORT,
-        title: Vue.prototype.$tr('isite.cms.form.sort'),
+        title: i18n.tr('isite.cms.form.sort'),
         prefix: 4,
         component: sort,
         done: false,
@@ -50,7 +52,7 @@ const data = ref([
     },
     {
         id: STEP_SCHEDULE,
-        title: Vue.prototype.$tr('isite.cms.form.schedule'),
+        title: i18n.tr('isite.cms.form.schedule'),
         prefix: 5,
         component: schedule,
         done: false,

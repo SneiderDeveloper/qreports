@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import baseService from '@imagina/qcrud/_services/baseService.js'
+import baseService from 'modules/qcrud/_services/baseService.js'
 import descriptionStore from './sections/descriptionStore';
 import featureStore from './sections/featureStore.js'
 import fieldsDetailsStore from './sections/fieldsDetailsStore.js';

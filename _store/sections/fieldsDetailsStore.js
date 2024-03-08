@@ -1,7 +1,7 @@
-import Vue, { reactive } from 'vue';
-import baseService from '@imagina/qcrud/_services/baseService.js'
+import { reactive } from 'vue';
 import featureStore from './featureStore.js';
 import moment from 'moment'
+import { i18n } from 'src/plugins/utils';
 
 const state = reactive({
     form: {},
@@ -18,24 +18,24 @@ export default function fieldsDetailsStore() {
     }
     function optionDate() {
         return [
-            { label: Vue.prototype.$tr('isite.cms.label.customRange'), value: 'customRange' },
-            { label: Vue.prototype.$tr('isite.cms.label.today'), value: 'today' },
-            { label: Vue.prototype.$tr('isite.cms.label.yesterday'), value: 'yesterday' },
-            { label: Vue.prototype.$tr('isite.cms.label.tomorrow'), value: 'tomorrow' },
-            { label: Vue.prototype.$tr('isite.cms.label.LastNumDays', { numDays: 7 }), value: 'lastSevenDays' },
-            { label: Vue.prototype.$tr('isite.cms.label.LastNumDays', { numDays: 30 }), value: 'lastThirtyDays' },
-            { label: Vue.prototype.$tr('isite.cms.label.LastNumDays', { numDays: 60 }), value: 'lastSixtyDays' },
-            { label: Vue.prototype.$tr('isite.cms.label.currentWeek'), value: 'currentWeek' },
-            { label: Vue.prototype.$tr('isite.cms.label.lastWeek'), value: 'lastWeek' },
-            { label: Vue.prototype.$tr('isite.cms.label.nextWeek'), value: 'nextWeek' },
-            { label: Vue.prototype.$tr('isite.cms.label.currentMonth'), value: 'currentMonth' },
-            { label: Vue.prototype.$tr('isite.cms.label.lastMonth'), value: 'lastMonth' },
-            { label: Vue.prototype.$tr('isite.cms.label.nextMonth'), value: 'nextMonth' },
-            { label: Vue.prototype.$tr('isite.cms.label.numMonthsAgo', { numMonths: 2 }), value: 'twoMonthsAgo' },
-            { label: Vue.prototype.$tr('isite.cms.label.currentYear'), value: 'currentYear' },
-            { label: Vue.prototype.$tr('isite.cms.label.lastYear'), value: 'lastYear' },
-            { label: Vue.prototype.$tr('isite.cms.label.numYearsAgo', { numYears: 2 }), value: 'twoYearsAgo' },
-            { label: Vue.prototype.$tr('isite.cms.label.lastNumYears', { numYears: 2 }), value: 'lastTwoYears' },
+            { label: i18n.tr('isite.cms.label.customRange'), value: 'customRange' },
+            { label: i18n.tr('isite.cms.label.today'), value: 'today' },
+            { label: i18n.tr('isite.cms.label.yesterday'), value: 'yesterday' },
+            { label: i18n.tr('isite.cms.label.tomorrow'), value: 'tomorrow' },
+            { label: i18n.tr('isite.cms.label.LastNumDays', { numDays: 7 }), value: 'lastSevenDays' },
+            { label: i18n.tr('isite.cms.label.LastNumDays', { numDays: 30 }), value: 'lastThirtyDays' },
+            { label: i18n.tr('isite.cms.label.LastNumDays', { numDays: 60 }), value: 'lastSixtyDays' },
+            { label: i18n.tr('isite.cms.label.currentWeek'), value: 'currentWeek' },
+            { label: i18n.tr('isite.cms.label.lastWeek'), value: 'lastWeek' },
+            { label: i18n.tr('isite.cms.label.nextWeek'), value: 'nextWeek' },
+            { label: i18n.tr('isite.cms.label.currentMonth'), value: 'currentMonth' },
+            { label: i18n.tr('isite.cms.label.lastMonth'), value: 'lastMonth' },
+            { label: i18n.tr('isite.cms.label.nextMonth'), value: 'nextMonth' },
+            { label: i18n.tr('isite.cms.label.numMonthsAgo', { numMonths: 2 }), value: 'twoMonthsAgo' },
+            { label: i18n.tr('isite.cms.label.currentYear'), value: 'currentYear' },
+            { label: i18n.tr('isite.cms.label.lastYear'), value: 'lastYear' },
+            { label: i18n.tr('isite.cms.label.numYearsAgo', { numYears: 2 }), value: 'twoYearsAgo' },
+            { label: i18n.tr('isite.cms.label.lastNumYears', { numYears: 2 }), value: 'lastTwoYears' },
         ]
     }
     function getForm() {

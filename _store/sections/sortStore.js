@@ -1,6 +1,4 @@
 import { reactive } from 'vue';
-import baseService from '@imagina/qcrud/_services/baseService.js'
-import featureStore from './featureStore.js';
 import _ from 'lodash';
 import qReportsStore from '../qReportsStore.js';
 import {DESCENDING, ASCENDING, NOT_SET} from './model/constants.js';
