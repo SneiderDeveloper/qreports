@@ -1,6 +1,7 @@
 import { reactive, computed } from 'vue';
 import axios from "axios";
 
+const defaultFormat = 'csv';
 const model = {
     status: 0,
     timeInterval: null,
@@ -13,7 +14,7 @@ const model = {
         email: null,
         status: 1,
     }],
-    format: 'pdf'
+    format: defaultFormat
 }
 const state = reactive({
     form: {
@@ -28,7 +29,7 @@ const state = reactive({
             email: null,
             status: 1,
         }],
-        format: 'pdf'
+        format: defaultFormat
     }
 });
 
@@ -48,7 +49,7 @@ const store = computed(() => ({
             email: null,
             status: 1,
         }];
-        state.form.format = data.format || 'pdf';
+        state.form.format = data.format || defaultFormat;
     },
     addEmailNotification() {
         state.form.emails.push({

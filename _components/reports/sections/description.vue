@@ -64,6 +64,11 @@ export default {
       await descriptionStore().getListOfReportTypes();
     });
   },
+  watch: {
+    'form.reportTypeId': function(newValue, oldValue) {
+      this.getSelectedReportType();
+    }
+  },
   data() {
     return {};
   },
@@ -75,7 +80,7 @@ export default {
       const reportType = descriptionStore()
         .getReportTypeList()
         .filter(item => item.entity.includes(this.form.entity));
-      return reportType;  
+      return reportType;
     },
     formFields() {
       return {
@@ -89,7 +94,7 @@ export default {
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
               selectByDefault: true,
-              label: "Object",
+              label: "Object*",
               icon: "fa-solid fa-list-ul",
             },
             loadOptions: {
@@ -105,8 +110,8 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              label: "Report Type",
-              icon: "description",
+              label: "Report Type*",
+              icon: "fa-thin fa-file-lines",
               options: this.reportTypeList,
             },
           },
@@ -118,7 +123,7 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              label: "Folder",
+              label: "Folder*",
               icon: "folder_open",
             },
             loadOptions: {
@@ -132,7 +137,7 @@ export default {
               crudType: 'select',
               crudData: import('modules/quser/_crud/roles'),
               crudProps: {
-                label: `${this.$trp('isite.cms.label.role', {capitalize: true})}*`,
+                label: `${this.$trp('isite.cms.label.role', {capitalize: true})}`,
                 multiple: true,
                 useChips: true,
               },
@@ -146,8 +151,8 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              icon: "text_fields",
-              label: "Report Title",
+              icon: "fa-regular fa-text-size",
+              label: "Report Title*",
             },
           },
           description: {
