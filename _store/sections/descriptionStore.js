@@ -19,6 +19,7 @@ const state = reactive({
     reportTypeList: [],
 });
 
+
 export default function descriptionStore() {
     /**
      * Mutation
