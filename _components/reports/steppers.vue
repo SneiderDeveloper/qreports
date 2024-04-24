@@ -272,15 +272,15 @@ export default {
 .stepper-report .q-stepper__tab--done .q-stepper__dot span,
 .stepper-report .q-stepper__tab--done .q-stepper__title,
 .stepper-report .q-stepper__tab--active .q-stepper__title {
-  color: var(--q-color-primary) !important;
+  color: var(--q-primary) !important;
 }
 .stepper-report .q-stepper__tab--done .q-stepper__dot {
-  border-color: var(--q-color-primary) !important;
-  color: var(--q-color-primary) !important;
+  border-color: var(--q-primary) !important;
+  color: var(--q-primary) !important;
 }
 .stepper-report .q-stepper__tab--done .q-stepper__dot:after,
 .stepper-report .q-stepper__tab--done .q-stepper__dot:before {
-  background-color: var(--q-color-primary) !important;
+  background-color: var(--q-primary) !important;
 }
 .stepper-report .q-stepper__tab--done.q-stepper__tab--active .q-stepper__dot span {
   color: #fff !important;
@@ -299,7 +299,7 @@ export default {
 }
 .input-report .q-field.q-field--float .q-field__label {
   @apply tw-font-medium;
-  color: var(--q-color-primary);
+  color: var(--q-primary);
 }
 .radio-report .q-field .q-field__label {
   @apply tw-font-medium tw-top-0 tw-text-black;
@@ -318,7 +318,7 @@ export default {
 }
 .input-report-nolabel .q-field .q-field__label {
   @apply tw-font-medium;
-  color: var(--q-color-primary);
+  color: var(--q-primary);
 }
 .input-report .q-field .q-field__native input {
   @apply lg:tw--mt-3;
@@ -328,6 +328,6 @@ export default {
 }
 /*.input-report .q-icon,*/
 .input-report-nolabel .q-select__dropdown-icon {
-  color: var(--q-color-primary);
+  color: var(--q-primary);
 }
 </style>
