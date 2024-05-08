@@ -45,7 +45,7 @@
       alternative-labels
       active-color="primary"
       animated
-      class="tw-bg-white"
+      class="tw-bg-white tw-overflow-auto"
       :header-nav="!!this.reportId"
     >
       <q-step
@@ -66,7 +66,7 @@
       </q-step>
 
       <template v-slot:navigation>
-        <q-stepper-navigation class="text-right tw-border-t">
+        <q-stepper-navigation class="text-right tw-border-t tw-z-0">
           <q-btn
             rounded
             no-caps
@@ -288,12 +288,7 @@ export default {
 .stepper-report .q-stepper__nav {
   background-color: #fafafa;
 }
-.stepper-report .q-stepper__step-inner {
-  @apply tw-p-4 lg:tw-p-5;
-}
-.stepper-report .q-form .q-field {
-  @apply tw-p-0 !important;
-}
+
 .stepper-report .q-stepper__tab--error-with-icon .q-stepper__dot {
   background: red !important;
 }
