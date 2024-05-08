@@ -59,7 +59,7 @@
         :active-color="section.error ? 'red' : 'primary'"
       >
         <div>
-          <q-form :ref="section.refs">
+          <q-form :ref="section.refs" class="qformClass">
             <component :is="section.component" />
           </q-form>
         </div>

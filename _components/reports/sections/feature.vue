@@ -272,4 +272,13 @@ export default {
   -webkit-line-clamp: 1;
   overflow: hidden;
 }
+.check-report-div {
+  .check-report-1 {
+    #dynamicFieldComponent {
+      .q-field {
+        @apply tw-p-0 #{!important}
+      }
+    }
+  }
+}
 </style>
