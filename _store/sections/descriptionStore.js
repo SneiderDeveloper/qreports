@@ -12,6 +12,7 @@ const descriptionModel = {
     title: null,
     description: null,
     roles: [],
+    users: [],
 }
 
 const state = reactive({
@@ -33,6 +34,8 @@ export default function descriptionStore() {
             folderId: data.folderId || null,
             title: data.title || null,
             description: data.description || null,
+            roles: data.roles || [],
+            users: data.users || [],
         }
     }
     function getReportTypeList() {

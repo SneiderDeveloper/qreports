@@ -37,6 +37,11 @@
             class="input-report tw-mb-4"
             :field="formFields.reportsForms.roles"
           />
+          <dynamic-field
+              v-model="form.users"
+              class="input-report tw-mb-4"
+              :field="formFields.reportsForms.users"
+          />
         </div>
         <div>
           <dynamic-field
@@ -153,6 +158,21 @@ export default {
               ],
               icon: "text_fields",
               label: "Report Title*",
+            },
+          },
+          users: {
+            value: [],
+            type: "select",
+            props: {
+              label: 'Users',
+              clearable: true,
+              color: "primary",
+              multiple: true,
+            },
+            loadOptions: {
+              apiRoute: "apiRoutes.quser.users",
+              select: { label: "fullName", id: "id"},
+              filterByQuery: true,
             },
           },
           description: {
