@@ -3,18 +3,18 @@
   <div class="stepper-report">
     <div
       class="
-        tw-flex 
+        tw-flex
         tw-flex-col
-        sm:tw-flex-row 
+        sm:tw-flex-row
         sm:tw-items-end
         tw-justify-between
       "
     >
-      <h2 
+      <h2
         class="
-          text-primary 
-          tw-text-2xl 
-          tw-font-semibold 
+          text-primary
+          tw-text-2xl
+          tw-font-semibold
           tw-mb-4"
       >
         {{  titleReport }}
@@ -28,12 +28,12 @@
           class="q-mr-sm tw-mb-4"
           no-caps
         />
-        <q-btn 
-          rounded 
-          color="primary" 
-          label="Save" 
-          class="tw-mb-4" 
-          no-caps 
+        <q-btn
+          rounded
+          color="primary"
+          label="Save"
+          class="tw-mb-4"
+          no-caps
         />
       </div>
     </div>
@@ -45,7 +45,7 @@
       alternative-labels
       active-color="primary"
       animated
-      class="tw-bg-white"
+      class="tw-bg-white tw-overflow-auto"
       :header-nav="!!this.reportId"
     >
       <q-step
@@ -59,14 +59,14 @@
         :active-color="section.error ? 'red' : 'primary'"
       >
         <div>
-          <q-form :ref="section.refs">
+          <q-form :ref="section.refs" class="qformClass">
             <component :is="section.component" />
           </q-form>
         </div>
       </q-step>
 
       <template v-slot:navigation>
-        <q-stepper-navigation class="text-right tw-border-t">
+        <q-stepper-navigation class="text-right tw-border-t tw-z-0">
           <q-btn
             rounded
             no-caps
@@ -77,10 +77,10 @@
             @click="formPrevious"
             class="
              tw-w-28
-             q-mr-sm 
-             tw-mt-6 
-             text-sm 
-             btn-small 
+             q-mr-sm
+             tw-mt-6
+             text-sm
+             btn-small
              rounded-sm"
           />
           <q-btn
@@ -104,9 +104,6 @@ import qReportsStore from "../../_store/qReportsStore.js";
 import {
   STEP_DESCRIPTION,
   STEP_FEATURE,
-  STEP_FIELDS_DETAILDS,
-  STEP_SORT,
-  STEP_SCHEDULE,
 } from "./sections/Model/constants.js";
 import featureStore from "../../_store/sections/featureStore.js";
 import sortStore from '../../_store/sections/sortStore.js';
@@ -130,7 +127,7 @@ export default {
       }
     },
   },
-  beforeDestroy() {
+  onBeforeMount() {
     this.$nextTick(function () {
       qReportsStore().reset();
       this.reset();
@@ -159,7 +156,7 @@ export default {
       return this.$route.params.id || null;
     },
     titleReport() {
-      return this.reportId ? this.$tr('ireports.cms.sidebar.reportEdit') 
+      return this.reportId ? this.$tr('ireports.cms.sidebar.reportEdit')
         : this.$tr('ireports.cms.sidebar.reportCreate')
     },
   },
@@ -167,8 +164,7 @@ export default {
     async saveFormReports() {
       try {
         const form = this.sections.find((item) => item.id === this.step);
-       // console.log(form);
-        
+
         if (this.$refs[form.refs] && this.$refs[form.refs].length > 0) {
           this.$refs[form.refs][0].validate().then(async (success) => {
             if (success) {
@@ -187,7 +183,7 @@ export default {
               if (this.step === this.sections.length) {
                 await qReportsStore().saveReport(this.reportId);
                 await this.$alert.success({
-                    message: this.reportId ? 'The report was updated correctly' 
+                    message: this.reportId ? 'The report was updated correctly'
                       :'the report was saved correctly',
                 });
                 this.$router.push({ name: "qreports.admin.folders" });
@@ -257,10 +253,10 @@ export default {
   @apply tw-text-white;
 }
 .stepper-report .q-stepper .q-stepper__dot:before {
-  margin-right: 2px; 
+  margin-right: 2px;
 }
 .stepper-report .q-stepper .q-stepper__dot:after {
-  margin-left: 2px; 
+  margin-left: 2px;
 }
 .stepper-report .q-stepper .q-stepper__line:after,
 .stepper-report .q-stepper .q-stepper__line:before {
@@ -276,15 +272,15 @@ export default {
 .stepper-report .q-stepper__tab--done .q-stepper__dot span,
 .stepper-report .q-stepper__tab--done .q-stepper__title,
 .stepper-report .q-stepper__tab--active .q-stepper__title {
-  color: var(--q-color-primary) !important;
+  color: var(--q-primary) !important;
 }
 .stepper-report .q-stepper__tab--done .q-stepper__dot {
-  border-color: var(--q-color-primary) !important;
-  color: var(--q-color-primary) !important;
+  border-color: var(--q-primary) !important;
+  color: var(--q-primary) !important;
 }
 .stepper-report .q-stepper__tab--done .q-stepper__dot:after,
 .stepper-report .q-stepper__tab--done .q-stepper__dot:before {
-  background-color: var(--q-color-primary) !important;
+  background-color: var(--q-primary) !important;
 }
 .stepper-report .q-stepper__tab--done.q-stepper__tab--active .q-stepper__dot span {
   color: #fff !important;
@@ -292,18 +288,13 @@ export default {
 .stepper-report .q-stepper__nav {
   background-color: #fafafa;
 }
-.stepper-report .q-stepper__step-inner {
-  @apply tw-p-4 lg:tw-p-5;
-}
-.stepper-report .q-form .q-field {
-  @apply tw-p-0 !important;
-}
+
 .stepper-report .q-stepper__tab--error-with-icon .q-stepper__dot {
   background: red !important;
 }
 .input-report .q-field.q-field--float .q-field__label {
   @apply tw-font-medium;
-  color: var(--q-color-primary);
+  color: var(--q-primary);
 }
 .radio-report .q-field .q-field__label {
   @apply tw-font-medium tw-top-0 tw-text-black;
@@ -322,7 +313,7 @@ export default {
 }
 .input-report-nolabel .q-field .q-field__label {
   @apply tw-font-medium;
-  color: var(--q-color-primary);
+  color: var(--q-primary);
 }
 .input-report .q-field .q-field__native input {
   @apply lg:tw--mt-3;
@@ -332,6 +323,6 @@ export default {
 }
 /*.input-report .q-icon,*/
 .input-report-nolabel .q-select__dropdown-icon {
-  color: var(--q-color-primary);
+  color: var(--q-primary);
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <crud
       v-if="!loading"
-      :crud-data="import('@imagina/qreports/_crud/report.vue')"
+      :crud-data="import('modules/qreports/_crud/report.vue')"
       :custom-data="crudData"
       ref="crudRequests"
     />
@@ -14,7 +14,7 @@ import _ from "lodash";
 import { QSpinnerFacebook } from 'quasar'
 import { SORT_ASC, SORT_DESC } from '../_components/reports/sections/Model/constants.js';
 import { ASCENDING } from '../_store/sections/model/constants.js';
-import cache from "@imagina/qsite/_plugins/cache";
+import { cache } from "src/plugins/utils";
 
 export default {
   data() {
@@ -34,7 +34,7 @@ export default {
   computed: {
     //Crud info
     reportId() {
-      return this.$route.params.id || null;
+      return this.$route.params?.id || null;
     },
     crudInfo() {
       return this.$store.state.qcrudComponent.component[this.crudId] || {};
@@ -132,7 +132,7 @@ export default {
           })
           .filter((filter) => {
             const filterObject = Object.keys(data.filters || {});
-            return filterObject.some((item) => item === filter.id);
+            return filterObject.some((item) => item === filter?.id);
           });
       } catch (error) {
         console.log(error);

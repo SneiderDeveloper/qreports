@@ -8,11 +8,11 @@
     </div>
     <div class="tw-flex">
       <div>
-        <h4 
+        <h4
           class="
-            text-primary 
-            tw-text-base 
-            tw-font-extrabold 
+            text-primary
+            tw-text-base
+            tw-font-extrabold
             ">
           {{ $tr('ireports.cms.selectColumns') }}
         </h4>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div>
-       <p class="tw-mb-6 tw-font-bold">{{ $tr('ireports.cms.dragColumns') }}</p> 
+       <p class="tw-mb-6 tw-font-bold">{{ $tr('ireports.cms.dragColumns') }}</p>
     </div>
     <div>
       <draggable
@@ -39,44 +39,43 @@
           tw-grid-cols-1
           md:tw-grid-cols-2
           xl:tw-grid-cols-6
-          tw-my-4 
+          tw-my-4
           tw-overflow-hidden
         "
+        item-key="id"
       >
-        <div 
-          v-for="list in columnList" 
-          :key="list.id" 
-          class="check-report-div"
-        >
-          <q-tooltip anchor="bottom middle" self="center middle"> 
-            {{ list.title }}
-          </q-tooltip>
-          <dynamic-field
-            class="check-report-1"
-            v-model="list.check"
-            :field="formFields.reportsColumns[list.id]"
-            @input="checkIfAllChecksSelected('columnList')"
-          />
-          <q-btn
-              flat
-              round
-              size="6px"
-              class="f-cursor-grab check-report-icon"
-            >
-              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]"> 
-                {{ $tr('ireports.cms.moveColumn') }} 
-              </q-tooltip>
-            </q-btn>
-        </div>
+        <template #item="{ element }">
+          <div class="check-report-div">
+            <q-tooltip anchor="bottom middle" self="center middle">
+              {{ element?.title }}
+            </q-tooltip>
+            <dynamic-field
+              class="check-report-1"
+              v-model="element.check"
+              :field="formFields.reportsColumns[element?.id]"
+              @input="checkIfAllChecksSelected('columnList')"
+            />
+            <q-btn
+                flat
+                round
+                size="6px"
+                class="f-cursor-grab check-report-icon"
+              >
+                <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                  {{ $tr('ireports.cms.moveColumn') }}
+                </q-tooltip>
+              </q-btn>
+          </div>
+        </template>
       </draggable>
     </div>
     <div class="tw-flex tw-pt-5">
       <div>
-        <h4 
+        <h4
           class="
-            text-primary 
-            tw-text-base 
-            tw-font-extrabold 
+            text-primary
+            tw-text-base
+            tw-font-extrabold
           "
         >
           {{ $tr('ireports.cms.selectFirst') }}
@@ -90,20 +89,20 @@
       </div>
     </div>
     <div>
-       <p class="tw-mb-6 tw-font-bold">{{ labelTotalFilter }}</p> 
+       <p class="tw-mb-6 tw-font-bold">{{ labelTotalFilter }}</p>
     </div>
     <div class="tw-flex tw-flex-wrap">
       <div
-        v-for="(filter) in filterList"
-        :key="filter.id" 
+        v-for="filter in filterList"
+        :key="filter?.id"
         class="tw-mr-2 tw-mb-2"
       >
         <dynamic-field
-            v-model="filter.check" 
+            v-model="filter.check"
             class="check-report-2"
             :class="{'check-report-text-white check-report-btn': Boolean(filter.check)}"
-            :field="formFields.reportsFilters[filter.id]"
-            @input="checkIfAllChecksSelected('filterList')" 
+            :field="formFields.reportsFilters[filter?.id]"
+            @input="checkIfAllChecksSelected('filterList')"
         />
       </div>
     </div>
@@ -179,9 +178,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .ghost {
-  @apply tw-bg-gray-100 tw-opacity-50 !important;
+  @apply tw-bg-gray-100 tw-opacity-50 #{!important};
 }
 .check-report-div {
   @apply tw-relative tw-border tw-rounded-xl;
@@ -200,7 +199,7 @@ export default {
 }
 
 .check-report-1 .q-hoverable:hover > .q-focus-helper {
-  @apply tw-opacity-0 !important;
+  @apply tw-opacity-0 #{!important};
 }
 
 /* checkbox */
@@ -218,7 +217,7 @@ export default {
 }
 
 .check-report-2 .q-item {
-  @apply tw-pr-5 !important;
+  @apply tw-pr-5 #{!important};
 }
 
 .check-report-2 .q-item__label {
@@ -226,7 +225,7 @@ export default {
 }
 
 .check-report-text-white .q-item__label {
-  @apply tw-text-white !important;
+  @apply tw-text-white #{!important};
 }
 
 .check-report-2 .q-field--focused {
@@ -236,7 +235,7 @@ export default {
 .check-report-2 .q-checkbox[aria-checked="true"]:before {
   @apply tw-w-full tw-h-full tw-absolute tw-rounded-3xl tw-z-0;
   content: "";
-  background: var(--q-color-primary);
+  background: var(--q-primary);
 }
 
 .check-report-2 .q-item__label {
@@ -272,5 +271,14 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
+}
+.check-report-div {
+  .check-report-1 {
+    #dynamicFieldComponent {
+      .q-field {
+        @apply tw-p-0 #{!important}
+      }
+    }
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import baseService from '@imagina/qcrud/_services/baseService.js';
+import baseService from 'modules/qcrud/_services/baseService.js';
 
 const modelEmailNotification = {
     email: null,
@@ -19,6 +19,7 @@ const state = reactive({
     form: {...descriptionModel},
     reportTypeList: [],
 });
+
 
 export default function descriptionStore() {
     /**

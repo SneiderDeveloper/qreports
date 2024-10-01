@@ -11,7 +11,7 @@
           tw-grid tw-gap-6 tw-grid-cols-1
           md:tw-grid-cols-2
           xl:tw-grid-cols-2
-          tw-my-4 tw-overflow-hidden
+          tw-my-4
         "
       >
         <div>
@@ -85,7 +85,7 @@ export default {
       const reportType = descriptionStore()
         .getReportTypeList()
         .filter(item => item.entity.includes(this.form.entity));
-      return reportType;  
+      return reportType;
     },
     formFields() {
       return {
@@ -116,7 +116,7 @@ export default {
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
               label: "Report Type*",
-              icon: "description",
+              icon: "fa-thin fa-file-lines",
               options: this.reportTypeList,
             },
           },
@@ -140,7 +140,7 @@ export default {
             type: 'crud',
             props: {
               crudType: 'select',
-              crudData: import('@imagina/quser/_crud/roles'),
+              crudData: import('modules/quser/_crud/roles'),
               crudProps: {
                 label: `${this.$trp('isite.cms.label.role', {capitalize: true})}`,
                 multiple: true,
@@ -156,7 +156,7 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              icon: "text_fields",
+              icon: "fa-regular fa-text-size",
               label: "Report Title*",
             },
           },

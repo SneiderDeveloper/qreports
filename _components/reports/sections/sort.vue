@@ -106,7 +106,7 @@ export default {
 }
 .select-report .q-field .q-field__label {
   @apply tw-font-medium sm:tw-hidden;
-  color: var(--q-color-primary);
+  color: var(--q-primary);
 }
 .select-report .q-field--labeled .q-field__control-container {
   @apply sm:tw-pt-px !important;

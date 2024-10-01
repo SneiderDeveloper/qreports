@@ -1,58 +1,60 @@
-import description from '../description.vue';
-import feature from '../feature';
-import fieldsDetails from '../fieldsDetails';
-import sort from '../sort';
-import schedule from '../schedule';
-import { 
-    STEP_DESCRIPTION, 
-    STEP_FEATURE, 
-    STEP_FIELDS_DETAILDS,
+import description from 'src/modules/qreports/_components/reports/sections/description.vue';
+import feature from 'src/modules/qreports/_components/reports/sections/feature.vue';
+import fieldsDetails from 'src/modules/qreports/_components/reports/sections/fieldsDetails.vue';
+import sort from 'src/modules/qreports/_components/reports/sections/sort.vue';
+import schedule from 'src/modules/qreports/_components/reports/sections/schedule.vue';
+import {
+    STEP_DESCRIPTION,
+    STEP_FEATURE,
+    STEP_SCHEDULE,
     STEP_SORT,
-    STEP_SCHEDULE 
+    STEP_FIELDS_DETAILDS
 } from './constants.js';
-import Vue , { ref } from 'vue';
+import { ref, markRaw } from 'vue';
+import { i18n } from 'src/plugins/utils'
+
 const data = ref([
     {
         id: STEP_DESCRIPTION,
-        title: Vue.prototype.$tr('isite.cms.form.description'),
+        title: i18n.tr('isite.cms.form.description'),
         prefix: 1,
-        component: description,
+        component: markRaw(description),
         done: false,
         refs: 'descriptionForm',
         error: false
     },
     {
         id: STEP_FEATURE,
-        title: Vue.prototype.$tr('isite.cms.form.feature'),
+        title: i18n.tr('isite.cms.form.feature'),
         prefix: 2,
-        component: feature,
+        component: markRaw(feature),
         done: false,
         refs: 'featureForm',
         error: false
     },
     {
         id: STEP_FIELDS_DETAILDS,
-        title: Vue.prototype.$tr('isite.cms.form.filtersDetails'),
+        title: i18n.tr('isite.cms.form.fieldsDetails'),
         prefix: 3,
-        component: fieldsDetails,
+        component: markRaw(fieldsDetails),
         done: false,
         refs: 'fieldsDetailsForm',
         error: false
     },
     {
         id: STEP_SORT,
-        title: Vue.prototype.$tr('isite.cms.form.sort'),
+        title: i18n.tr('isite.cms.form.sort'),
         prefix: 4,
-        component: sort,
+        component: markRaw(sort),
         done: false,
         refs: 'sortForm',
         error: false
     },
     {
         id: STEP_SCHEDULE,
-        title: Vue.prototype.$tr('isite.cms.form.schedule'),
+        title: i18n.tr('isite.cms.form.schedule'),
         prefix: 5,
-        component: schedule,
+        component: markRaw(schedule),
         done: false,
         refs: 'scheduleForm',
         error: false
