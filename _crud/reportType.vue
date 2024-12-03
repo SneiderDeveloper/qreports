@@ -20,20 +20,20 @@ export default {
             },
             {
               name: "name",
-              label: "Name",
+              label: this.$tr("isite.cms.form.name"),
               field: "name",
               align: "left",
             },
             {
               name: "entity",
-              label: "Entity",
+              label: this.$tr("isite.cms.label.entity"),
               field: "entity",
               format: val => val ? val : '-',
               align: "left",
             },
             {
               name: "procedureName",
-              label: "Procedure Name",
+              label: this.$tr("ireports.cms.label.procedureName"),
               field: "procedureName",
               format: val => val ? val : '-',
               align: "left",
@@ -64,7 +64,7 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              label: "Name*",
+              label: `${this.$tr("isite.cms.form.name")}*`,
               clearable: true,
               color: "primary",
             },
@@ -77,7 +77,7 @@ export default {
               rules: [
                 (val) => !!val || this.$tr("isite.cms.message.fieldRequired"),
               ],
-              label: "Entity*",
+              label: `${this.$tr("isite.cms.label.entity")}*`,
               clearable: true,
               color: "primary",
               "hide-bottom-space": false,
@@ -87,7 +87,7 @@ export default {
             value: "",
             type: "input",
             props: {
-              label: "Procedure Name",
+              label: this.$tr("ireports.cms.label.procedureName"),
               clearable: true,
               color: "primary",
               "hide-bottom-space": false,
@@ -97,21 +97,21 @@ export default {
             value: [],
             type: "json",
             props: {
-              label: "columns",
+              label: this.$tr("ireports.cms.label.columns"),
             },
           },
           filters: {
             value: [],
             type: "json",
             props: {
-              label: "filters",
+              label: this.$tr("ireports.cms.label.filters"),
             },
           },
           sort: {
             value: [],
             type: "json",
             props: {
-              label: "sort",
+              label: this.$tr("ireports.cms.label.sort"),
             },
           }
         },
